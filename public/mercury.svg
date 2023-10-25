@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 169.25 42.44">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .05em;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: .5px;
+      }
+
+      .cls-6, .cls-4 {
+        fill: #006adc;
+      }
+
+      .cls-7 {
+        font-size: 13.42px;
+        letter-spacing: .05em;
+      }
+
+      .cls-7, .cls-8 {
+        font-family: ABeeZee-Regular, ABeeZee;
+      }
+
+      .cls-7, .cls-8, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-9 {
+        letter-spacing: .02em;
+      }
+
+      .cls-8 {
+        font-size: 23.71px;
+      }
+
+      .cls-5 {
+        fill: #0091ff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="12.23" y1="21.22" x2="169.25" y2="21.22" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006adc"/>
+      <stop offset=".46" stop-color="#0079e9"/>
+      <stop offset="1" stop-color="#0091ff"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-2" x="12.23" y=".25" width="157.02" height="41.94" rx="20.97" ry="20.97"/>
+    <circle class="cls-6" cx="28.36" cy="21.22" r="20.97"/>
+    <circle class="cls-3" cx="28.36" cy="21.22" r="18.55"/>
+    <circle class="cls-5" cx="49.34" cy="21.22" r="7.3"/>
+    <circle class="cls-5" cx="7.3" cy="21.22" r="7.3"/>
+    <text class="cls-8" transform="translate(61.73 28.89)"><tspan class="cls-1" x="0" y="0">me</tspan><tspan class="cls-9" x="36.96" y="0">r</tspan><tspan class="cls-1" x="46.89" y="0">cury</tspan></text>
+    <text class="cls-7" transform="translate(2.85 25.85)"><tspan x="0" y="0">&lt;</tspan></text>
+    <text class="cls-7" transform="translate(45.67 25.45)"><tspan x="0" y="0">&gt;</tspan></text>
+    <path class="cls-4" d="m36.98,27.37c-1.72,2.57-4.1,4.22-7.2,4.86-1.72.36-3.37.32-5.06-.1-1.84-.45-2.41-1.32-1.76-3.13.33-.92.78-1.84,1.37-2.63,1.05-1.39,2.22-2.68,3.37-3.99.25-.3.6-.52.93-.74.65-.44,1.33-.46,2.01-.05.58.34,1.16.68,1.77.98.23.12.52.12.97.23-.07-.47-.06-.82-.18-1.11-.19-.48-.44-.94-.7-1.38-.6-1.01-.46-1.96.2-2.88.37-.52.72-1.05,1.05-1.59.25-.41.31-.81-.26-1.2-.6.39-1.27.74-1.84,1.21-1.27,1.06-2.51.99-3.81.1-.32-.22-.69-.41-1.06-.53-.54-.17-.89.17-.69.71.18.48.45.93.72,1.37.95,1.59.89,2.25-.41,3.57-1.79,1.83-3.78,3.39-6.1,4.5-.35.17-.74.32-1.12.38-1.52.24-2.09-.17-2.49-1.66-.86-3.24-.47-6.31,1.37-9.11,1.73-2.63,4.13-4.28,7.27-4.94,2.98-.63,5.69-.1,8.2,1.5,2.7,1.71,4.41,4.14,5.02,7.34.57,2.99.11,5.78-1.58,8.3Z"/>
+  </g>
+</svg>
