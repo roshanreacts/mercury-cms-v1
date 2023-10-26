@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import MTWrapper from "../../container/MTWrapper";
+import SideBar from "~/components/SideBar";
+import Navbar from "~/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,7 +13,26 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MTWrapper>{children}</MTWrapper>
+        {/* <MTWrapper> */}
+        <div className="flex flex-col align-baseline h-[89vh]">
+          <div>
+            <Navbar />
+
+          </div>
+          <div className="flex-1 flex justify-evenly h-full">
+            <div className="h-full">
+              <SideBar />
+
+            </div>
+            <div className="flex-1 overflow-y-scroll">
+              {children}
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* </MTWrapper> */}
       </body>
     </html>
   );
