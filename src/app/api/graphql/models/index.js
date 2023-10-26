@@ -1,6 +1,8 @@
 import mercury from "@mercury-js/core";
 import { UserSchema } from "./User";
-import { ApplicationSchema } from "./Application";
+import { PageSchema } from "./Page";
+import { WebsiteSchema } from "./Website";
 
 mercury.createList("User", UserSchema);
-mercury.createList("Application", ApplicationSchema);
+mercury.createList("Page",PageSchema);
+mercury.createList("Website", WebsiteSchema);

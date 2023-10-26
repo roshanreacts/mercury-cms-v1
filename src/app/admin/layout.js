@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import MTWrapper from "~/container/MTWrapper";
+import MTWrapper from "../../container/MTWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

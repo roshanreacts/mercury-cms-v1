@@ -1,47 +1,35 @@
 export const UserSchema = {
   fields: {
-    firstName: {
+    name: {
       type: "string",
-    },
-    lastName: {
-      type: "string",
+      isRequired: true
     },
     email: {
       type: "string",
-      require: true,
+      isRequired: true,
       unique: true,
     },
-    organization: {
+    password: {
       type: "string",
-    },
-    zipcode: {
-      type: "string",
+      isRequired: true
     },
     role: {
       type: "enum",
       enumType: "string",
-      enum: ["USER", "ADMIN", "SUPERADMIN"],
+      enum: ["USER", "ADMIN"],
       default: "USER",
     },
-    apps: {
+    websites: {
       type: "relationship",
-      ref: "Application",
-      many: true,
+      ref: "Website",
+      many: true
     },
   },
   access: {
     default: true,
     acl: [
-      {
-        SUPERADMIN: {
-          read: true,
-          create: true,
-          update: true,
-          delete: true,
-        },
-      },
       { ADMIN: { create: true, read: true, update: true, delete: true } },
-      { EMPLOPYEE: { create: false, read: true, update: true, delete: false } },
+      { USER: { create: false, read: true, update: false, delete: false } },
       {
         ANONYMOUS: { read: false, update: false, delete: false, create: false },
       },

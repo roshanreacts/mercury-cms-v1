@@ -1,4 +1,4 @@
-import EditorGround from "~/container/Editor";
+import EditorGround from "../../../container/Editor";
 
 export default function Home() {
   return (

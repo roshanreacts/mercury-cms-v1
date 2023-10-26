@@ -2,23 +2,18 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import mercury from "@mercury-js/core";
 import { ApolloServer } from "@apollo/server";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { gql } from "graphql-tag";
 import { applyMiddleware } from "graphql-middleware";
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import "./models";
+import CombinedResolvers from "./resolvers";
+import typeDefs from './schema';
+import { serialize } from 'cookie';
+import cors from 'cors';
+
+
 mercury.connect(process.env.DB_URL);
 
-const resolvers = {
-  Query: {
-    hello: () => "world",
-  },
-};
-
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+const resolvers = mergeResolvers(CombinedResolvers);
 const schema = applyMiddleware(
   makeExecutableSchema({
     typeDefs: mergeTypeDefs([typeDefs, mercury.schema]),
@@ -26,15 +21,30 @@ const schema = applyMiddleware(
   })
 );
 
+var corsOptions = {
+  origin: '*',
+  credentials: true
+};
+// cors(corsOptions)
+
 const server = new ApolloServer({
   schema,
+  cors: corsOptions
 });
 
-const handler = startServerAndCreateNextHandler(server, {
-  context: async ({ req }) => {
-    return { ...req, user: { role: "ANONYMOUS" } };
-  },
-});
+const handler = startServerAndCreateNextHandler(server,
+  {
+    context: async (req, res) => ({
+      req,
+      res,
+      user: { role: "ANONYMOUS" },
+      // setCookie: (name, value, options) => {
+      //   const cookie = serialize(name, value, options);
+      //   res.setHeader('Set-Cookie', cookie);
+      // },
+    }),
+
+  });
 
 export async function GET(request) {
   return handler(request);

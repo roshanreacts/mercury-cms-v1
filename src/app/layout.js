@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,6 +10,8 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  loadDevMessages();
+  loadErrorMessages();
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
