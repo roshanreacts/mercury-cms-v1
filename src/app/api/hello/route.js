@@ -6,5 +6,11 @@ export async function GET(request) {
       title: "Home",
       body: "Home Content",
     },
+    {
+      userId: 2,
+      id: 2,
+      title: "Contatc",
+      body: "Contact Content",
+    },
   ]);
 }

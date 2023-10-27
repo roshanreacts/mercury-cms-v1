@@ -12,7 +12,7 @@ export async function getTodos() {
 
 export async function makeFetchCall() {
   // wait 1 second
-  const data = await fetch("http://localhost:3000/api/hello");
-  console.log("data", await data.json());
-  return await data.json();
+  const data1 = await fetch("http://localhost:3000/api/hello", {cache: "no-store"});
+  const data = await data1.json();
+  return data;
 }

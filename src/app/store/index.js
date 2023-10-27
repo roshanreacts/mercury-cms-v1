@@ -45,6 +45,7 @@ const RootStore = types
   .actions((self) => ({
     getAllPages: flow(function* () {
       const data = yield makeFetchCall();
+      console.log("::data",data);
       self.pages = data;
     }),
   }));
