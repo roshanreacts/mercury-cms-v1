@@ -7,6 +7,7 @@ import { MdOutlinePermMedia } from 'react-icons/md'
 import { AiOutlineDown, AiOutlineFileAdd } from 'react-icons/ai';
 import { TiArrowUnsorted } from 'react-icons/ti'
 import Link from 'next/link'
+import PageList from '~/container/PagesList'
 
 const websites = ['Vithi It Solutions', 'ABC', 'XYZ'];
 
@@ -87,20 +88,7 @@ const SideBar = () => {
                         </div>
                         {
                             pageDropdown &&
-                            <div
-                                className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
-                                id="submenu"
-                            >
-                                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                    Home
-                                </h1>
-                                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                    Contact Us
-                                </h1>
-                                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                                    About Us
-                                </h1>
-                            </div>
+                            <PageList />
                         }
 
                         <div

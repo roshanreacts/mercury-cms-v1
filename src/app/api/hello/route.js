@@ -1,5 +1,10 @@
 export async function GET(request) {
-  return new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
+  return Response.json([
+    {
+      userId: 1,
+      id: 1,
+      title: "Home",
+      body: "Home Content",
+    },
+  ]);
 }
