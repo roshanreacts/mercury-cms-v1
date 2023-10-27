@@ -34,7 +34,7 @@ const AddWebsite = () => {
                 <BiAddToQueue />
               </div>
               <div className="block pl-2 font-semibold text-xl text-gray-700">
-                <h2 className="leading-relaxed">Create A Website</h2>
+                <h2 className="leading-relaxed">Create Website</h2>
               </div>
             </div>
             <Formik
@@ -47,20 +47,6 @@ const AddWebsite = () => {
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-4">
                     <div className="flex gap-4">
                       <div className="">
-                        <label className="leading-loose"> Website Slug</label>
-                        <Field
-                          type="text"
-                          name="websiteSlug"
-                          className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                          placeholder="Website Slug"
-                        />
-                        <ErrorMessage
-                          name="websiteSlug"
-                          component="span"
-                          className="text-red-500 text-xs"
-                        />
-                      </div>
-                      <div>
                         <label className="leading-loose"> Website Name</label>
                         <Field
                           type="text"
@@ -70,6 +56,20 @@ const AddWebsite = () => {
                         />
                         <ErrorMessage
                           name="websiteName"
+                          component="span"
+                          className="text-red-500 text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="leading-loose"> Website Slug</label>
+                        <Field
+                          type="text"
+                          name="websiteSlug"
+                          className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                          placeholder="Website Slug"
+                        />
+                        <ErrorMessage
+                          name="websiteSlug"
                           component="div"
                           className="text-red-500 text-xs"
                         />
