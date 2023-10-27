@@ -1,82 +1,50 @@
-"use client"
-import React, { useState } from 'react'
-import { BiUserCircle } from 'react-icons/bi';
-import { AiFillCaretDown } from 'react-icons/ai';
-import { FiLogOut } from 'react-icons/fi';
-import Link from 'next/link';
+"use client";
+import React, { useState } from "react";
+import { BiUserCircle } from "react-icons/bi";
+import { AiFillCaretDown } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleVisibility = () => {
-    setIsExpanded(!isExpanded);
-  };
   return (
-    <div >
-
+    <div>
       <div className="flex flex-wrap place-items-center w-full">
         <section className="relative mx-auto w-full">
-          <nav className="flex justify-between bg-gray-900 text-white w-full">
-            <div className="px-5 xl:px-12 py-5 flex w-full items-center">
-              <a className="text-3xl font-bold font-heading" href="#">
-                Logo Here.
-              </a>
-              <ul className="flex px-4 mx-auto font-semibold font-heading space-x-12 text-white">
-                <li>
-                  <a
-                    className={`hover:text-gray-200 flex items-center relative text-sm md:text-lg`}
-                    href="#"
-                    onClick={toggleVisibility}
-                  >
-                    Websites
-                    <span className={`ml-1 text-sm transform ${isExpanded ? 'rotate-180' : 'rotate-0'}`}>
-                      <AiFillCaretDown />
-                    </span>
-                  </a>
+          <nav className=" bg-gray-900 text-white w-full">
+            <div className="px-5 xl:px-12 py-5 w-full items-center flex justify-between">
+              <Image
+                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+                src="/mercury.svg"
+                alt="Next.js Logo"
+                width={180}
+                height={37}
+                priority
+              />
 
-                  {isExpanded && (
-                    <div className='absolute bg-white text-black rounded p-2 cursor-pointer mt-2'>
-                      {/* Websites should populate here */}
-                      <Link href='/admin/websiteId'>
-                        <p className='border-b-2 p-1 px-5'>Vithi It Solutions</p>
-
-                      </Link>
-                      {/* <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p>
-                      <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p> */}
-                      <Link href='/admin/addwebsite' className=' p-1 px-6 border-2 border-blue-700 text-blue-600 rounded-md text-sm'>+ Create Website</Link>
-                    </div>
-                  )}
-                </li>
-              </ul>
-              <div className="hidden xl:flex items-center space-x-5 ">
+              <div className="flex items-center space-x-5 ">
                 <a className="flex items-center hover:text-gray-200" href="#">
-                  <BiUserCircle className='text-3xl' />
+                  <BiUserCircle className="text-3xl" />
                 </a>
-                <div className='border-2 border-gray-200 p-1 rounded-md px-3 hover:text-gray-200'>
+                <div className="border-2 border-gray-200 p-1 rounded-md px-3 hover:text-gray-200">
                   <button>{1 == 1 ? "Logout" : "Login"}</button>
                 </div>
-
               </div>
             </div>
-            <a className="flex items-center mr-6  hover:text-gray-200  xl:hidden" href="#">
-              <BiUserCircle className='text-3xl' />
+            <a
+              className="flex items-center mr-6  hover:text-gray-200  xl:hidden"
+              href="#"
+            >
+              <BiUserCircle className="text-3xl" />
             </a>
-            <div className='border-2 flex mr-6 items-center self-center border-gray-200 p-1 rounded-md hover:text-gray-200  xl:hidden h-fit'>
+            <div className="border-2 flex mr-6 items-center self-center border-gray-200 p-1 rounded-md hover:text-gray-200  xl:hidden h-fit">
               {1 == 1 && <FiLogOut />}
-              {/* Later codition should be added */}
             </div>
-            {/* <a className="navbar-burger self-center mr-12 xl:hidden" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </a> */}
           </nav>
-
         </section>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
