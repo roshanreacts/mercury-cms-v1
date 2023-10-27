@@ -11,29 +11,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* <MTWrapper> */}
-        <div className="flex flex-col align-baseline h-[88vh] bg-gray-100">
-          <div>
-            <Navbar />
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      <Navbar />
 
-          </div>
-          <div className="flex-1 flex justify-evenly min-h-[-webkit-fill-available]">
-            <div className="h-full">
-              <SideBar />
-
-            </div>
-            <div className="flex-1 overflow-y-scroll ml-3 mt-2">
-              {children}
-
-            </div>
-          </div>
-
+      <div className="flex-1 flex">
+        <div>
+          <SideBar />
         </div>
 
-        {/* </MTWrapper> */}
-      </body>
-    </html>
+        <div className="flex-1 overflow-y-scroll ml-3 mt-2">
+          {children}
+        </div>
+      </div>
+    </div>
   );
 }
