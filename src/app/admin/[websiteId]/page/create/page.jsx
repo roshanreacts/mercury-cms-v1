@@ -1,9 +1,10 @@
 import React from 'react'
+import AddPage from '~/container/addPage'
 
 const page = (props) => {
   return (
     <div>
-      <h1>Create Page for website - {props.params.websiteId}</h1>
+      <AddPage/>
     </div>
   )
 }
