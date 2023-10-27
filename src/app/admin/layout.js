@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {/* <MTWrapper> */}
-        <div className="flex flex-col align-baseline h-[89vh]">
+        <div className="flex flex-col align-baseline h-[88vh] bg-gray-100">
           <div>
             <Navbar />
 
