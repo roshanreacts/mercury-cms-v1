@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { BiUserCircle } from 'react-icons/bi';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { FiLogOut } from 'react-icons/fi';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -34,11 +35,12 @@ const Navbar = () => {
                   </a>
 
                   {isExpanded && (
-                    <div className='absolute bg-white text-black rounded p-2 cursor-pointer mt-2 px-5'>
+                    <div className='absolute bg-white text-black rounded p-2 cursor-pointer mt-2'>
                       {/* Websites should populate here */}
-                      <p className='border-b-2 border-b-gray-900 p-1'>Vithi It Solutions</p>
-                      <p className='border-b-2 border-b-gray-900 p-1'>Vithi It Solutions</p>
-                      <p className='border-b-2 border-b-gray-900 p-1'>Vithi It Solutions</p>
+                      <p className='border-b-2 p-1 px-5'>Vithi It Solutions</p>
+                      {/* <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p>
+                      <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p> */}
+                      <Link href='/admin/addwebsite' className=' p-1 px-6 border-2 border-blue-700 text-blue-600 rounded-md text-sm'>+ Create Website</Link>
                     </div>
                   )}
                 </li>

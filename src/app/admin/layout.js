@@ -19,12 +19,12 @@ export default function RootLayout({ children }) {
             <Navbar />
 
           </div>
-          <div className="flex-1 flex justify-evenly h-full">
+          <div className="flex-1 flex justify-evenly min-h-[-webkit-fill-available]">
             <div className="h-full">
               <SideBar />
 
             </div>
-            <div className="flex-1 overflow-y-scroll">
+            <div className="flex-1 overflow-y-scroll ml-3 mt-2">
               {children}
 
             </div>
