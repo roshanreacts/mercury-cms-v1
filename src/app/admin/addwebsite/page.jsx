@@ -1,10 +1,11 @@
 import React from 'react'
+import AddWebsite from '~/container/addWebsite'
 
 const page = () => {
   return (
-    <div>
-      <h1>Add Website Form</h1>
-    </div>
+    <main className="">
+    <AddWebsite/>
+  </main>
   )
 }
 
