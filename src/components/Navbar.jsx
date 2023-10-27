@@ -37,7 +37,10 @@ const Navbar = () => {
                   {isExpanded && (
                     <div className='absolute bg-white text-black rounded p-2 cursor-pointer mt-2'>
                       {/* Websites should populate here */}
-                      <p className='border-b-2 p-1 px-5'>Vithi It Solutions</p>
+                      <Link href='/admin/websiteId'>
+                        <p className='border-b-2 p-1 px-5'>Vithi It Solutions</p>
+
+                      </Link>
                       {/* <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p>
                       <p className='border-b-2  p-1 px-5'>Vithi It Solutions</p> */}
                       <Link href='/admin/addwebsite' className=' p-1 px-6 border-2 border-blue-700 text-blue-600 rounded-md text-sm'>+ Create Website</Link>
@@ -59,7 +62,7 @@ const Navbar = () => {
               <BiUserCircle className='text-3xl' />
             </a>
             <div className='border-2 flex mr-6 items-center self-center border-gray-200 p-1 rounded-md hover:text-gray-200  xl:hidden h-fit'>
-              {1==1 && <FiLogOut/>}
+              {1 == 1 && <FiLogOut />}
               {/* Later codition should be added */}
             </div>
             {/* <a className="navbar-burger self-center mr-12 xl:hidden" href="#">

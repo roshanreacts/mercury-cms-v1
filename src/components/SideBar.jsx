@@ -4,8 +4,9 @@ import { BiFilter, BiX } from 'react-icons/bi'
 import { BsAppIndicator, BsFilterLeft, BsPostcard } from 'react-icons/bs'
 import { RiPagesLine } from 'react-icons/ri'
 import { MdOutlinePermMedia } from 'react-icons/md'
-import { AiOutlineDown } from 'react-icons/ai'
+import { AiOutlineDown, AiOutlineFileAdd } from 'react-icons/ai'
 import { PiSidebarSimpleFill } from 'react-icons/pi'
+import Link from 'next/link'
 
 const SideBar = () => {
     const [sidebarActive, setSidebarActive] = useState(true);
@@ -47,7 +48,7 @@ const SideBar = () => {
                             <RiPagesLine />
                             <div className="flex justify-between w-full items-center">
                                 <span className="text-[15px] ml-4 text-gray-200 font-bold">Pages</span>
-                                <span className={`text-sm ${pageDropdown?"rotate-180":""}`} id="arrow">
+                                <span className={`text-sm ${pageDropdown ? "rotate-180" : ""}`} id="arrow">
                                     <AiOutlineDown />
                                 </span>
                             </div>
@@ -84,6 +85,14 @@ const SideBar = () => {
                         </div>
                         <div className="my-4 bg-gray-600 h-[1px]"></div>
 
+                        <Link href='/admin/websiteId/page/create'>
+                            <div
+                                className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+                            >
+                                <AiOutlineFileAdd />
+                                <span className="text-[15px] ml-4 text-gray-200 font-bold">Add Page</span>
+                            </div>
+                        </Link>
 
                     </div>
             }
