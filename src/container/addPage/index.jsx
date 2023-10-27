@@ -29,7 +29,7 @@ const AddPage = () => {
                 <RiFileAddLine />
               </div>
               <div className="block pl-2 font-semibold text-xl text-gray-700">
-                <h2 className="leading-relaxed">Create A Page</h2>
+                <h2 className="leading-relaxed">Create Page</h2>
               </div>
             </div>
             <Formik
@@ -48,6 +48,20 @@ const AddPage = () => {
               {({ isSubmitting }) => (
                 <Form>
                   <div className="">
+                    <label className="leading-loose"> Page Name</label>
+                    <Field
+                      type="text"
+                      name="pageName"
+                      className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                      placeholder="Page Name"
+                    />
+                    <ErrorMessage
+                      name="pageName"
+                      component="div"
+                      className="text-red-500 text-xs"
+                    />
+                  </div>
+                  <div className="">
                     <label className="leading-loose"> Page Slug</label>
                     <Field
                       type="text"
@@ -57,20 +71,6 @@ const AddPage = () => {
                     />
                     <ErrorMessage
                       name="pageSlug"
-                      component="div"
-                      className="text-red-500 text-xs"
-                    />
-                  </div>
-                  <div className="">
-                    <label className="leading-loose"> Page Title</label>
-                    <Field
-                      type="text"
-                      name="pageTitle"
-                      className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                      placeholder="Page Title"
-                    />
-                    <ErrorMessage
-                      name="pageTitle"
                       component="div"
                       className="text-red-500 text-xs"
                     />
