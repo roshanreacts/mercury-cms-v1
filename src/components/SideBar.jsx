@@ -31,10 +31,8 @@ const SideBar = () => {
                     >
                         <div className="text-gray-100 text-xl">
                             <div className="p-2.5 mt-1 flex items-center justify-between gap-3 cursor-pointer">
-                                <div className='w-full relative'>
-                                    <h1 className="font-bold text-gray-200 text-[13px] border-2 rounded-md p-1.5 flex items-center justify-between"
-                                        onClick={() => setWebsiteDropdown(!websiteDropdown)}
-                                    >
+                                <div className='w-full relative' onClick={() => setWebsiteDropdown(!websiteDropdown)}>
+                                    <h1 className="font-bold text-gray-200 text-[13px] border-2 rounded-md p-1.5 flex items-center justify-between">
                                         {websites.length > 0 ? websites[currentWebsite] : "Click To Create First Website"}
                                         <span>
                                             <TiArrowUnsorted />
