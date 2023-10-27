@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
           <SideBar />
         </div>
 
-        <div className="flex-1 overflow-y-scroll ml-3 mt-2">
+        <div className="flex-1 ml-3 mt-2">
           {children}
         </div>
       </div>
