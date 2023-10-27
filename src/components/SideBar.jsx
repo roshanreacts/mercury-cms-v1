@@ -1,37 +1,71 @@
 "use client"
 import React, { useState } from 'react'
-import { BiFilter, BiX } from 'react-icons/bi'
-import { BsAppIndicator, BsFilterLeft, BsPostcard } from 'react-icons/bs'
+import { BiX } from 'react-icons/bi'
+import { BsFilterLeft, BsPostcard } from 'react-icons/bs'
 import { RiPagesLine } from 'react-icons/ri'
 import { MdOutlinePermMedia } from 'react-icons/md'
-import { AiOutlineDown, AiOutlineFileAdd } from 'react-icons/ai'
-import { PiSidebarSimpleFill } from 'react-icons/pi'
+import { AiOutlineDown, AiOutlineFileAdd } from 'react-icons/ai';
+import { TiArrowUnsorted } from 'react-icons/ti'
 import Link from 'next/link'
+
+const websites = ['Vithi It Solutions', 'ABC', 'XYZ'];
 
 const SideBar = () => {
     const [sidebarActive, setSidebarActive] = useState(true);
     const [pageDropdown, setPageDropdown] = useState(false);
+    const [websiteDropdown, setWebsiteDropdown] = useState(false);
+    const [currentWebsite, setCurrentWebsite] = useState(0);
     return (
         <div className='bg-gray-900 h-full relative'>
             {
                 !sidebarActive ?
                     <span
-                        className="absolute text-white text-5xl top-[20%] cursor-pointer"
+                        className="absolute text-white text-5xl top-[2%] cursor-pointer"
                         onClick={() => setSidebarActive(true)}
                     >
-
                         <BsFilterLeft className='px-2 bg-gray-900 rounded-br-md rounded-tr-md' />
-
                     </span>
-
                     :
                     <div
                         className="sidebar h-full lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
                     >
                         <div className="text-gray-100 text-xl">
-                            <div className="p-2.5 mt-1 flex items-center justify-between">
-                                <div className="px-2 py-1 rounded-md bg-blue-600"><BsAppIndicator /></div>
-                                <h1 className="font-bold text-gray-200 text-[15px] ml-3">Admin Actions</h1>
+                            <div className="p-2.5 mt-1 flex items-center justify-between gap-3 cursor-pointer">
+                                <div className='w-full relative'>
+                                    <h1 className="font-bold text-gray-200 text-[13px] border-2 rounded-md p-1.5 flex items-center justify-between"
+                                        onClick={() => setWebsiteDropdown(!websiteDropdown)}
+                                    >
+                                        {websites.length > 0 ? websites[currentWebsite] : "Click To Create First Website"}
+                                        <span>
+                                            <TiArrowUnsorted />
+                                        </span>
+
+                                    </h1>
+                                    {
+                                        websiteDropdown &&
+                                        <div className='absolute bg-white text-black w-full overflow-y-scroll z-10 items-center justify-center text-base rounded-md mt-1 p-2'>
+                                            {
+                                                websites?.map((item, index) =>
+                                                    <Link href={`/admin/${item}`}>
+                                                        <p key={index} className='p-1 hover:bg-blue-100 rounded-md' onClick={() => {
+                                                            setCurrentWebsite(index)
+                                                            setWebsiteDropdown(false)
+                                                        }}>
+                                                            {item}
+                                                        </p>
+                                                    </Link>
+
+                                                )
+                                            }
+                                            <Link href='/admin/addwebsite' onClick={() => setWebsiteDropdown(false)} className='m-1 p-1 px-6 border-2 border-blue-700 w-full text-blue-600 rounded-md text-sm'>
+                                                + Create Website
+                                            </Link>
+
+                                        </div>
+                                    }
+
+                                </div>
+
                                 <div
                                     className=" cursor-pointer text-2xl"
                                     onClick={() => setSidebarActive(false)}
