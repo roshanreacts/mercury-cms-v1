@@ -12,7 +12,7 @@ const AddPage = () => {
 
   const validationSchema = Yup.object().shape({
     pageSlug: Yup.string().required("Required"),
-    pageTitle: Yup.string().required("Page Title is required"),
+    pageName: Yup.string().required("Page Title is required"),
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
     pagePath: Yup.string().required("Page Path is required"),
@@ -35,7 +35,7 @@ const AddPage = () => {
             <Formik
               initialValues={{
                 pageSlug: "",
-                pageTitle: "",
+                pageName: "",
                 pageComponents: "",
                 metaDescription: "",
                 pagePath: "",
