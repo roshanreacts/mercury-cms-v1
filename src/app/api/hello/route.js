@@ -9,7 +9,7 @@ export async function GET(request) {
     {
       userId: 2,
       id: 2,
-      title: "Contatc",
+      title: "Contact",
       body: "Contact Content",
     },
   ]);
