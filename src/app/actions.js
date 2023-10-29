@@ -1,5 +1,7 @@
 "use server";
 
+import { useQuery } from "@apollo/client";
+
 export async function getTodos() {
   return {
     type: "GET_TODOS",
@@ -15,4 +17,8 @@ export async function makeFetchCall() {
   const data1 = await fetch("http://localhost:3000/api/hello", {cache: "no-store"});
   const data = await data1.json();
   return data;
+}
+
+export async function makeGraphqlQuery() {
+  const data = useQuery()
 }

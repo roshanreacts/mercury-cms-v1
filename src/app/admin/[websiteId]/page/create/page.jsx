@@ -4,7 +4,7 @@ import AddPage from '~/container/addPage'
 const page = (props) => {
   return (
     <div>
-      <AddPage/>
+      <AddPage />
     </div>
   )
 }
