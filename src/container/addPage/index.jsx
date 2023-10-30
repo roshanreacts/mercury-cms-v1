@@ -8,7 +8,7 @@ const AddPage = () => {
 
   const validationSchema = Yup.object().shape({
     pageSlug: Yup.string().required("Required"),
-    pageName: Yup.string().required("Page Title is required"),
+    pageName: Yup.string().required("Page Name is required"),
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
     pagePath: Yup.string().required("Page Path is required"),
@@ -18,17 +18,19 @@ const AddPage = () => {
   const initialValues={
     pageSlug: "",
     pageName: "",
-    pageTitle: "",
     pageComponents: "",
     metaDescription: "",
     pagePath: "",
     status: "draft",
     version: 0.1,
   };
+  const onSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <>
-      <PageForm initialValues={initialValues} validationSchema={validationSchema} />
+      <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} />
     </>
   );
 };
