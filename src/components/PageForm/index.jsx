@@ -7,7 +7,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
     
     return (
         <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-            <div className="relative py-3 md:max-w-xl sm:mx-auto">
+            <div className="relative py-3 sm:mx-auto">
                 <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
                     <div className="max-w-lg mx-auto space-x-5">
                         <div className="flex items-center text-center space-x-5 mb-6">

@@ -8,7 +8,7 @@ const AddPage = () => {
 
   const validationSchema = Yup.object().shape({
     pageSlug: Yup.string().required("Page slug is required").matches(/^(?![\s\S]*\s)[\S\s]*$/, "spaces not allowed"),
-    pageName: Yup.string().required("Page Title is required"),
+    pageName: Yup.string().required("Page Name is required"),
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
     pagePath: Yup.string().required("Page Path is required"),

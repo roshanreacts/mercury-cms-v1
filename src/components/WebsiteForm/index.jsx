@@ -91,8 +91,8 @@ const WebsiteForm = ({ initialValues, validationSchema,onSubmit }) => {
                               name="status"
                               className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                             >
-                              <option value="draft">Draft</option>
-                              <option value="published">Published</option>
+                              <option value="Draft">Draft</option>
+                              <option value="Published">Published</option>
                             </Field>
                             <ErrorMessage
                               name="status"
