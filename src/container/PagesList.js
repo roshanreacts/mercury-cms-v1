@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import store from "~/app/store";
 import { observer } from "mobx-react-lite";
+import Link from "next/link";
 
-const PageList = () => {
+const PageList = ({ currentWebsite }) => {
   const params = useParams();
   useEffect(() => {
     (async () => {
@@ -18,19 +19,29 @@ const PageList = () => {
   }, []);
 
   return (
-    <div
-      className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
-      id="submenu"
-    >
-      {store.pages.map((page) => (
-        <h1
-          key={page.id}
-          className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1"
-        >
-          {page.title}
-        </h1>
-      ))}
-    </div>
+    <>
+      {
+        store.pages.map((page) => (
+          <Link href={`/admin/${currentWebsite}/page/${page.id}`}>
+            <div
+              className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+              id="submenu"
+            >
+
+              <h1
+                key={page.id}
+                className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1"
+              >
+                {page.title}
+              </h1>
+
+            </div>
+          </Link>
+        ))
+      }
+    </>
+
+
   );
 };
 
