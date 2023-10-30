@@ -88,7 +88,7 @@ const SideBar = () => {
                         </div>
                         {
                             pageDropdown &&
-                            <PageList />
+                            <PageList currentWebsite={websites[currentWebsite]} />
                         }
 
                         <div
@@ -105,7 +105,7 @@ const SideBar = () => {
                         </div>
                         <div className="my-4 bg-gray-600 h-[1px]"></div>
 
-                        <Link href='/admin/websiteId/page/create'>
+                        <Link href={`/admin/${websites[currentWebsite]}/page/create`}>
                             <div
                                 className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                             >
