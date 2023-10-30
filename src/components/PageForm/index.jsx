@@ -3,10 +3,8 @@ import React from 'react'
 import { RiFileAddLine } from "react-icons/ri";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const PageForm = ({ initialValues, validationSchema }) => {
-    const onSubmit = (values) => {
-    console.log(values);
-  };
+const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
+    
     return (
         <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
             <div className="relative py-3 md:max-w-xl sm:mx-auto">
