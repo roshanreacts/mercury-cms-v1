@@ -18,14 +18,12 @@ const AddPage = () => {
   const initialValues={
     pageSlug: "",
     pageName: "",
-    pageTitle: "",
     pageComponents: "",
     metaDescription: "",
     pagePath: "",
     status: "draft",
     version: 0.1,
   };
-
   const onSubmit = (values) => {
     console.log(values);
   };
