@@ -13,10 +13,12 @@ const AddWebsite = () => {
   };
 
   const validationSchema = Yup.object({
-    websiteSlug: Yup.string().required("Required"),
-    websiteName: Yup.string().required("Required"),
-    websiteDescription: Yup.string().required("Required"),
-    domain: Yup.string().required("Required"),
+    websiteSlug: Yup.string()
+      .required("Website Slug Required")
+      .matches(/^[^\s]+$/, "Should not contain spaces"),
+    websiteName: Yup.string().required("Website Name Required"),
+    websiteDescription: Yup.string().required("Website Description Required"),
+    domain: Yup.string().required("Domain Required"),
   });
 
   const onSubmit = (values) => {
