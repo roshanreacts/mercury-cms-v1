@@ -19,7 +19,7 @@ export async function makeFetchCall() {
   return { data: data, loading: false, error: undefined };
 }
 
-export async function makeGraphqlQuery(query, variables) {
+export async function makeGraphqlQuery(query, variables, options) {
   let data = await fetch('http://localhost:3000/api/graphql', {
     method: 'POST',
     headers: {
@@ -27,12 +27,10 @@ export async function makeGraphqlQuery(query, variables) {
     },
     body: JSON.stringify({
       query,
-      variables: {
-        ...variables
-      }
+      variables
     })
   },
-    { cache: "no-store" }
+    options
   );
   data = await data.json();
   console.log(data, "response");
