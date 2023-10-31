@@ -8,30 +8,34 @@ import client from '../../utilis/appoloClient'
 import { useMutation } from '@apollo/client';
 import { gql } from "graphql-tag";
 import { useRouter } from 'next/navigation'
+import { makeGraphqlQuery } from '~/app/actions';
 
 
 
 
-// const LOGIN_USER = gql`
-//   mutation LoginUser($email: String!, $password: String!) {
-//     login(email: $email, password: $password) {
-//       message
-//       token
-//     }
-//   }
-// `;
+const LOGIN_USER = `
+query AllPages {
+    allPages {
+      docs {
+        id
+        slug
+      }
+    }
+  }
+`;
 
 const LoginContainer = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const router = useRouter();
 
-    // const [loginUser] = useMutation(LOGIN_USER);
 
-    const loginAdmin = (data) =>{
+    const loginAdmin = async(data) => {
         console.log(data);
-        if(data)
-            router.push('/admin');
+        // if (data)
+            // router.push('/admin');
+        const response = await makeGraphqlQuery(LOGIN_USER);
+        console.log(response);
     }
 
     const formik = useFormik({
@@ -42,12 +46,12 @@ const LoginContainer = () => {
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
             password: Yup.string().
-            min(6,"Minimum 6 digits are required.").
-            matches(
-                /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-                'Password must meet the requirements'
-              ).
-            required('Required')
+                min(6, "Minimum 6 digits are required.").
+                matches(
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+                    'Password must meet the requirements'
+                ).
+                required('Required')
         }),
         onSubmit: (values) => {
             loginAdmin(values);
@@ -58,7 +62,7 @@ const LoginContainer = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    
+
 
 
     return (

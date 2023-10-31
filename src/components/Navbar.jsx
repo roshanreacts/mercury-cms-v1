@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="flex flex-wrap place-items-center w-full">
       <section className="relative mx-auto w-full">
         <nav className="flex justify-between bg-gray-900 text-white w-full">
-          <div className="px-5 xl:px-12 py-5 flex w-full items-center justify-between">
+          <div className="px-5 xl:px-12 py-3 flex w-full items-center justify-between">
             <Image
               className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
               src="/mercury-logo.png"

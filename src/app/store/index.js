@@ -8,6 +8,8 @@ const Page = types
     title: types.string,
     userId: types.number,
     body: types.string,
+    loading: types.boolean,
+    error: types.union | undefined
   })
   .actions((self) => ({
     updateTitle(newTitle) {
@@ -40,20 +42,37 @@ const RootStore = types
   .model("Root", {
     users: types.array(User),
     todos: types.array(Todo),
-    pages: types.array(Page),
+    pages: types.model({
+      data: types.array(Page),
+      loading: types.boolean,
+      error: types.union | undefined
+    }),
   })
   .actions((self) => ({
     getAllPages: flow(function* () {
       const data = yield makeFetchCall();
-      console.log("::data",data);
+      console.log("::data", data);
       self.pages = data;
     }),
+    getPage: flow(function* (pageId){
+      const data = yield makeFetchCall();
+      console.log("::data", data);
+      self.pages.map((pg) => {
+        if(pg.id===data.id){
+          return data;
+        }
+        else{
+          return pg;
+        }
+      })
+    })
   }));
 
 const store = RootStore.create({
   users: [{ name: "Michel" }, { name: "Mattia" }],
   todos: [{ title: "Eat", done: false }],
-  pages: [{ id: 0, title: "Home", userId: 0, body: "Home Page" }],
+  pages: {loading:false}
+  // pages: { data: [{ id: 0, title: "Home", userId: 0, body: "Home Page", loading: false, error: undefined }], loading: false, error: undefined },
 });
 
 // const store = asReduxStore(todos)

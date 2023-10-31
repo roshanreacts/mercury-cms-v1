@@ -1,14 +1,10 @@
 import React from 'react'
-import { getTodos } from '~/app/actions';
+import AddPage from '~/container/addPage';
 
-const Page =async (props) => {
-  const editPage = props.searchParams.edit?props.searchParams.edit:false;
-  console.log(props.searchParams, "sgd");
-  // const data = await getTodos();
-  // console.log(data, "data");
+const Page = async (props) => {
   return (
     <div>
-      <h1>Page Data of {props.params.pageId}</h1>
+      <AddPage/>
     </div>
   )
 }

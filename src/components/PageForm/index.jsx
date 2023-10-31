@@ -1,21 +1,23 @@
-
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RiFileAddLine } from "react-icons/ri";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import Link from 'next/link';
 
-const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
-    
+const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, pageId }) => {
     return (
         <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
             <div className="relative py-3 md:max-w-xl sm:mx-auto">
                 <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
                     <div className="max-w-lg mx-auto space-x-5">
+                        {pageId && !edit &&
+
+                            <Link href={`${pageId}?edit=true`}> <button>Edit</button> </Link>}
                         <div className="flex items-center text-center space-x-5 mb-6">
                             <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
                                 <RiFileAddLine />
                             </div>
                             <div className="block pl-2 font-semibold text-xl text-gray-700">
-                                <h2 className="leading-relaxed">Create Page</h2>
+                                <h2 className="leading-relaxed">{view ? "View Page" : (add ? "Add Page" : "Update Page")}</h2>
                             </div>
                         </div>
                         <Formik
@@ -30,6 +32,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                         <Field
                                             type="text"
                                             name="pageName"
+                                            disabled={view}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Name"
                                         />
@@ -44,6 +47,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                         <Field
                                             type="text"
                                             name="pageSlug"
+                                            disabled={view}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Slug"
                                         />
@@ -58,6 +62,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                         <Field
                                             as="textarea"
                                             name="pageComponents"
+                                            disabled={view}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Components"
                                             rows="5"
@@ -73,6 +78,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                         <Field
                                             as="textarea"
                                             name="metaDescription"
+                                            disabled={view}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Meta Description"
                                             rows="5"
@@ -88,6 +94,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                         <Field
                                             type="text"
                                             name="pagePath"
+                                            disabled={view}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Path"
                                         />
@@ -103,10 +110,11 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                             <Field
                                                 as="select"
                                                 name="status"
+                                                disabled={view}
                                                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                                             >
-                                                <option value="draft">Draft</option>
-                                                <option value="active">Active</option>
+                                                <option value="Draft">Draft</option>
+                                                <option value="Active">Active</option>
                                             </Field>
                                         </div>
                                         <div className="">
@@ -114,6 +122,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                             <Field
                                                 type="number"
                                                 name="version"
+                                                disabled={view}
                                                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                 placeholder="Version"
                                             />
@@ -124,15 +133,18 @@ const PageForm = ({ initialValues, validationSchema, onSubmit }) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="pt-4 flex items-center space-x-4">
-                                        <button
-                                            type="submit"
-                                            // disabled={isSubmitting}
-                                            className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
-                                        >
-                                            Create
-                                        </button>
-                                    </div>
+                                    {
+                                        !view &&
+                                        <div className="pt-4 flex items-center space-x-4">
+                                            <button
+                                                type="submit"
+                                                className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                                            >
+                                                {add && "Create"}
+                                                {edit && "Update"}
+                                            </button>
+                                        </div>
+                                    }
                                 </Form>
                             )}
                         </Formik>

@@ -29,14 +29,13 @@ var corsOptions = {
 
 const server = new ApolloServer({
   schema,
-  cors: corsOptions
+  // cors: corsOptions
 });
 
 const handler = startServerAndCreateNextHandler(server,
   {
     context: async (req, res) => ({
-      req,
-      res,
+      ...req,
       user: { role: "ANONYMOUS" },
       // setCookie: (name, value, options) => {
       //   const cookie = serialize(name, value, options);

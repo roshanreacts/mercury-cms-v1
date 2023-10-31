@@ -12,6 +12,9 @@ const PageList = ({ currentWebsite }) => {
       const data = store.getAllPages(params.webSiteId);
 
       console.log(data);
+      // const data1 = store.getPage(1);
+      // console.log(data1);
+
     })();
     return () => {
       console.log("cleanup");
@@ -20,24 +23,28 @@ const PageList = ({ currentWebsite }) => {
 
   return (
     <>
+
       {
-        store.pages.map((page) => (
-          <Link href={`/admin/${currentWebsite}/page/${page.id}`}>
-            <div
-              className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
-              id="submenu"
-            >
-
-              <h1
-                key={page.id}
-                className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1"
+        store.pages.loading ?
+          <><h1 className="text-white">loading....</h1></>
+          :
+          store.pages.data.map((page, index) => (
+            <Link href={`/admin/${currentWebsite}/page/${page.id}?edit=false`} key={index}>
+              <div
+                className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+                id="submenu"
               >
-                {page.title}
-              </h1>
 
-            </div>
-          </Link>
-        ))
+                <h1
+                  key={page.id}
+                  className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1"
+                >
+                  {page.title}
+                </h1>
+
+              </div>
+            </Link>
+          ))
       }
     </>
 

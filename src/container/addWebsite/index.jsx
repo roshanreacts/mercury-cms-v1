@@ -26,7 +26,7 @@ const AddWebsite = () => {
   };
 return(
   <>
-  <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} />
+  <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} />
   </>
 )
 };

@@ -1,7 +1,9 @@
 import React from 'react'
 import { BiAddToQueue } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
+const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) => {
+
+  console.log(add, "afsdadfs", edit);
 
   return (
     <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
@@ -13,7 +15,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                 <BiAddToQueue />
               </div>
               <div className="block pl-2 font-semibold text-xl text-gray-700">
-                <h2 className="leading-relaxed">Create Website</h2>
+                <h2 className="leading-relaxed">{add ? "Create Website" : (edit ? "Update Website" : "View Website")}</h2>
               </div>
             </div>
             <Formik
@@ -32,6 +34,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                           name="websiteName"
                           className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Website Name"
+                          disabled={!(add || edit)}
                         />
                         <ErrorMessage
                           name="websiteName"
@@ -46,6 +49,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                           name="websiteSlug"
                           className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Website Slug"
+                          disabled={!(add || edit)}
                         />
                         <ErrorMessage
                           name="websiteSlug"
@@ -61,6 +65,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                         name="websiteDescription"
                         className='px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Description"'
                         placeholder="Description"
+                        disabled={!(add || edit)}
                       />
                       <ErrorMessage
                         name="websiteDescription"
@@ -77,6 +82,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                           name="domain"
                           className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Domain"
+                          disabled={!(add || edit)}
                         />
                         <ErrorMessage
                           name="domain"
@@ -89,10 +95,11 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                         <Field
                           as="select"
                           name="status"
+                          disabled={!(add || edit)}
                           className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                         >
-                          <option value="draft">Draft</option>
-                          <option value="published">Published</option>
+                          <option value="Draft">Draft</option>
+                          <option value="Published">Published</option>
                         </Field>
                         <ErrorMessage
                           name="status"
@@ -103,13 +110,25 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit }) => {
                     </div>
                   </div>
                   <div className="pt-4 flex items-center space-x-4">
-                    <button
-                      type="submit"
-                      className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
-                    >
-                      Create
-                    </button>
+
+
+                    {add ?
+                      <button
+                        type="submit"
+                        className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                      >
+                        Create
+                      </button>
+                      : edit &&
+                      <button
+                        type="submit"
+                        className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                      >
+                        Update
+                      </button>
+                    }
                   </div>
+
                 </Form>
               )}
             </Formik>

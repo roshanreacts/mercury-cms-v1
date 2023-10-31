@@ -14,11 +14,27 @@ export async function getTodos() {
 
 export async function makeFetchCall() {
   // wait 1 second
-  const data1 = await fetch("http://localhost:3000/api/hello", {cache: "no-store"});
+  const data1 = await fetch("http://localhost:3000/api/hello", { cache: "no-store" });
   const data = await data1.json();
-  return data;
+  return { data: data, loading: false, error: undefined };
 }
 
-export async function makeGraphqlQuery() {
-  const data = useQuery()
+export async function makeGraphqlQuery(query, variables) {
+  let data = await fetch('http://localhost:3000/api/graphql', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      query,
+      variables: {
+        ...variables
+      }
+    })
+  },
+    { cache: "no-store" }
+  );
+  data = await data.json();
+  console.log(data, "response");
+  return data;
 }
