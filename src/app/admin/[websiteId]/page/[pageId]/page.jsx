@@ -1,10 +1,10 @@
 import React from 'react'
-import AddPage from '~/container/addPage';
+import PageUpdateView from '~/container/Page';
 
 const Page = async (props) => {
   return (
     <div>
-      <AddPage/>
+      <PageUpdateView/>
     </div>
   )
 }

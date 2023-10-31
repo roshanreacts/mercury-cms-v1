@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import * as Yup from 'yup';
 import PageForm from "~/components/PageForm";
 
-const AddPage = () => {
+let add = false, edit = false;
+const PageUpdateView = () => {
+  edit = useSearchParams().get('edit') === 'true' ? true : false;
+  const pageId = useParams().pageId;
   
   let initialValues = {
     pageSlug: "",
@@ -15,8 +18,6 @@ const AddPage = () => {
     status: "draft",
     version: 0.1,
   };
-
-
   const validationSchema = Yup.object().shape({
     pageSlug: Yup.string().required("Page slug is required").matches(/^(?![\s\S]*\s)[\S\s]*$/, "spaces not allowed"),
     pageName: Yup.string().required("Page Name is required"),
@@ -33,9 +34,9 @@ const AddPage = () => {
 
   return (
     <>
-      <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} pageId={undefined} />
+      <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={false} edit={edit} pageId={pageId} />
     </>
   );
 };
 
-export default AddPage;
+export default PageUpdateView;
