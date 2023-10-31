@@ -31,7 +31,7 @@ export default {
         //   maxAge: 60 * 60 
         // })
 
-        return { message: "Login Success", token }
+        return { message: "Login Success", token, name: user.name, email:user.email, role: user.role }
       } catch (error) {
         throw new GraphQLError(error)
       }

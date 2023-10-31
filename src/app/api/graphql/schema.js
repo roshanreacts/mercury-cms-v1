@@ -1,4 +1,5 @@
 import { gql } from "graphql-tag";
+import { User } from '../graphql/models/User'
 
 
 const typeDefs = gql`
@@ -11,6 +12,10 @@ const typeDefs = gql`
   type Response {
     message: String,
     token: String,
+    name: String,
+    email: String,
+    role: String
   }
+
 `;
 export default typeDefs;

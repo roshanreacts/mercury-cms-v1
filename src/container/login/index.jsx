@@ -14,12 +14,13 @@ import { makeGraphqlQuery } from '~/app/actions';
 
 
 const LOGIN_USER = `
-query AllPages {
-    allPages {
-      docs {
-        id
-        slug
-      }
+mutation Login($password: String!, $email: String!) {
+    login(password: $password, email: $email) {
+        message
+        token
+        email
+        name
+        role
     }
   }
 `;
@@ -30,11 +31,11 @@ const LoginContainer = () => {
     const router = useRouter();
 
 
-    const loginAdmin = async(data) => {
+    const loginAdmin = async (data) => {
         console.log(data);
         // if (data)
-            // router.push('/admin');
-        const response = await makeGraphqlQuery(LOGIN_USER);
+        // router.push('/admin');
+        const response = await makeGraphqlQuery(LOGIN_USER, data, { cache: "no-store" });
         console.log(response);
     }
 
