@@ -3,7 +3,7 @@ import { RiFileAddLine } from "react-icons/ri";
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Link from 'next/link';
 
-const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, pageId }) => {
+const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, pageId }) => {
     return (
         <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
             <div className="relative py-3 sm:mx-auto">
@@ -17,7 +17,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                 <RiFileAddLine />
                             </div>
                             <div className="block pl-2 font-semibold text-xl text-gray-700">
-                                <h2 className="leading-relaxed">{view ? "View Page" : (add ? "Add Page" : "Update Page")}</h2>
+                                <h2 className="leading-relaxed">{add ? "Create Page" : (edit ? "Update Page" : "View Page")}</h2>
                             </div>
                         </div>
                         <Formik
@@ -32,7 +32,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                         <Field
                                             type="text"
                                             name="pageName"
-                                            disabled={view}
+                                            disabled={!(add || edit)}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Name"
                                         />
@@ -47,7 +47,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                         <Field
                                             type="text"
                                             name="pageSlug"
-                                            disabled={view}
+                                            disabled={!(add || edit)}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Slug"
                                         />
@@ -62,7 +62,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                         <Field
                                             as="textarea"
                                             name="pageComponents"
-                                            disabled={view}
+                                            disabled={!(add || edit)}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Components"
                                             rows="5"
@@ -78,7 +78,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                         <Field
                                             as="textarea"
                                             name="metaDescription"
-                                            disabled={view}
+                                            disabled={!(add || edit)}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Meta Description"
                                             rows="5"
@@ -94,7 +94,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                         <Field
                                             type="text"
                                             name="pagePath"
-                                            disabled={view}
+                                            disabled={!(add || edit)}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="Page Path"
                                         />
@@ -110,7 +110,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                             <Field
                                                 as="select"
                                                 name="status"
-                                                disabled={view}
+                                                disabled={!(add || edit)}
                                                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                                             >
                                                 <option value="Draft">Draft</option>
@@ -122,7 +122,7 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                             <Field
                                                 type="number"
                                                 name="version"
-                                                disabled={view}
+                                                disabled={!(add || edit)}
                                                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                 placeholder="Version"
                                             />
@@ -133,18 +133,23 @@ const PageForm = ({ initialValues, validationSchema, onSubmit, add, edit, view, 
                                             />
                                         </div>
                                     </div>
-                                    {
-                                        !view &&
-                                        <div className="pt-4 flex items-center space-x-4">
+                                    <div className="pt-4 flex items-center space-x-4">
+                                        {add ?
                                             <button
                                                 type="submit"
                                                 className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
                                             >
-                                                {add && "Create"}
-                                                {edit && "Update"}
+                                                Create
                                             </button>
-                                        </div>
-                                    }
+                                            : edit &&
+                                            <button
+                                                type="submit"
+                                                className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                                            >
+                                                Update
+                                            </button>
+                                        }
+                                    </div>
                                 </Form>
                             )}
                         </Formik>

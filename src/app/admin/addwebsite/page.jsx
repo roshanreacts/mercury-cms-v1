@@ -4,8 +4,8 @@ import AddWebsite from '~/container/addWebsite'
 const page = () => {
   return (
     <main className="">
-    <AddWebsite/>
-  </main>
+      <AddWebsite />
+    </main>
   )
 }
 
