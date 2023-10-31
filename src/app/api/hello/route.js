@@ -4,17 +4,13 @@ export async function GET(request) {
       userId: 1,
       id: 1,
       title: "Home",
-      body: "Home Content",
-      loading: false,
-      error: undefined,
+      body: "Home Content"
     },
     {
       userId: 2,
       id: 2,
       title: "Contact",
-      body: "Contact Content",
-      loading: false,
-      error: undefined,
+      body: "Contact Content"
     },
   ]);
 }

@@ -28,7 +28,7 @@ const PageList = ({ currentWebsite }) => {
         store.pages.loading ?
           <><h1 className="text-white">loading....</h1></>
           :
-          store.pages.data.map((page, index) => (
+          store.pages.data?.map((page, index) => (
             <Link href={`/admin/${currentWebsite}/page/${page.id}?edit=false`} key={index}>
               <div
                 className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
