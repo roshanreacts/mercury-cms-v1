@@ -1,6 +1,6 @@
 import { types, flow } from "mobx-state-tree";
 import { connectReduxDevtools } from "mst-middlewares";
-import { makeFetchCall } from "~/app/actions";
+import { makeFetchCall, makeGraphqlQuery } from "~/app/actions";
 import User from "./models/User";
 import Page from "./models/Page";
 import Website from "./models/Website";
@@ -9,16 +9,25 @@ const RootStore = types
   .model("Root", {
     token: types.maybeNull(types.string),
     loggedInUser: types.maybeNull(User),
+    message: types.maybeNull(types.string),
     users: types.array(User),
     pages: types.array(Page),
     websites: types.array(Website),
   })
   .actions((self) => ({
     login: flow(function* (query, variables, options) {
-      const data = yield makeGraphqlQuery(query, variables, options);
+      let data = yield makeGraphqlQuery(query, variables, options);
+      data = data.data;
       console.log("::data", data);
-      self.loggedInUser = data.user;
-      self.token = data.token 
+      self.token = data.login.token 
+      self.message = data.login.message
+      self.loggedInUser = {
+        name: data.login.name,
+        email: data.login.email,
+        role: data.login.role,
+        id: data.login.id
+      }
+      
     }),
     getAllPages: flow(function* () {
       const data = yield makeFetchCall();

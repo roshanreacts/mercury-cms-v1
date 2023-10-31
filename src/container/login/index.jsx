@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Link from 'next/link';
 import { useFormik } from 'formik';
@@ -9,6 +9,10 @@ import { useMutation } from '@apollo/client';
 import { gql } from "graphql-tag";
 import { useRouter } from 'next/navigation'
 import { makeGraphqlQuery } from '~/app/actions';
+import store from '~/app/store';
+import { observer } from "mobx-react-lite";
+import { setTokenCookie } from '~/utilis/storeCookie';
+import useLoader from '../useLoader';
 
 
 
@@ -16,11 +20,12 @@ import { makeGraphqlQuery } from '~/app/actions';
 const LOGIN_USER = `
 mutation Login($password: String!, $email: String!) {
     login(password: $password, email: $email) {
-        message
-        token
-        email
-        name
-        role
+      message
+      token
+      id
+      email
+      name
+      role
     }
   }
 `;
@@ -33,11 +38,11 @@ const LoginContainer = () => {
 
     const loginAdmin = async (data) => {
         console.log(data);
-        // if (data)
-        // router.push('/admin');
-        const response = await makeGraphqlQuery(LOGIN_USER, data, { cache: "no-store" });
-        console.log(response);
-    }
+        const data1 =  await store.login(LOGIN_USER, data, { cache: "no-store" });
+        console.log(data1);
+        setTokenCookie()
+        router.push('/admin')
+    }   
 
     const formik = useFormik({
         initialValues: {
@@ -128,4 +133,4 @@ const LoginContainer = () => {
     );
 }
 
-export default LoginContainer;
+export default observer(LoginContainer);

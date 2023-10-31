@@ -14,7 +14,8 @@ const typeDefs = gql`
     token: String,
     name: String,
     email: String,
-    role: String
+    role: String,
+    id: String
   }
 
 `;

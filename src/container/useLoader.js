@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 const useLoader = (promise) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
