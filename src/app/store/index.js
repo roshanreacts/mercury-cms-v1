@@ -1,14 +1,15 @@
 import { types, flow } from "mobx-state-tree";
 import { connectReduxDevtools } from "mst-middlewares";
 import { makeFetchCall } from "~/app/actions";
-import {Page, User, Website} from "./mobxModels";
-
+import User from "./models/User";
+import Page from "./models/Page";
+import Website from "./models/Website";
 
 const RootStore = types
   .model("Root", {
     users: types.array(User),
     pages: types.array(Page),
-    websites:types.array(Website)
+    websites: types.array(Website),
   })
   .actions((self) => ({
     getAllPages: flow(function* () {
@@ -19,24 +20,16 @@ const RootStore = types
     getPage: flow(function* (pageId) {
       const data = yield makeFetchCall();
       console.log("::data", data);
-      self.pages.map((pg) => {
-        if (pg.id === data.id) {
-          return data;
-        } else {
-          return pg;
-        }
-      });
+      self.pages = self.pages.map((pg) => (pg.id === data.id ? data : pg));
     }),
   }));
 
 const store = RootStore.create({
-  users: [{ name: "Michel" }, { name: "Mattia" }],
-  pages: [ ],
-  websites: []
-  // pages: { data: [{ id: 0, title: "Home", userId: 0, body: "Home Page", loading: false, error: undefined }], loading: false, error: undefined },
+  users: [{ name: "Michel", id: "23" }, { name: "Mattia", id: "23" }],
+  pages: [],
+  websites: [],
 });
 
-// const store = asReduxStore(todos)
 connectReduxDevtools(require("remotedev"), store);
 
 export default store;
