@@ -31,3 +31,9 @@ export const checkTokenExpiry = () => {
 export const clearTokenCookie = () => {
     deleteCookie("authToken");
 }
+
+export const getLoggedInUserIdFromCookie = () => {
+    let token = getCookie("authToken");
+    const { id } = jwt.decode(token);
+    return id;
+}

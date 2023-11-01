@@ -14,10 +14,6 @@ import { observer } from "mobx-react-lite";
 import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
 import useLoader from '../useLoader';
 
-
-
-
-
 const LOGIN_USER = `
 mutation Login($password: String!, $email: String!) {
     login(password: $password, email: $email) {

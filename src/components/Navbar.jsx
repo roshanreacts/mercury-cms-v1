@@ -4,8 +4,19 @@ import { BiUserCircle } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-import { checkTokenExpiry, clearTokenCookie } from "~/utilis/cookie";
+import { checkTokenExpiry, clearTokenCookie, getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 import { useRouter } from "next/navigation";
+import store from "~/store";
+
+const  GET_SINGLE_USER= `
+query GetUser($where: whereUserInput) {
+  getUser(where: $where) {
+    id
+    name
+    email
+    role
+  }
+}`
 
 const Navbar = () => {
 
@@ -24,9 +35,22 @@ const Navbar = () => {
       router.push('/login');
     }
     else {
+      const idFromCookie = getLoggedInUserIdFromCookie();
+      (async()=>{
+        await store.getLoggedInUser(GET_SINGLE_USER, {
+          where: {
+            id: {
+              is: idFromCookie
+            }
+          }
+        }, {
+          cache: "no-store" 
+        })
+
+      })()
       setLoggedIn(true)
     }
-  }, [])
+  })
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);

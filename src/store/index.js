@@ -27,7 +27,12 @@ const RootStore = types
         role: data.login.role,
         id: data.login.id
       }
-      
+    }),
+    getLoggedInUser: flow(function* (query, variables, options) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      data = data.data;
+      console.log("::data", data);
+      self.loggedInUser = data?.getUser
     }),
     getAllPages: flow(function* () {
       const data = yield makeFetchCall();
