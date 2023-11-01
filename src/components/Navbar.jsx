@@ -17,7 +17,7 @@ const Navbar = () => {
   useEffect(() => {
     if (checkTokenExpiry()) {
       setLoggedIn(false)
-      router.push('/login');
+      router.replace('/login');
     }
     else {
       setLoggedIn(true)

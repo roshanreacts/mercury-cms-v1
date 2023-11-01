@@ -39,7 +39,7 @@ const LoginContainer = () => {
     useEffect(()=>{
         //returns false if not expired
         if(!checkTokenExpiry()){
-            router.push('/admin');
+            router.replace('/admin');
         }
     },[])
 
@@ -51,7 +51,7 @@ const LoginContainer = () => {
 
         //setting token into the cookie
         setTokenCookie()
-        router.push('/admin')
+        router.replace('/admin')
     }   
 
     const formik = useFormik({
