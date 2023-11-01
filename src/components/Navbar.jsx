@@ -89,15 +89,17 @@ const Navbar = () => {
                     <div className="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none right-3">
                       <div className="py-1" role="none">
                         <p className="block px-4 py-2 text-sm text-gray-700" role="menuitem">
-                          User Profile
+                        {store.loggedInUser?.name}
                         </p>
                         <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                          View Profile
+                        {store.loggedInUser?.email}
                         </Link>
                         <Link href="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                           Settings
-
-                        </Link>
+                        </Link> 
+                        <Link href="/resetPassword" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                        Reset Password</Link>
+                        
                       </div>
                     </div>
                   )}
@@ -130,7 +132,7 @@ const Navbar = () => {
                 <div className="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none top-12 right-8 xl:hidden">
                   <div className="py-1" role="none">
                     <p className="block px-4 py-2 text-sm text-gray-700" role="menuitem">
-                      User Profile
+                      {store.loggedInUser?.name}
                     </p>
                     <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                       View Profile
