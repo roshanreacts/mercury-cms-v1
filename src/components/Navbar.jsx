@@ -16,9 +16,8 @@ const Navbar = () => {
   
   useEffect(() => {
     let expired;
-    (async()=>{
-      expired = await checkTokenExpiry()
-    })()
+    expired = checkTokenExpiry()
+
     
     if (expired) {
       setLoggedIn(false)
