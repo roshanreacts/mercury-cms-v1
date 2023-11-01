@@ -7,16 +7,8 @@ import Image from "next/image";
 import { checkTokenExpiry, clearTokenCookie, getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 import { useRouter } from "next/navigation";
 import store from "~/store";
+import { GET_SINGLE_USER } from "~/utilis/queries";
 
-const  GET_SINGLE_USER= `
-query GetUser($where: whereUserInput) {
-  getUser(where: $where) {
-    id
-    name
-    email
-    role
-  }
-}`
 
 const Navbar = () => {
 

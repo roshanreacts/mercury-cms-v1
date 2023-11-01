@@ -13,19 +13,9 @@ import store from '~/store';
 import { observer } from "mobx-react-lite";
 import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
 import useLoader from '../useLoader';
+import { LOGIN_USER } from '~/utilis/queries';
 
-const LOGIN_USER = `
-mutation Login($password: String!, $email: String!) {
-    login(password: $password, email: $email) {
-      message
-      token
-      id
-      email
-      name
-      role
-    }
-  }
-`;
+
 
 const LoginContainer = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
