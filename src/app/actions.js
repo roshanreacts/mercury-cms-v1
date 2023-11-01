@@ -20,7 +20,7 @@ export async function makeFetchCall() {
 export async function makeGraphqlQuery(query, variables, options) {
 
   try {
-    let data = await fetch('http://localhost:3000/api/graphql', {
+    const data = await fetch('http://localhost:3000/api/graphql', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
