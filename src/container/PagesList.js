@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
-import store from "~/app/store";
+import store from "~/store";
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
 

@@ -1,5 +1,5 @@
 import { Cookies } from 'react-cookie';
-import store from '~/app/store';
+import store from '~/store';
 import jwt from 'jsonwebtoken';
 
 
