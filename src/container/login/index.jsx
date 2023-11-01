@@ -11,8 +11,10 @@ import { useRouter } from 'next/navigation'
 import { makeGraphqlQuery } from '~/app/actions';
 import store from '~/app/store';
 import { observer } from "mobx-react-lite";
-import { setTokenCookie } from '~/utilis/storeCookie';
+import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
 import useLoader from '../useLoader';
+import { Cookies } from 'react-cookie';
+
 
 
 
@@ -34,12 +36,20 @@ const LoginContainer = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const router = useRouter();
+    useEffect(()=>{
+        //returns false if not expired
+        if(!checkTokenExpiry()){
+            router.push('/admin');
+        }
+    },[])
 
 
     const loginAdmin = async (data) => {
         console.log(data);
         const data1 =  await store.login(LOGIN_USER, data, { cache: "no-store" });
         console.log(data1);
+
+        //setting token into the cookie
         setTokenCookie()
         router.push('/admin')
     }   
