@@ -32,8 +32,8 @@ export async function makeGraphqlQuery(query, variables, options) {
     },
       options
     );
-    data = await data.json();
-    return data;
+    const parseData = await data.json();
+    return parseData;
   }
   catch(e){
     throw e;
