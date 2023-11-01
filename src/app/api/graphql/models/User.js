@@ -10,7 +10,7 @@ export const UserSchema = {
       unique: true,
     },
     password: {
-      type: "string",
+      type: "password",
       isRequired: true
     },
     role: {

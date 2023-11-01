@@ -1,6 +1,5 @@
 import mercury from "@mercury-js/core";
 import { GraphQLError } from "graphql";
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export default {
@@ -20,7 +19,8 @@ export default {
           throw new GraphQLError("User Doesn't Exists");
         }
 
-        const passwordCompare = await bcrypt.compare(password, user.password);
+
+        const passwordCompare = await user.verifyPassword(password);
 
         if (!passwordCompare) {
           throw new GraphQLError("Please Check Password Entered!!");
