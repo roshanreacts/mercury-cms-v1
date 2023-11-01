@@ -25,3 +25,8 @@ export const checkTokenExpiry = () => {
     }
     return true;
 }
+
+export const clearTokenCookie = () => {
+    const cookie = new Cookies();
+    cookie.remove('authToken')
+}
