@@ -13,7 +13,6 @@ import store from '~/store';
 import { observer } from "mobx-react-lite";
 import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
 import useLoader from '../useLoader';
-import { Cookies } from 'react-cookie';
 
 
 

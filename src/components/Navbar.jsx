@@ -13,11 +13,16 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const router = useRouter();
-
+  
   useEffect(() => {
-    if (checkTokenExpiry()) {
+    let expired;
+    (async()=>{
+      expired = await checkTokenExpiry()
+    })()
+    
+    if (expired) {
       setLoggedIn(false)
-      router.replace('/login');
+      router.push('/login');
     }
     else {
       setLoggedIn(true)

@@ -1,4 +1,4 @@
-import { Cookies } from 'react-cookie';
+// import { Cookies } from 'react-cookie';
 import store from '~/store';
 import jwt from 'jsonwebtoken';
 import { setCookie, getCookie, deleteCookie } from 'cookies-next';
@@ -16,7 +16,7 @@ export const setTokenCookie = () => {
 }
 
 export const checkTokenExpiry = () => {
-    const cookie = new Cookies();
+    // const cookie = new Cookies();
     let token = getCookie("authToken");
     if (token) {
         const { exp } = jwt.decode(token);
