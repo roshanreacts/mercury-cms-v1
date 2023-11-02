@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation'
 import store from '~/store';
 import { observer } from "mobx-react-lite";
 import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
-import useLoader from '../useLoader';
+import {useLazyQuery} from '../hooks';
 import { LOGIN_USER } from '~/utilis/queries';
 
 
 
 const LoginContainer = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
-
+const [loginUser, {data, loading, error}] = useLazyQuery(store.login);
     const router = useRouter();
     useEffect(()=>{
         //returns false if not expired
@@ -25,15 +25,18 @@ const LoginContainer = () => {
     },[])
 
 
-    const loginAdmin = async (data) => {
-        console.log(data);
-        const data1 =  await store.login(LOGIN_USER, data, { cache: "no-store" });
-        console.log(data1);
-
-        //setting token into the cookie
+    useEffect(()=>{
+        if(data){
+            console.log(data)
+                    //setting token into the cookie
         setTokenCookie()
-        router.replace('/admin')
-    }   
+        router.replace('/admin');
+        }
+
+        if(error){
+            console.log("login error",error)
+        }
+    },[data,error]) 
 
     const formik = useFormik({
         initialValues: {
@@ -43,15 +46,15 @@ const LoginContainer = () => {
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
             password: Yup.string().
-                min(6, "Minimum 6 digits are required.").
-                matches(
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-                    'Password must meet the requirements'
-                ).
+                // min(6, "Minimum 6 digits are required.").
+                // matches(
+                //     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+                //     'Password must meet the requirements'
+                // ).
                 required('Required')
         }),
         onSubmit: (values) => {
-            loginAdmin(values);
+            loginUser(LOGIN_USER, values, { cache: "no-store" });
         },
     });
 
@@ -105,8 +108,8 @@ const LoginContainer = () => {
                             </div>
                         </div>
                         <div className="mt-6 w-[30%]">
-                            <button className="w-full p-2 bg-gray-900 text-white rounded" type="submit">
-                                Login
+                            <button disabled={loading} className="w-full p-2 bg-gray-900 text-white rounded" type="submit">
+                                {!loading ? "Login" : "loading"}
                             </button>
                         </div>
 

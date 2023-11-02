@@ -12,32 +12,31 @@ export async function getTodos() {
 
 export async function makeFetchCall() {
   // wait 1 second
-  const data1 = await fetch("http://localhost:3001/api/hello", { cache: "no-store" });
+  const data1 = await fetch("http://localhost:3001/api/hello", {
+    cache: "no-store",
+  });
   const data = await data1.json();
   return { data: data, loading: false, error: undefined };
 }
 
-export async function makeGraphqlQuery(query, variables, options) {
-
-  try {
-    const data = await fetch('http://localhost:3000/api/graphql', {
-      method: 'POST',
+export async function serverFetch(query, variables, options) {
+  const data = await fetch(
+    "http://localhost:3000/api/graphql",
+    {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
       body: JSON.stringify({
         query,
-        variables
-      })
+        variables,
+      }),
     },
-      options
-    );
-    let parseData = await data.json();
-    parseData = parseData?.data;
-    return parseData;
+    options
+  );
+  let parseData = await data.json();
+  if (parseData?.errors) {
+    return { error: parseData?.errors[0] };
   }
-  catch(e){
-    throw e;
-  }
-  
+  return parseData?.data;
 }
