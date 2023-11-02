@@ -1,13 +1,16 @@
-import React from 'react'
-import Website from '~/container/Website';
+"use client";
+import React from "react";
+import ConfirmActionButton from "~/components/ConfirmActionButton";
+import Website from "~/container/Website";
 
-const page = (props) => {
-    console.log(props, "dgsads");
+const Page = (props) => {
+  
   return (
     <div>
       <Website />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;
+
