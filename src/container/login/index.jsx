@@ -4,11 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import client from '../../utilis/appoloClient'
-import { useMutation } from '@apollo/client';
-import { gql } from "graphql-tag";
 import { useRouter } from 'next/navigation'
-import { makeGraphqlQuery } from '~/app/actions';
 import store from '~/store';
 import { observer } from "mobx-react-lite";
 import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';

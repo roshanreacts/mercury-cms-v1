@@ -34,6 +34,9 @@ export const clearTokenCookie = () => {
 
 export const getLoggedInUserIdFromCookie = () => {
     let token = getCookie("authToken");
-    const { id } = jwt.decode(token);
-    return id;
+    if(token){
+        const { id } = jwt.decode(token);
+        return id;
+    }
+    return undefined
 }

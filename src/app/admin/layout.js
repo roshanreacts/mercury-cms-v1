@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
           <SideBar />
         </div>
 
-        <div className="flex-1 ml-3 mt-2" style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 100px)' }}>
+        <div className="flex-1 ml-3 mt-2" style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 80px)' }}>
           {children}
         </div>
       </div>

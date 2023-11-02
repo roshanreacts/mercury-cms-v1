@@ -4,7 +4,7 @@ import User from './User'
 
 const Website = types
   .model("Website", {
-    id: types.maybeNull(types.identifierNumber),
+    id: types.identifier,
     slug: types.maybeNull(types.string),
     name: types.maybeNull(types.string),
     description: types.maybeNull(types.string),

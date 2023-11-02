@@ -12,7 +12,7 @@ mutation Login($password: String!, $email: String!) {
 `;
 
 
-export const  GET_SINGLE_USER= `
+export const GET_SINGLE_USER = `
 query GetUser($where: whereUserInput) {
   getUser(where: $where) {
     id
@@ -23,7 +23,7 @@ query GetUser($where: whereUserInput) {
 }`
 
 
-export const GET_ALL_PAGES=`
+export const GET_ALL_PAGES = `
 query AllPages($where: wherePageInput) {
   allPages(where: $where) {
     docs {
@@ -35,3 +35,14 @@ query AllPages($where: wherePageInput) {
 }
 `
 
+export const GET_ALL_WEBSITES = `
+query AllWebsites($where: whereWebsiteInput) {
+  allWebsites(where: $where) {
+    docs {
+      id
+      name
+      slug
+    }
+  }
+}
+`

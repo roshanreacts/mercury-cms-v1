@@ -37,11 +37,16 @@ const RootStore = types
       console.log("::data", data);
       self.pages = data?.allPages?.docs
     }),
+    getAllWebsites: flow(function* (query, variables, options) {
+      const data = yield makeGraphqlQuery(query, variables, options);
+      console.log("::data", data);
+      self.websites = data?.allWebsites?.docs
+    }),
   }));
 
 const store = RootStore.create({
-  users: [{ id:"4", name:"ewfr" }, { id:"23" }],
-  pages: [ ],
+  users: [],
+  pages: [],
   websites: []
 });
 

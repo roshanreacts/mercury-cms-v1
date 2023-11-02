@@ -4,7 +4,7 @@ import Website from './Website';
 
 const Page = types
   .model("Page", {
-    id: types.maybeNull(types.identifierNumber),
+    id: types.identifier,
     title: types.maybeNull(types.string),
     slug: types.maybeNull(types.string),
     path: types.maybeNull(types.string),

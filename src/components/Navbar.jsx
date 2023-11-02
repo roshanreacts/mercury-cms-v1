@@ -78,7 +78,7 @@ const Navbar = () => {
                     <BiUserCircle className="text-3xl" />
                   </div>
                   {showDropdown && (
-                    <div className="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none right-3">
+                    <div className="z-10 absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none right-3">
                       <div className="py-1" role="none">
                         <p className="block px-4 py-2 text-sm text-gray-700" role="menuitem">
                         {store.loggedInUser?.name}
@@ -121,7 +121,7 @@ const Navbar = () => {
                 <BiUserCircle className="text-3xl" />
               </div>
               {showDropdown && (
-                <div className="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none top-12 right-8 xl:hidden">
+                <div className="z-10 absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none top-12 right-8 xl:hidden">
                   <div className="py-1" role="none">
                         <p className="block px-4 py-2 text-sm text-gray-700" role="menuitem">
                         {store.loggedInUser?.name}
