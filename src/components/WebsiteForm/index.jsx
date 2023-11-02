@@ -1,16 +1,20 @@
 import React from 'react'
 import { BiAddToQueue } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import ConfirmActionButton from '../ConfirmActionButton';
 const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) => {
 
   console.log(add, "afsdadfs", edit);
+  const handleAction = () => {
+    console.log("actions");
+  };
 
   return (
-    <div className="min-h-screen min-w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-      <div className="relative py-3 md:max-w-xl sm:mx-auto">
-        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-          <div className="max-w-lg mx-auto space-x-5">
-            <div className="flex items-center space-x-5">
+    <div className="mx-10 my-6 flex flex-col justify-center">
+      
+      <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+        <div className='flex justify-between mb-12'>
+        <div className="flex items-center space-x-5">
               <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
                 <BiAddToQueue />
               </div>
@@ -18,6 +22,29 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
                 <h2 className="leading-relaxed">{add ? "Create Website" : (edit ? "Update Website" : "View Website")}</h2>
               </div>
             </div>
+        <div className="flex justify-end items-end">
+        <div>
+          <ConfirmActionButton
+            action="Delete"
+            para="Are you sure you want to"
+            onConfirm={handleAction}
+            type="warning"
+          />
+        </div>
+
+        <div>
+          <ConfirmActionButton
+            action="Update"
+            para="Are you sure you want to"
+            onConfirm={handleAction}
+            type="info"
+          />
+        </div>
+      </div>
+        </div>
+      
+          <div className="mx-auto space-x-5">
+           
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -115,14 +142,14 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
                     {add ?
                       <button
                         type="submit"
-                        className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                        className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
                       >
                         Create
                       </button>
                       : edit &&
                       <button
                         type="submit"
-                        className="bg-gray-900 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                        className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
                       >
                         Update
                       </button>
@@ -134,7 +161,6 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
             </Formik>
           </div>
         </div>
-      </div>
     </div>
   );
 }
