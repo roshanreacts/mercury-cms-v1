@@ -8,14 +8,21 @@ import { AiOutlineDown, AiOutlineFileAdd } from 'react-icons/ai';
 import { TiArrowUnsorted } from 'react-icons/ti'
 import Link from 'next/link'
 import PageList from '~/container/PagesList'
+import store from '~/store'
+import WebsiteList from '~/container/WebsiteList'
+import { observer } from 'mobx-react-lite'
+import { useParams } from 'next/navigation'
 
-const websites = ['Vithi It Solutions', 'ABC', 'XYZ'];
 
 const SideBar = () => {
     const [sidebarActive, setSidebarActive] = useState(true);
     const [pageDropdown, setPageDropdown] = useState(false);
     const [websiteDropdown, setWebsiteDropdown] = useState(false);
-    const [currentWebsite, setCurrentWebsite] = useState(0);
+    const params = useParams()
+    const [currentWebsite, setCurrentWebsite] = useState(params.websiteId);
+
+    // console.log(currentWebsite, "currentweb");
+
     return (
         <div className='bg-gray-900 h-full relative'>
             {
@@ -34,7 +41,7 @@ const SideBar = () => {
                             <div className="p-2.5 mt-1 flex items-center justify-between gap-3 cursor-pointer">
                                 <div className='w-full relative' onClick={() => setWebsiteDropdown(!websiteDropdown)}>
                                     <h1 className="font-bold text-gray-200 text-[13px] border-2 rounded-md p-1.5 flex items-center justify-between">
-                                        {websites.length > 0 ? websites[currentWebsite] : "Click To Create First Website"}
+                                        {store.websites.length > 0 ? store.websites.filter((web)=>web.id===currentWebsite)?.name : "Click To Create First Website"}
                                         <span>
                                             <TiArrowUnsorted />
                                         </span>
@@ -42,25 +49,7 @@ const SideBar = () => {
                                     </h1>
                                     {
                                         websiteDropdown &&
-                                        <div className='absolute bg-white text-black w-full overflow-y-scroll z-10 items-center justify-center text-base rounded-md mt-1 p-2'>
-                                            {
-                                                websites?.map((item, index) =>
-                                                    <Link href={`/admin/${item}`}>
-                                                        <p key={index} className='p-1 hover:bg-blue-100 rounded-md' onClick={() => {
-                                                            setCurrentWebsite(index)
-                                                            setWebsiteDropdown(false)
-                                                        }}>
-                                                            {item}
-                                                        </p>
-                                                    </Link>
-
-                                                )
-                                            }
-                                            <Link href='/admin/addwebsite' onClick={() => setWebsiteDropdown(false)} className='m-1 p-1 px-6 border-2 border-blue-700 w-full text-blue-600 rounded-md text-sm'>
-                                                + Create Website
-                                            </Link>
-
-                                        </div>
+                                        <WebsiteList setCurrentWebsite={setCurrentWebsite} setWebsiteDropdown={setWebsiteDropdown} />
                                     }
 
                                 </div>
@@ -88,7 +77,7 @@ const SideBar = () => {
                         </div>
                         {
                             pageDropdown &&
-                            <PageList currentWebsite={websites[currentWebsite]} />
+                            <PageList currentWebsite={store.websites[currentWebsite]} />
                         }
 
                         <div
@@ -105,7 +94,7 @@ const SideBar = () => {
                         </div>
                         <div className="my-4 bg-gray-600 h-[1px]"></div>
 
-                        <Link href={`/admin/${websites[currentWebsite]}/page/create`}>
+                        <Link href={`/admin/${store.websites[currentWebsite]}/page/create`}>
                             <div
                                 className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                             >
@@ -120,4 +109,4 @@ const SideBar = () => {
     )
 }
 
-export default SideBar
+export default observer(SideBar)

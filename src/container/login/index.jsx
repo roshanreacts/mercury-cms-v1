@@ -7,36 +7,27 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/navigation'
 import store from '~/store';
 import { observer } from "mobx-react-lite";
-import { checkTokenExpiry, setTokenCookie } from '~/utilis/cookie';
-import {useLazyQuery} from '../hooks';
+import {clearTokenCookie, setTokenCookie } from '~/utilis/cookie';
+import { useLazyQuery } from '../hooks';
 import { LOGIN_USER } from '~/utilis/queries';
 
 
 
 const LoginContainer = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
-const [loginUser, {data, loading, error}] = useLazyQuery(store.login);
+    const [loginUser, { data, loading, error }] = useLazyQuery(store.login);
     const router = useRouter();
-    useEffect(()=>{
-        //returns false if not expired
-        if(!checkTokenExpiry()){
+
+    useEffect(() => {
+        if (data) {
+            setTokenCookie()
             router.replace('/admin');
         }
-    },[])
 
-
-    useEffect(()=>{
-        if(data){
-            console.log(data)
-                    //setting token into the cookie
-        setTokenCookie()
-        router.replace('/admin');
+        if (error) {
+            console.log("login error", error)
         }
-
-        if(error){
-            console.log("login error",error)
-        }
-    },[data,error]) 
+    }, [data, error])
 
     const formik = useFormik({
         initialValues: {

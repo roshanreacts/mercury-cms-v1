@@ -34,7 +34,6 @@ const useLazyQuery = (promise) => {
     setLoading(true);
     promise(...args)
       .then((data) => {
-        console.log("::data", data);
         if (data == null) {
           setData(true);
         } else {

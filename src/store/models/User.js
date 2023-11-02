@@ -8,7 +8,7 @@ const User = types
     name: types.maybeNull(types.string),
     email: types.maybeNull(types.string),
     password: types.maybeNull(types.string),
-    role: types.maybeNull(types.enumeration(['USER', 'ADMIN'])),
+    role: types.maybeNull(types.string),
     websites: types.maybeNull(types.array(Website)),
   })
   .actions((self) => ({

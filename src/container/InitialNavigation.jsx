@@ -1,31 +1,51 @@
 "use client"
+import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import store from '~/store';
-import { getLoggedInUserIdFromCookie } from '~/utilis/cookie';
+import { checkTokenExpiry, clearTokenCookie, getLoggedInUserIdFromCookie } from '~/utilis/cookie';
 import { GET_ALL_WEBSITES, GET_SINGLE_USER } from '~/utilis/queries';
+import { useLazyQuery } from './hooks';
+import { hasCookie } from 'cookies-next';
 
-const InitialNavigation = () => {
+const InitialNavigation = ({ logoPresent }) => {
+    const [getLoggedUser, userResponse] = useLazyQuery(store.getLoggedInUser);
+    const [getWebsites, websiteResponse] = useLazyQuery(store.getAllWebsites);
     const router = useRouter();
 
 
+
+    const checkSession = () => {
+        const expired = checkTokenExpiry()
+        console.log(expired, "token expired");
+        if (expired) {
+            console.log("In the expired");
+            router.replace('login');
+        }
+    }
+
+    checkSession()
     useEffect(() => {
+
         const idFromCookie = getLoggedInUserIdFromCookie();
-
-        (async () => {
-            await store.getLoggedInUser(GET_SINGLE_USER, {
-                where: {
-                    id: {
-                        is: idFromCookie
-                    }
+        getLoggedUser(GET_SINGLE_USER, {
+            where: {
+                id: {
+                    is: idFromCookie
                 }
-            }, {
-                cache: "no-store"
-            })
-            const userId = store.loggedInUser?.id;
+            }
+        }, {
+            cache: "no-store"
+        })
+    }, [])
 
-            await store.getAllWebsites(GET_ALL_WEBSITES, {
+    useEffect(() => {
+        
+        checkSession();
+        if (userResponse.data) {
+            const userId = store.loggedInUser?.id;
+            getWebsites(GET_ALL_WEBSITES, {
                 where: {
                     author: {
                         is: userId
@@ -34,30 +54,39 @@ const InitialNavigation = () => {
             }, {
                 cache: "no-store"
             });
+        }
+    }, [userResponse.data, userResponse.error, userResponse.loading])
 
-            console.log(store.websites[0], "vbhn");
+
+    useEffect(() => {
+        if (websiteResponse.data || websiteResponse.error) {
             const websiteId = store.websites[0]?.id;
             if (websiteId)
-                router.push(`/admin/${websiteId}`);
+                router.replace(`/admin/${websiteId}`);
             else
-                router.push('/admin/addwebsite');
-        })()
+                router.replace('/admin/addwebsite');
+        }
+    }, [websiteResponse.data, websiteResponse.error])
 
 
-
-    }, [])
     return (
-        <div className='h-[100vh] flex justify-center items-center'>
-            <Image
-              className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert animate-pulse animate-infinite animate-ease-in-out"
-              src="/mercury-logo.png"
-              alt="Next.js Logo"
-              width={180}
-              height={37}
-              priority
-            />
-        </div>
+        <>
+            {
+                logoPresent &&
+                <div className='h-[100vh] flex justify-center items-center'>
+                    <Image
+                        className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert animate-pulse animate-infinite animate-ease-in-out"
+                        src="/mercury-logo.png"
+                        alt="Next.js Logo"
+                        width={180}
+                        height={37}
+                        priority
+                    />
+                </div>
+            }
+        </>
+
     )
 }
 
-export default InitialNavigation
+export default observer(InitialNavigation)
