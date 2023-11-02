@@ -19,13 +19,7 @@ const PageForm = ({
     <div className="relative py-3 mx-10">
       <div className="relative bg-white shadow rounded-3xl sm:p-10">
         <div className="flex justify-between mb-20">
-        {pageId && !edit && (
-            <Link href={`${pageId}?edit=true`}>
-              {" "}
-              <button>Edit</button>{" "}
-            </Link>
-          )}
-          <div className="flex items-center text-center space-x-5">
+                  <div className="flex items-center text-center space-x-5">
             <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
               <RiFileAddLine />
             </div>

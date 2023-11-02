@@ -21,7 +21,7 @@ const InitialNavigation = ({ logoPresent }) => {
         console.log(expired, "token expired");
         if (expired) {
             console.log("In the expired");
-            router.replace('login');
+            router.replace('/login');
         }
     }
 
