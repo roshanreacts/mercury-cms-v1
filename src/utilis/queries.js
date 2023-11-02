@@ -21,3 +21,17 @@ query GetUser($where: whereUserInput) {
     role
   }
 }`
+
+
+export const GET_ALL_PAGES=`
+query AllPages($where: wherePageInput) {
+  allPages(where: $where) {
+    docs {
+      id
+      slug
+      title
+    }
+  }
+}
+`
+

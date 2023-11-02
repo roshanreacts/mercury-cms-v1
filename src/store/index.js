@@ -17,7 +17,6 @@ const RootStore = types
   .actions((self) => ({
     login: flow(function* (query, variables, options) {
       let data = yield makeGraphqlQuery(query, variables, options);
-      data = data.data;
       console.log("::data", data);
       self.token = data.login.token 
       self.message = data.login.message
@@ -30,19 +29,13 @@ const RootStore = types
     }),
     getLoggedInUser: flow(function* (query, variables, options) {
       let data = yield makeGraphqlQuery(query, variables, options);
-      data = data.data;
       console.log("::data", data);
       self.loggedInUser = data?.getUser
     }),
-    getAllPages: flow(function* () {
-      const data = yield makeFetchCall();
+    getAllPages: flow(function* (query, variables, options) {
+      const data = yield makeGraphqlQuery(query, variables, options);
       console.log("::data", data);
-      self.pages = data;
-    }),
-    getPage: flow(function* (pageId) {
-      const data = yield makeFetchCall();
-      console.log("::data", data);
-      self.pages = self.pages.map((pg) => (pg.id === data.id ? data : pg));
+      self.pages = data?.allPages?.docs
     }),
   }));
 
@@ -50,7 +43,6 @@ const store = RootStore.create({
   users: [{ id:"4", name:"ewfr" }, { id:"23" }],
   pages: [ ],
   websites: []
-  // pages: { data: [{ id: 0, title: "Home", userId: 0, body: "Home Page", loading: false, error: undefined }], loading: false, error: undefined },
 });
 
 connectReduxDevtools(require("remotedev"), store);
