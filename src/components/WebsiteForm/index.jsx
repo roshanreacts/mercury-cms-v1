@@ -3,12 +3,14 @@ import { BiAddToQueue } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
+import Loader from "~/container/Loader";
 const WebsiteForm = ({
   initialValues,
   validationSchema,
   onSubmit,
   add,
   edit,
+  loading
 }) => {
 
   const router = useRouter();
@@ -172,7 +174,7 @@ const WebsiteForm = ({
                         type="submit"
                         className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                       >
-                        Update
+                        {loading ? <Loader size="small" type="info" />:"Update"}
                       </button>
                     )
                   )}

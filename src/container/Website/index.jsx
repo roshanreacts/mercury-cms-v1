@@ -100,7 +100,7 @@ const WebsiteViewUpdate = () => {
     useEffect(() => {
         if (updateWebsiteResponse.data) {
             ToastSuccessMessage("Updated Website!!")
-            router.replace(`${currentWebsite}/?edit=false`)
+            router.back();
         }
         if (updateWebsiteResponse.error) {
             ToastErrorMessage(updateWebsiteResponse.error.message)
@@ -126,7 +126,7 @@ const WebsiteViewUpdate = () => {
         <div>
             <ToastContainer />
             {initialValues.websiteName ?
-                <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={false} edit={edit} />
+                <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={false} edit={edit} loading={updateWebsiteResponse.loading}/>
                 :
                 <div className='h-[100vh] flex justify-center items-center'>
                     <Image
