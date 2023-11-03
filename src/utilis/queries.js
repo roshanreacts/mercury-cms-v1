@@ -11,7 +11,6 @@ mutation Login($password: String!, $email: String!) {
   }
 `;
 
-
 export const GET_SINGLE_USER = `
 query GetUser($where: whereUserInput) {
   getUser(where: $where) {
@@ -20,8 +19,7 @@ query GetUser($where: whereUserInput) {
     email
     role
   }
-}`
-
+}`;
 
 export const GET_ALL_PAGES = `
 query AllPages($where: wherePageInput) {
@@ -33,7 +31,7 @@ query AllPages($where: wherePageInput) {
     }
   }
 }
-`
+`;
 
 export const GET_ALL_WEBSITES = `
 query AllWebsites($where: whereWebsiteInput) {
@@ -45,8 +43,8 @@ query AllWebsites($where: whereWebsiteInput) {
     }
   }
 }
-`
-export const GET_WEB_SITE =`
+`;
+export const GET_WEB_SITE = `
 query GetWebsite($where: whereWebsiteInput) {
   getWebsite(where: $where) {
     id
@@ -61,8 +59,7 @@ query GetWebsite($where: whereWebsiteInput) {
       title
     }
   }
-}`
-
+}`;
 
 export const GET_PAGE = `
 query Query($where: wherePageInput) {
@@ -76,4 +73,21 @@ query Query($where: wherePageInput) {
     version
     components
   }
-}`
+}`;
+
+export const UPDATE_WEBSITE = `
+mutation Mutation($data: updateWebsiteSchema!, $updateWebsiteId: ID!) {
+  updateWebsite(data: $data, id: $updateWebsiteId) {
+    status
+    slug
+    pages {
+      title
+      id
+      slug
+    }
+    name
+    id
+    domain
+    description
+  }
+}`;
