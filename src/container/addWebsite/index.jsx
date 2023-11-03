@@ -10,6 +10,7 @@ const AddWebsite = () => {
     websiteDescription: "",
     domain: "",
     status: "Draft",
+    Pages:"One"
   };
 
   const validationSchema = Yup.object({

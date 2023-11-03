@@ -15,6 +15,7 @@ const Website = () => {
         websiteDescription: "",
         domain: "",
         status: "draft",
+        Pages:"One"
     };
 
     const validationSchema = Yup.object({

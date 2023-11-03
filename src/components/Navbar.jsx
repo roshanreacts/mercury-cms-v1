@@ -101,7 +101,7 @@ const Navbar = () => {
 
               {
                 loggedIn &&
-                <div className="border-2 border-gray-200 p-1 rounded-md px-3 hover:text-gray-200 hidden xl:flex" onClick={handleLogout}>
+                <div className="border-2 border-gray-200 p-1 rounded-md px-3 hover:text-gray-200 hidden hover:bg-transparent hover:border-2 xl:flex" onClick={handleLogout}>
                   <button>Logout</button>
                 </div>
               }
