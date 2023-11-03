@@ -16,9 +16,9 @@ const PageForm = ({
     console.log("actions");
   };
   return (
-    <div className="relative py-3 mx-10">
-      <div className="relative bg-white shadow rounded-3xl sm:p-10">
-        <div className="flex justify-between mb-20">
+    <div className="relative mx-4">
+      <div className="relative bg-white shadow rounded-3xl py-3 px-10">
+        <div className="flex justify-between mb-4">
                   <div className="flex items-center text-center space-x-5">
             <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
               <RiFileAddLine />
@@ -144,11 +144,11 @@ const PageForm = ({
                  <ErrorMessage name="version" component="span" className="text-red-500 text-xs" />
                </div>
              </div>
-             <div className="pt-4 flex items-center space-x-4">
+             <div className="pt-4 flex justify-center space-x-4">
                {add ? (
                  <button
                    type="submit"
-                   className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
+                   className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                  >
                    Create
                  </button>
@@ -156,7 +156,7 @@ const PageForm = ({
                  edit && (
                    <button
                      type="submit"
-                     className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
+                     className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                    >
                      Update
                    </button>

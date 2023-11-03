@@ -12,8 +12,8 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
   return (
     <div className="mx-10 my-6 flex flex-col justify-center">
       
-      <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-        <div className='flex justify-between mb-12'>
+      <div className="relative px-10 py-5 bg-white mx-8 md:mx-0 shadow rounded-3xl">
+        <div className='flex justify-between mb-2'>
         <div className="flex items-center space-x-5">
               <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
                 <BiAddToQueue />
@@ -53,7 +53,7 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
               {({ touched, errors }) => (
                 <Form className="flex flex-col gap-4">
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-4">
-                    <div className="flex gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="">
                         <label className="leading-loose"> Website Name</label>
                         <Field
@@ -136,20 +136,20 @@ const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) =
                       </div>
                     </div>
                   </div>
-                  <div className="pt-4 flex items-center space-x-4">
+                  <div className="pt-4 flex justify-center">
 
 
                     {add ?
                       <button
                         type="submit"
-                        className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                       >
                         Create
                       </button>
                       : edit &&
                       <button
                         type="submit"
-                        className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                       >
                         Update
                       </button>
