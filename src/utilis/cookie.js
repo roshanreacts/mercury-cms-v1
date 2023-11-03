@@ -24,6 +24,9 @@ export const checkTokenExpiry = () => {
             return true;
         }
     }
+    else{
+        return true;
+    }
     return false;
 }
 
