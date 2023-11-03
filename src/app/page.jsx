@@ -7,7 +7,7 @@ import store from '~/store';
 export default function Home() {
   return (
     <div>
-      <InitialNavigation logoPresent={true}/>
+      <InitialNavigation logoPresent={true} />
     </div>
   )
 }

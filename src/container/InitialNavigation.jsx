@@ -1,31 +1,18 @@
 "use client"
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import store from '~/store';
 import { checkTokenExpiry, clearTokenCookie, getLoggedInUserIdFromCookie } from '~/utilis/cookie';
 import { GET_ALL_WEBSITES, GET_SINGLE_USER } from '~/utilis/queries';
 import { useLazyQuery } from './hooks';
-import { hasCookie } from 'cookies-next';
 
-const InitialNavigation = ({ logoPresent }) => {
+const InitialNavigation = ({ logoPresent, fromLayout = false }) => {
     const [getLoggedUser, userResponse] = useLazyQuery(store.getLoggedInUser);
     const [getWebsites, websiteResponse] = useLazyQuery(store.getAllWebsites);
     const router = useRouter();
 
-
-
-    const checkSession = () => {
-        const expired = checkTokenExpiry()
-        console.log(expired, "token expired");
-        if (expired) {
-            console.log("In the expired");
-            router.replace('/login');
-        }
-    }
-
-    checkSession()
     useEffect(() => {
 
         const idFromCookie = getLoggedInUserIdFromCookie();
@@ -35,14 +22,10 @@ const InitialNavigation = ({ logoPresent }) => {
                     is: idFromCookie
                 }
             }
-        }, {
-            cache: "no-store"
-        })
+        }, { cache: "no-store" })
     }, [])
 
     useEffect(() => {
-        
-        checkSession();
         if (userResponse.data) {
             const userId = store.loggedInUser?.id;
             getWebsites(GET_ALL_WEBSITES, {
@@ -51,22 +34,30 @@ const InitialNavigation = ({ logoPresent }) => {
                         is: userId
                     }
                 }
-            }, {
-                cache: "no-store"
-            });
+            }, { cache: "no-store" });
         }
     }, [userResponse.data, userResponse.error, userResponse.loading])
 
 
     useEffect(() => {
+        checkSession()
         if (websiteResponse.data || websiteResponse.error) {
             const websiteId = store.websites[0]?.id;
-            if (websiteId)
-                router.replace(`/admin/${websiteId}`);
-            else
-                router.replace('/admin/addwebsite');
+            if (!fromLayout)
+                if (websiteId)
+                    router.replace(`/admin/${websiteId}`);
+                else
+                    router.replace('/admin/addwebsite');
         }
     }, [websiteResponse.data, websiteResponse.error])
+
+
+    const checkSession = () => {
+        const expired = checkTokenExpiry()
+        if (expired) {
+            redirect('/login');
+        }
+    }
 
 
     return (

@@ -32,7 +32,7 @@ export async function serverFetch(query, variables, options) {
         variables,
       }),
       ...options
-    },
+    }
   );
   let parseData = await data.json();
   if (parseData?.errors) {

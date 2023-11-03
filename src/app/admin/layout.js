@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         </div>
 
         <div className="flex-1 ml-3 mt-2" style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 80px)' }}>
-          <InitialNavigation logoPresent={false} />
+          <InitialNavigation logoPresent={false} fromLayout={true}/>
 
           {children}
         </div>
