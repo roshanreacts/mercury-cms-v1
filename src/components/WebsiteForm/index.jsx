@@ -1,10 +1,10 @@
+
 import React from 'react'
 import { BiAddToQueue } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ConfirmActionButton from '../ConfirmActionButton';
 const WebsiteForm = ({ initialValues, validationSchema, onSubmit, add, edit }) => {
 
-  console.log(add, "afsdadfs", edit);
   const handleAction = () => {
     console.log("actions");
   };

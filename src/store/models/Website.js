@@ -1,6 +1,7 @@
-import { types } from 'mobx-state-tree';
+import { flow, types } from 'mobx-state-tree';
 import Page from './Page';
 import User from './User'
+import { makeGraphqlQuery } from '..';
 
 const Website = types
   .model("Website", {
@@ -13,7 +14,12 @@ const Website = types
     author: types.maybeNull(types.late(() => User)),
     pages: types.maybeNull(types.array(Page)),
   })
-  .actions((self) => ({}));
+  .actions((self) => ({
+    getWebsite: flow(function* (query, variables, options) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      self = data?.getWebsite;
+    }),
+  }));
 
 export default Website;
 

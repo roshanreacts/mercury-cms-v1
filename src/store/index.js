@@ -5,7 +5,7 @@ import User from "./models/User";
 import Page from "./models/Page";
 import Website from "./models/Website";
 
-const makeGraphqlQuery = async (...args) => {
+export const makeGraphqlQuery = async (...args) => {
   const data = await serverFetch(...args);
   if (data?.error) {
     throw data?.error;
@@ -48,6 +48,11 @@ const RootStore = types
       const data = yield makeGraphqlQuery(query, variables, options);
       console.log("::data Websites", data);
       self.websites = data?.allWebsites?.docs;
+    }),
+    getWebsiteWithId: flow(function* (query, variables, options, id) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      const index = self.websites.findIndex((web) => web.id === id);
+      self.websites[index] = data?.getWebsite;
     }),
   }));
 
