@@ -2,6 +2,7 @@ import React from "react";
 import { BiAddToQueue } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ConfirmActionButton from "../ConfirmActionButton";
+import { useRouter } from "next/navigation";
 const WebsiteForm = ({
   initialValues,
   validationSchema,
@@ -9,10 +10,15 @@ const WebsiteForm = ({
   add,
   edit,
 }) => {
-  const handleAction = () => {
-    console.log("actions");
-  };
 
+  const router = useRouter();
+
+  const handleDelete = () => {
+
+  }
+  const handleUpdate = () => {
+    router.push('?edit=true')
+  }
   return (
     <div className="mx-10 my-6 flex flex-col justify-center">
       <div className="relative px-10 py-5 bg-white mx-8 md:mx-0 shadow rounded-3xl">
@@ -31,25 +37,29 @@ const WebsiteForm = ({
               </h2>
             </div>
           </div>
-          <div className="flex justify-end items-end">
-            <div>
-              <ConfirmActionButton
-                action="Delete"
-                para="Are you sure you want to"
-                onConfirm={handleAction}
-                type="warning"
-              />
+          {!add &&
+            <div className="flex justify-end items-end">
+              <div>
+                <ConfirmActionButton
+                  action="Delete"
+                  para="Are you sure you want to"
+                  onConfirm={handleDelete}
+                  type="warning"
+                />
+              </div>
+              {!edit &&
+                <div>
+                  <ConfirmActionButton
+                    action="Update"
+                    para="Are you sure you want to"
+                    onConfirm={handleUpdate}
+                    type="info"
+                  />
+                </div>
+              }
             </div>
+          }
 
-            <div>
-              <ConfirmActionButton
-                action="Update"
-                para="Are you sure you want to"
-                onConfirm={handleAction}
-                type="info"
-              />
-            </div>
-          </div>
         </div>
 
         <div className="mx-auto space-x-5">
@@ -138,24 +148,6 @@ const WebsiteForm = ({
                       </Field>
                       <ErrorMessage
                         name="status"
-                        component="div"
-                        className="text-red-500 text-xs"
-                      />
-                    </div>
-                    <div className="">
-                      <label className="leading-loose">Pages</label>
-                      <Field
-                        as="select"
-                        name="pages"
-                        disabled={!(add || edit)}
-                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
-                      >
-                        <option value="one">One</option>
-                        <option value="two">Two</option>
-                        <option value="three">Three</option>
-                      </Field>
-                      <ErrorMessage
-                        name="pages"
                         component="div"
                         className="text-red-500 text-xs"
                       />

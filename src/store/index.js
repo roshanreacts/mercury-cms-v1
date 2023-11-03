@@ -54,6 +54,11 @@ const RootStore = types
       const index = self.websites.findIndex((web) => web.id === id);
       self.websites[index] = data?.getWebsite;
     }),
+    updateWebsiteById: flow(function* (query, variables, options, id) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      const index = self.websites.findIndex((web) => web.id === id);
+      self.websites[index] = data?.getWebsite;
+    })
   }));
 
 const store = RootStore.create({

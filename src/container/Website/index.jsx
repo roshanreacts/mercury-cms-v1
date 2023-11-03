@@ -18,12 +18,13 @@ const WebsiteViewUpdate = () => {
         websiteName: "",
         websiteDescription: "",
         domain: "",
-        status: "draft",
+        status: "Draft",
     })
     const currentWebsite = useParams().websiteId;
 
     const [getWebsites, websitesResponse] = useLazyQuery(store.getAllWebsites);
     const [getSingleWebsite, singleWebsiteResponse] = useLazyQuery(store.getWebsiteWithId)
+    const [updateWebsite, updateWebsiteResponse] = useLazyQuery(store.updateWebsiteById)
 
     useEffect(() => {
         if (store.websites.length === 0) {
@@ -94,7 +95,7 @@ const WebsiteViewUpdate = () => {
     });
 
     const onSubmit = (values) => {
-        console.log(values);
+        
     };
     return (
         <div>
