@@ -107,18 +107,19 @@ const PageForm = ({
                />
                <ErrorMessage name="metaDescription" component="span" className="text-red-500 text-xs" />
              </div>
+             
+             <div className="grid grid-cols-3 gap-2">
              <div className="text-left">
                <label className="leading-loose">Page Path</label>
                <Field
                  type="text"
                  name="pagePath"
                  disabled={!(add || edit)}
-                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-96 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                  placeholder="Page Path"
                />
                <ErrorMessage name="pagePath" component="span" className="text-red-500 text-xs" />
              </div>
-             <div className="flex gap-4">
                <div className="text-left">
                  <label className="leading-loose">Status</label>
                  <Field
@@ -147,7 +148,7 @@ const PageForm = ({
                {add ? (
                  <button
                    type="submit"
-                   className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                   className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
                  >
                    Create
                  </button>
@@ -155,7 +156,7 @@ const PageForm = ({
                  edit && (
                    <button
                      type="submit"
-                     className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                     className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
                    >
                      Update
                    </button>
