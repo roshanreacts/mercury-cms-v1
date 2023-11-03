@@ -100,7 +100,7 @@ const WebsiteViewUpdate = () => {
     useEffect(() => {
         if (updateWebsiteResponse.data) {
             ToastSuccessMessage("Updated Website!!")
-            router.back();
+            window.location.href = `${currentWebsite}`
         }
         if (updateWebsiteResponse.error) {
             ToastErrorMessage(updateWebsiteResponse.error.message)
