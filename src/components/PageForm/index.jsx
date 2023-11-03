@@ -19,13 +19,7 @@ const PageForm = ({
     <div className="relative py-3 mx-10">
       <div className="relative bg-white shadow rounded-3xl sm:p-10">
         <div className="flex justify-between mb-20">
-        {pageId && !edit && (
-            <Link href={`${pageId}?edit=true`}>
-              {" "}
-              <button>Edit</button>{" "}
-            </Link>
-          )}
-          <div className="flex items-center text-center space-x-5">
+                  <div className="flex items-center text-center space-x-5">
             <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
               <RiFileAddLine />
             </div>
@@ -113,18 +107,19 @@ const PageForm = ({
                />
                <ErrorMessage name="metaDescription" component="span" className="text-red-500 text-xs" />
              </div>
+             
+             <div className="grid grid-cols-3 gap-2">
              <div className="text-left">
                <label className="leading-loose">Page Path</label>
                <Field
                  type="text"
                  name="pagePath"
                  disabled={!(add || edit)}
-                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-96 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-900"
                  placeholder="Page Path"
                />
                <ErrorMessage name="pagePath" component="span" className="text-red-500 text-xs" />
              </div>
-             <div className="flex gap-4">
                <div className="text-left">
                  <label className="leading-loose">Status</label>
                  <Field
@@ -153,7 +148,7 @@ const PageForm = ({
                {add ? (
                  <button
                    type="submit"
-                   className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                   className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
                  >
                    Create
                  </button>
@@ -161,7 +156,7 @@ const PageForm = ({
                  edit && (
                    <button
                      type="submit"
-                     className="bg-gray-900 flex justify-center items-center text-white px-4 py-3 rounded-md focus:outline-none"
+                     className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none"
                    >
                      Update
                    </button>

@@ -46,3 +46,34 @@ query AllWebsites($where: whereWebsiteInput) {
   }
 }
 `
+export const GET_WEB_SITE =`
+query GetWebsite($where: whereWebsiteInput) {
+  getWebsite(where: $where) {
+    id
+    slug
+    name
+    description
+    domain
+    status
+    pages {
+      id
+      slug
+      title
+    }
+  }
+}`
+
+
+export const GET_PAGE = `
+query Query($where: wherePageInput) {
+  getPage(where: $where) {
+    id
+    title
+    slug
+    path
+    metaDescription
+    status
+    version
+    components
+  }
+}`
