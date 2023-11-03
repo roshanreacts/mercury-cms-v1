@@ -1,17 +1,21 @@
 "use client"
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import WebsiteForm from '~/components/WebsiteForm';
 import * as Yup from "yup";
 import { useLazyQuery } from '../hooks';
 import store from '~/store';
-import { GET_ALL_WEBSITES, GET_WEB_SITE } from '~/utilis/queries';
+import { GET_ALL_WEBSITES, GET_WEB_SITE, UPDATE_WEBSITE } from '~/utilis/queries';
 import { observer } from 'mobx-react-lite';
 import { getLoggedInUserIdFromCookie } from '~/utilis/cookie';
 import Image from 'next/image';
+import { ToastErrorMessage, ToastSuccessMessage } from '~/components/ToastMessage';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
 
 let edit = false;
 const WebsiteViewUpdate = () => {
+    const router = useRouter()
     edit = useSearchParams().get('edit') === 'true' ? true : false;
     const [initialValues, setInitialValues] = useState({
         websiteSlug: "",
@@ -21,14 +25,14 @@ const WebsiteViewUpdate = () => {
         status: "Draft",
     })
     const currentWebsite = useParams().websiteId;
-
+    const userId = getLoggedInUserIdFromCookie()
     const [getWebsites, websitesResponse] = useLazyQuery(store.getAllWebsites);
     const [getSingleWebsite, singleWebsiteResponse] = useLazyQuery(store.getWebsiteWithId)
     const [updateWebsite, updateWebsiteResponse] = useLazyQuery(store.updateWebsiteById)
 
     useEffect(() => {
         if (store.websites.length === 0) {
-            const userId = getLoggedInUserIdFromCookie()
+
             getWebsites(GET_ALL_WEBSITES, {
                 where: {
                     author: {
@@ -65,7 +69,6 @@ const WebsiteViewUpdate = () => {
 
     useEffect(() => {
         if (singleWebsiteResponse.data) {
-            console.log(store.websites, "final data");
 
             const webData = store.websites.filter((web) => web.id === currentWebsite)[0];
 
@@ -81,7 +84,6 @@ const WebsiteViewUpdate = () => {
     }, [singleWebsiteResponse.data, singleWebsiteResponse.error])
 
     useEffect(() => {
-        console.log(initialValues);
     }, [initialValues])
 
 
@@ -94,11 +96,35 @@ const WebsiteViewUpdate = () => {
         domain: Yup.string().required("Domain Required"),
     });
 
+
+    useEffect(() => {
+        if (updateWebsiteResponse.data) {
+            ToastSuccessMessage("Updated Website!!")
+            router.replace(`${currentWebsite}/?edit=false`)
+        }
+        if (updateWebsiteResponse.error) {
+            ToastErrorMessage(updateWebsiteResponse.error.message)
+        }
+    }, [updateWebsiteResponse.data, updateWebsiteResponse.error, updateWebsiteResponse.loading])
+
     const onSubmit = (values) => {
-        
+        updateWebsite(UPDATE_WEBSITE, {
+            data: {
+                name: values.websiteName,
+                slug: values.websiteSlug,
+                domain: values.domain,
+                description: values.websiteDescription,
+                status: values.status,
+                author: userId
+            },
+            updateWebsiteId: currentWebsite
+        }, {
+            cache: "no-store"
+        }, currentWebsite)
     };
     return (
         <div>
+            <ToastContainer />
             {initialValues.websiteName ?
                 <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={false} edit={edit} />
                 :

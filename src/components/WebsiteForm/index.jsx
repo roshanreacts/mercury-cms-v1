@@ -66,7 +66,11 @@ const WebsiteForm = ({
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit= {
+              (values) => {
+                onSubmit(values)
+              }
+            }
           >
             {({ touched, errors }) => (
               <Form className="flex flex-col gap-4">
