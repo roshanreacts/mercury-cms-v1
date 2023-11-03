@@ -9,7 +9,6 @@ const WebsiteForm = ({
   add,
   edit,
 }) => {
-  console.log(add, "afsdadfs", edit);
   const handleAction = () => {
     console.log("actions");
   };
@@ -27,8 +26,8 @@ const WebsiteForm = ({
                 {add
                   ? "Create Website"
                   : edit
-                  ? "Update Website"
-                  : "View Website"}
+                    ? "Update Website"
+                    : "View Website"}
               </h2>
             </div>
           </div>

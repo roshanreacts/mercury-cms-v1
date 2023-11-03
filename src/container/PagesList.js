@@ -1,34 +1,40 @@
 import React, { useEffect } from "react";
-import { useParams } from "next/navigation";
 import store from "~/store";
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
+import { useLazyQuery } from "./hooks";
+import { GET_ALL_PAGES } from "~/utilis/queries";
 
 const PageList = ({ currentWebsite }) => {
-  const params = useParams();
+  const [callPagesToStore, { loading, error, data }] = useLazyQuery(store.getAllPages);
   useEffect(() => {
-    (async () => {
-      console.log("mounted");
-      const data = store.getAllPages(params.webSiteId);
+      callPagesToStore(GET_ALL_PAGES, {
+        where: {
+          website: {
+            is: currentWebsite
+          }
+        }
+      }, { cache: "no-store" })
 
-      console.log(data);
-      // const data1 = store.getPage(1);
-      // console.log(data1);
-
-    })();
     return () => {
       console.log("cleanup");
     };
   }, []);
 
+  useEffect(()=>{
+    if(error){
+
+    }
+  },[data, loading, error])
+
   return (
     <>
 
       {
-        store.pages.loading ?
+        loading ?
           <><h1 className="text-white">loading....</h1></>
           :
-          store.pages.data?.map((page, index) => (
+          store.pages.map((page, index) => (
             <Link href={`/admin/${currentWebsite}/page/${page.id}?edit=false`} key={index}>
               <div
                 className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
