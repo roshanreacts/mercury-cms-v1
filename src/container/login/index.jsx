@@ -37,11 +37,6 @@ const LoginContainer = () => {
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
             password: Yup.string().
-                // min(6, "Minimum 6 digits are required.").
-                // matches(
-                //     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-                //     'Password must meet the requirements'
-                // ).
                 required('Required')
         }),
         onSubmit: (values) => {

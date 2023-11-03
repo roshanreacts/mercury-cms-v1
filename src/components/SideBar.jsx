@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiX } from 'react-icons/bi'
 import { BsFilterLeft, BsPostcard } from 'react-icons/bs'
 import { RiPagesLine } from 'react-icons/ri'
@@ -19,9 +19,10 @@ const SideBar = () => {
     const [pageDropdown, setPageDropdown] = useState(false);
     const [websiteDropdown, setWebsiteDropdown] = useState(false);
     const params = useParams()
-    const [currentWebsite, setCurrentWebsite] = useState(params.websiteId);
-
-    // console.log(currentWebsite, "currentweb");
+    const [currentWebsite, setCurrentWebsite] = useState("");
+    useEffect(()=>{
+        setCurrentWebsite(params.websiteId)
+    })
 
     return (
         <div className='bg-gray-900 h-full relative'>
@@ -41,7 +42,7 @@ const SideBar = () => {
                             <div className="p-2.5 mt-1 flex items-center justify-between gap-3 cursor-pointer">
                                 <div className='w-full relative' onClick={() => setWebsiteDropdown(!websiteDropdown)}>
                                     <h1 className="font-bold text-gray-200 text-[13px] border-2 rounded-md p-1.5 flex items-center justify-between">
-                                        {store.websites.length > 0 ? store.websites.filter((web)=>web.id===currentWebsite)?.name : "Click To Create First Website"}
+                                        {store.websites.length > 0 && currentWebsite ? `${(store.websites.filter((web)=>web.id==currentWebsite)[0])?.name}`  : "Create First Website"}
                                         <span>
                                             <TiArrowUnsorted />
                                         </span>
@@ -77,7 +78,7 @@ const SideBar = () => {
                         </div>
                         {
                             pageDropdown &&
-                            <PageList currentWebsite={store.websites[currentWebsite]} />
+                            <PageList currentWebsite={(store.websites.filter((web)=>web.id==currentWebsite)[0])?.id} />
                         }
 
                         <div
@@ -94,7 +95,7 @@ const SideBar = () => {
                         </div>
                         <div className="my-4 bg-gray-600 h-[1px]"></div>
 
-                        <Link href={`/admin/${store.websites[currentWebsite]}/page/create`}>
+                        <Link href={`/admin/${(store.websites.filter((web)=>web.id==currentWebsite)[0])?.id}/page/create`}>
                             <div
                                 className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                             >

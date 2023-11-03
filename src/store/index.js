@@ -46,7 +46,7 @@ const RootStore = types
     }),
     getAllWebsites: flow(function* (query, variables, options) {
       const data = yield makeGraphqlQuery(query, variables, options);
-      console.log("::data", data);
+      console.log("::data Websites", data);
       self.websites = data?.allWebsites?.docs;
     }),
   }));

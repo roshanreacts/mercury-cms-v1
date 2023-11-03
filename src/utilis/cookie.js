@@ -9,21 +9,22 @@ export const setTokenCookie = () => {
     expires.setTime(expires.getTime() + 60 * 60 * 1000);
 
     setCookie("authToken", store.token, {
-        path: "/",
-        expires,
+        expires: expires
     });
 }
 
 export const checkTokenExpiry = () => {
-    let token = getCookie("authToken");
+    let token = getCookie("authToken")
     if (token) {
         const { exp } = jwt.decode(token);
-        if (exp < (new Date().getTime() + 1) / 1000)
-            return false;
-        else
+
+        if (exp < Math.floor(new Date().getTime() / 1000)) {
+            
             deleteCookie("authToken");
+            return true;
+        }
     }
-    return true;
+    return false;
 }
 
 export const clearTokenCookie = () => {
@@ -32,7 +33,7 @@ export const clearTokenCookie = () => {
 
 export const getLoggedInUserIdFromCookie = () => {
     let token = getCookie("authToken");
-    if(token){
+    if (token) {
         const { id } = jwt.decode(token);
         return id;
     }

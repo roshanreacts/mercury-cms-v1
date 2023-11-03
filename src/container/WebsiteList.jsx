@@ -1,17 +1,18 @@
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import React from 'react'
+import store from '~/store'
 
-const WebsiteList = ({websites, setCurrentWebsite, setWebsiteDropdown}) => {
-    console.log(websites[0], "websites")
+const WebsiteList = ({ setCurrentWebsite, setWebsiteDropdown}) => {
     
     return (
         <div className='absolute bg-white text-black w-full overflow-y-scroll z-10 items-center justify-center text-base rounded-md mt-1 p-2'>
             {
                 
-                websites?.map((item, index) =>
+                store.websites?.map((item, index) =>
                     <Link href={`/admin/${item.id}`} key={index}>
                         <p className='p-1 hover:bg-blue-100 rounded-md' onClick={() => {
-                            setCurrentWebsite(index)
+                            setCurrentWebsite(item.id)
                             setWebsiteDropdown(false)
                         }}>
                             {item.name}
@@ -28,4 +29,4 @@ const WebsiteList = ({websites, setCurrentWebsite, setWebsiteDropdown}) => {
     )
 }
 
-export default WebsiteList
+export default observer(WebsiteList)
