@@ -85,7 +85,7 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
           <button
             id="deleteButton"
             onClick={toggleModal}
-            className={`block text-white ${getButtonColor()} hover:bg-slate-50 hover:text-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
+            className={`block text-white ${getButtonColor()} hover:bg-slate-50 hover:text-primary hover:border-2 hover:border-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
             type="button"
           >
             {action}
@@ -93,9 +93,9 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
         </div>
 
         {isModalOpen && (
-          <div id="deleteModal" className="overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-0 z-50 flex justify-center w-full h-screen">
+          <div id="deleteModal" className="overflow-y-auto overflow-x-hidden fixed top-[40%] right-0 left-0 z-50 flex justify-center w-full h-screen">
             <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-              <div className="relative p-4 text-center bg-gray-200 rounded-lg shadow dark:bg-gray-800 sm:p-5">
+              <div className="relative p-4 text-center bg-gray-300 rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 {getIcon()}
                 <p className="mb-4 text-white dark:text-gray-300">
                   {` ${para}  ${action}?`}

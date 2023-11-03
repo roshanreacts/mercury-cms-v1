@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite";
 import {clearTokenCookie, setTokenCookie } from '~/utilis/cookie';
 import { useLazyQuery } from '../hooks';
 import { LOGIN_USER } from '~/utilis/queries';
+import Loader from '../Loader';
 
 
 
@@ -94,9 +95,11 @@ const LoginContainer = () => {
                             </div>
                         </div>
                         <div className="mt-6 w-[30%]">
-                            <button disabled={loading} className="w-full p-2 bg-gray-900 text-white rounded" type="submit">
-                                {!loading ? "Login" : "loading"}
+                            <button disabled={loading} className="w-full p-2 bg-gray-900 text-white rounded flex justify-center items-center" type="submit">
+                                {!loading ? "Login" : <Loader type="info" size="small"/>}
                             </button>
+
+
                         </div>
 
 
