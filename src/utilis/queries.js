@@ -91,3 +91,12 @@ mutation Mutation($data: updateWebsiteSchema!, $updateWebsiteId: ID!) {
     description
   }
 }`;
+
+export const CREATE_WEBSITE = `
+mutation Mutation($data: createWebsiteInput!) {
+  createWebsite(data: $data) {
+    id
+    slug
+    name
+  }
+}`
