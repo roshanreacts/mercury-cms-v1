@@ -19,6 +19,10 @@ export default {
           throw new GraphQLError("User Doesn't Exists");
         }
 
+        if (user.role !== "ADMIN"){
+          throw new GraphQLError ("You Are Not Allowed To This Resource")
+        }
+
 
         const passwordCompare = await user.verifyPassword(password);
 

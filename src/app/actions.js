@@ -31,8 +31,8 @@ export async function serverFetch(query, variables, options) {
         query,
         variables,
       }),
+      ...options
     },
-    options
   );
   let parseData = await data.json();
   if (parseData?.errors) {
