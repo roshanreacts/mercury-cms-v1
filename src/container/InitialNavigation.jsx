@@ -14,7 +14,7 @@ const InitialNavigation = ({ logoPresent, fromLayout = false }) => {
     const router = useRouter();
 
     useEffect(() => {
-
+        checkSession()
         const idFromCookie = getLoggedInUserIdFromCookie();
         getLoggedUser(GET_SINGLE_USER, {
             where: {
