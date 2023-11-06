@@ -1,11 +1,11 @@
 "use client";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import PageForm from "~/components/PageForm";
 import { useLazyQuery } from "../hooks";
 import store from "~/store";
-import { GET_ALL_PAGES, GET_PAGE, UPDATE_PAGE } from "~/utilis/queries";
+import { GET_ALL_PAGES, GET_PAGE, UPDATE_PAGE, DELETE_PAGE } from "~/utilis/queries";
 import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 import {
   ToastErrorMessage,
@@ -23,6 +23,8 @@ const PageUpdateView = () => {
   const websiteId = useParams().websiteId;
   const userId = getLoggedInUserIdFromCookie();
 
+  const router = useRouter();
+
   const [initialValues, setInitialValues] = useState({
     pageSlug: "",
     pageName: "",
@@ -36,6 +38,8 @@ const PageUpdateView = () => {
   const [getPages, pagesResponse] = useLazyQuery(store.getAllPages);
   const [getSinglePage, singlePageResponse] = useLazyQuery(store.getPageWithId);
   const [updatePage, updatePageResponse] = useLazyQuery(store.updatePageById)
+  const [deletePage, deletePageResponse] = useLazyQuery(store.deletePage)
+  
   useEffect(() => {
     if (store.pages.length === 0) {
       getPages(
@@ -109,6 +113,28 @@ const PageUpdateView = () => {
       ToastErrorMessage(updatePageResponse.error.message);
     }
   }, [updatePageResponse.data, updatePageResponse.error, updatePageResponse.loading]);
+  useEffect(() => {
+    if (deletePageResponse.data) {
+      ToastSuccessMessage("Deleted Page!!");
+      router.replace(`/admin/${websiteId}`);
+    }
+    if (deletePageResponse.error) {
+      ToastErrorMessage(deletePageResponse.error.message);
+    }
+  }, [deletePageResponse.data, deletePageResponse.error, deletePageResponse.loading]);
+
+  const handleDelete = () => {
+    deletePage(
+      DELETE_PAGE,
+      {
+        deletePageId: pageId,
+      },
+      {
+        cache: "no-store",
+      },
+      pageId
+    );
+  };
 
   const onSubmit = (values) => {
     updatePage(UPDATE_PAGE, {
@@ -154,6 +180,7 @@ const PageUpdateView = () => {
           pageId={pageId}
           onSubmit={onSubmit}
           loading={updatePageResponse.loading}
+          handleDelete={handleDelete}
         />
       ) : (
         <div className="h-[100vh] flex justify-center items-center">
