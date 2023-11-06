@@ -35,7 +35,7 @@ const AddPage = () => {
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
     pagePath: Yup.string().required("Page Path is required"),
-    version: Yup.number().required("Version is required"),
+    version: Yup.string().required("Version is required").matches(/^[0-9]*\.?[0-9]+$/, "Enter Number"),
   });
 
   useEffect(() => {
