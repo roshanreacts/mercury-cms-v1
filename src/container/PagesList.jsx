@@ -38,7 +38,7 @@ const PageList = ({ currentWebsite }) => {
           </div>
           :
           store.pages.map((page, index) => (
-            <Link href={`/admin/${currentWebsite}/page/${page.id}?edit=false`} key={index}>
+            <Link href={`/admin/${currentWebsite}/page/${page.id}?`} key={index}>
               <div
                 className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
                 id="submenu"

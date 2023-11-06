@@ -9,11 +9,11 @@ const Page = types
     slug: types.maybeNull(types.string),
     path: types.maybeNull(types.string),
     metaDescription: types.maybeNull(types.string),
-    status: types.maybeNull(types.enumeration(["Active", "Published"])),
+    status: types.maybeNull(types.enumeration(["Active", "Draft"])),
     website: types.maybeNull(types.late(() => Website)), // Use types.late for circular dependencies
     author: types.maybeNull(types.late(() => User)), // Use types.late for circular dependencies
     components: types.maybeNull(types.string),
-    version: types.maybeNull(types.number),
+    version: types.maybeNull(types.string),
   })
   .actions((self) => ({
     updateTitle(newTitle) {

@@ -3,6 +3,7 @@ import { RiFileAddLine } from "react-icons/ri";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import ConfirmActionButton from "../ConfirmActionButton";
+import { useRouter } from "next/navigation";
 
 const PageForm = ({
   initialValues,
@@ -11,9 +12,19 @@ const PageForm = ({
   add,
   edit,
   pageId,
+  loading
 }) => {
-  const handleAction = () => {
-    console.log("actions");
+
+  const router = useRouter();
+
+
+const handleAction =()=>{
+  console.log("delete");
+}
+
+  const handleUpdate = () => {
+    console.log("update clicked");
+    router.push("?edit=true")
   };
   return (
     <div className="relative mx-4">
@@ -38,15 +49,16 @@ const PageForm = ({
                 type="warning"
               />
             </div>
-
-            <div>
-              <ConfirmActionButton
-                action="Update"
-                para="Are you sure you want to"
-                onConfirm={handleAction}
-                type="info"
-              />
-            </div>
+            {!edit &&
+                <div>
+                  <ConfirmActionButton
+                    action="Update"
+                    para="Are you sure you want to"
+                    onConfirm={handleUpdate}
+                    type="info"
+                  />
+                </div>
+              }
           </div>
         </div>
 
