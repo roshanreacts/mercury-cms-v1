@@ -23,10 +23,11 @@ export const PageSchema = {
             default: "Draft"
         },
         website: {
-            type: "relationship",
+            type: "virtual",
             ref: "Website",
-            many: false,
-            required: true
+            localField: "_id",
+            foreignField: "pages",
+            many: false
         },
         author: {
             type: "relationship",
