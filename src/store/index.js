@@ -79,10 +79,17 @@ const RootStore = types
     deleteWebsite: flow(function* (query, variables, options, id) {
       console.log("adsfcbsdd");
       let data = yield makeGraphqlQuery(query, variables, options);
-      console.log(data, "adsfdadsf");
       const index = self.websites.findIndex((web) => web.id === id);
       self.websites.splice(index, 1);
+    }),
+    deletePage: flow(function* (query, variables, options, id) {
+      yield makeGraphqlQuery(query, variables, options);
+      const index = self.pages.findIndex((page) => page.id === id);
+      if (index !== -1) {
+        self.pages.splice(index, 1)
+      }
     })
+    
   }));
 
 const store = RootStore.create({

@@ -13,15 +13,11 @@ const PageForm = ({
   add,
   edit,
   pageId,
-  loading
+  loading,
+  handleDelete
 }) => {
 
   const router = useRouter();
-
-
-  const handleAction = () => {
-    console.log("delete");
-  }
 
   const handleUpdate = () => {
     console.log("update clicked");
@@ -48,7 +44,7 @@ const PageForm = ({
                 <ConfirmActionButton
                   action="Delete"
                   para="Are you sure you want to"
-                  onConfirm={handleAction}
+                  onConfirm={handleDelete}
                   type="warning"
                 />
               </div>
