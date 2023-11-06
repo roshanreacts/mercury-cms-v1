@@ -6,6 +6,11 @@ import { useLazyQuery } from "../hooks";
 import store from "~/store";
 import { CREATE_WEBSITE } from "~/utilis/queries";
 import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
+import {
+  ToastErrorMessage,
+  ToastSuccessMessage,
+} from "~/components/ToastMessage";
+import { ToastContainer } from "react-toastify";
 
 const AddWebsite = () => {
   const [addWebsite, addWebsiteResponse] = useLazyQuery(store.addWebsite);
@@ -45,15 +50,17 @@ const AddWebsite = () => {
 
   useEffect(()=>{
     if(addWebsiteResponse.data){
-      console.log("added Website");
+      ToastSuccessMessage("Website Added Successfully")
+      
     }
     if(addWebsiteResponse.error){
-      console.log("error in website", addWebsiteResponse.error);
+      ToastErrorMessage(addWebsiteResponse.error.message)
     }
   }, [addWebsiteResponse.data, addWebsiteResponse.error, addWebsiteResponse.loading])
 
   return (
     <>
+    <ToastContainer/>
       <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} loading={addWebsiteResponse.loading}/>
     </>
   )

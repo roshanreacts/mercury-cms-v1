@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import React, { useEffect } from "react";
 import * as Yup from 'yup';
 import PageForm from "~/components/PageForm";
@@ -7,6 +7,11 @@ import store from "~/store";
 import { CREATE_PAGE } from "~/utilis/queries";
 import { useLazyQuery } from "../hooks";
 import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
+import {
+  ToastErrorMessage,
+  ToastSuccessMessage,
+} from "~/components/ToastMessage";
+import { ToastContainer } from "react-toastify";
 
 const AddPage = () => {
   const [addPage, addPageResponse] = useLazyQuery(store.addPage);
@@ -35,10 +40,13 @@ const AddPage = () => {
 
   useEffect(() => {
     if (addPageResponse.data) {
-      console.log("added page");
+      ToastSuccessMessage("Page Added Successfully")
+      const pageId = store.pages[store.pages.length-1].id;
+      redirect(`${pageId}`)
     }
     if (addPageResponse.error) {
       console.log("error in page", addPageResponse.error);
+      ToastErrorMessage(addPageResponse.error.message)
     }
   }, [addPageResponse.data, addPageResponse.error, addPageResponse.loading])
 
@@ -64,6 +72,7 @@ const AddPage = () => {
 
   return (
     <>
+    <ToastContainer/>
       <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} pageId={undefined} loading={addPageResponse.loading} />
     </>
   );
