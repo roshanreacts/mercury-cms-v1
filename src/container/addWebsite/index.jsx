@@ -1,16 +1,21 @@
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import WebsiteForm from "~/components/WebsiteForm";
 import * as Yup from "yup";
+import { useLazyQuery } from "../hooks";
+import store from "~/store";
+import { CREATE_WEBSITE } from "~/utilis/queries";
+import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 
 const AddWebsite = () => {
+  const [addWebsite, addWebsiteResponse] = useLazyQuery(store.addWebsite);
+  const userId = getLoggedInUserIdFromCookie();
   const initialValues = {
     websiteSlug: "",
     websiteName: "",
     websiteDescription: "",
     domain: "",
-    status: "Draft",
-    Pages:"One"
+    status: "Draft"
   };
 
   const validationSchema = Yup.object({
@@ -23,13 +28,35 @@ const AddWebsite = () => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    addWebsite(CREATE_WEBSITE, {
+      data: {
+        "author": userId,
+        "description": values.websiteDescription,
+        "domain": values.domain,
+        "name": values.websiteName,
+        "slug": values.websiteSlug,
+        "status": values.status
+      }
+    },
+      {
+        cache: "no-store"
+      })
   };
-return(
-  <>
-  <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} />
-  </>
-)
+
+  useEffect(()=>{
+    if(addWebsiteResponse.data){
+      console.log("added Website");
+    }
+    if(addWebsiteResponse.error){
+      console.log("error in website", addWebsiteResponse.error);
+    }
+  }, [addWebsiteResponse.data, addWebsiteResponse.error, addWebsiteResponse.loading])
+
+  return (
+    <>
+      <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} loading={addWebsiteResponse.loading}/>
+    </>
+  )
 };
 
 export default AddWebsite;

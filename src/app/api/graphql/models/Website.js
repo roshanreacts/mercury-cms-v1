@@ -24,8 +24,10 @@ export const WebsiteSchema = {
             many: false
         },
         pages: {
-            type: "relationship",
+            type: "virtual",
             ref: "Page",
+            localField: "_id",
+            foreignField: "website",
             many: true
         },
         access: {

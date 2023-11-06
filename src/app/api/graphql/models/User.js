@@ -20,8 +20,10 @@ export const UserSchema = {
       default: "USER",
     },
     websites: {
-      type: "relationship",
+      type: "virtual",
       ref: "Website",
+      localField: "_id",
+      foreignField: "author",
       many: true
     },
   },

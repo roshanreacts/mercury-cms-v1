@@ -1,11 +1,18 @@
 "use client";
-import { useParams, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useParams } from "next/navigation";
+import React, { useEffect } from "react";
 import * as Yup from 'yup';
 import PageForm from "~/components/PageForm";
+import store from "~/store";
+import { CREATE_PAGE } from "~/utilis/queries";
+import { useLazyQuery } from "../hooks";
+import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 
 const AddPage = () => {
-  
+  const [addPage, addPageResponse] = useLazyQuery(store.addPage);
+  const userId = getLoggedInUserIdFromCookie();
+  const websiteId = useParams().websiteId;
+
   let initialValues = {
     pageSlug: "",
     pageName: "",
@@ -13,7 +20,7 @@ const AddPage = () => {
     metaDescription: "",
     pagePath: "",
     status: "draft",
-    version: 0.1,
+    version: "0.1",
   };
 
 
@@ -26,9 +33,33 @@ const AddPage = () => {
     version: Yup.number().required("Version is required"),
   });
 
+  useEffect(()=>{
+    if(addPageResponse.data){
+      console.log("added page");
+    }
+    if(addPageResponse.error){
+      console.log("error in page", addPageResponse.error);
+    }
+  }, [addPageResponse.data, addPageResponse.error, addPageResponse.loading])
+
 
   const onSubmit = (values) => {
     console.log(values);
+    addPage(CREATE_PAGE, {
+      "data": {
+        "author": userId,
+        "components": values.pageComponents,
+        "metaDescription": values.metaDescription,
+        "path": values.pagePath,
+        "slug": values.pageSlug,
+        "status": values.status,
+        "title": values.pageName,
+        "version": values.version,
+        "website": websiteId
+      }
+    }, {
+      cache: "no-store"
+    })
   };
 
   return (

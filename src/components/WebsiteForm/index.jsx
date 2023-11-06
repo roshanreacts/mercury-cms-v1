@@ -166,7 +166,7 @@ const WebsiteForm = ({
                       type="submit"
                       className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                     >
-                      Create
+                      {loading ? <Loader size="small" type="info" />:"Create"}
                     </button>
                   ) : (
                     edit && (
