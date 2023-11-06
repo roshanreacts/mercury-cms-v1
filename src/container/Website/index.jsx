@@ -5,7 +5,7 @@ import WebsiteForm from '~/components/WebsiteForm';
 import * as Yup from "yup";
 import { useLazyQuery } from '../hooks';
 import store from '~/store';
-import { GET_ALL_WEBSITES, GET_WEB_SITE, UPDATE_WEBSITE } from '~/utilis/queries';
+import { DELETE_WEBSITE, GET_ALL_WEBSITES, GET_WEB_SITE, UPDATE_WEBSITE } from '~/utilis/queries';
 import { observer } from 'mobx-react-lite';
 import { getLoggedInUserIdFromCookie } from '~/utilis/cookie';
 import Image from 'next/image';
@@ -29,6 +29,7 @@ const WebsiteViewUpdate = () => {
     const [getWebsites, websitesResponse] = useLazyQuery(store.getAllWebsites);
     const [getSingleWebsite, singleWebsiteResponse] = useLazyQuery(store.getWebsiteWithId)
     const [updateWebsite, updateWebsiteResponse] = useLazyQuery(store.updateWebsiteById)
+    const [deleteWebsite, deleteWebsiteResponse] = useLazyQuery(store.deleteWebsite)
 
     useEffect(() => {
         if (store.websites.length === 0) {
@@ -122,11 +123,43 @@ const WebsiteViewUpdate = () => {
             cache: "no-store"
         }, currentWebsite)
     };
+
+    useEffect(() => {
+        if (deleteWebsiteResponse.data) {
+            ToastSuccessMessage("Deleted Website!!")
+            router.replace(`/admin`);
+        }
+        if (deleteWebsiteResponse.error) {
+            ToastErrorMessage(deleteWebsiteResponse.error.message)
+        }
+    }, [deleteWebsiteResponse.data, deleteWebsiteResponse.error, deleteWebsiteResponse.loading])
+
+
+    const handleDelete = () => {
+        deleteWebsite(DELETE_WEBSITE,
+            {
+                deleteWebsiteId: currentWebsite
+            },
+            {
+                cache: "no-store"
+            },
+            currentWebsite
+        )
+    }
+
     return (
         <div>
             <ToastContainer />
             {initialValues.websiteName ?
-                <WebsiteForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={false} edit={edit} loading={updateWebsiteResponse.loading}/>
+                <WebsiteForm
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                    add={false}
+                    edit={edit}
+                    loading={updateWebsiteResponse.loading}
+                    handleDelete={handleDelete}
+                />
                 :
                 <div className='h-[100vh] flex justify-center items-center'>
                     <Image

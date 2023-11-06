@@ -43,7 +43,7 @@ const RootStore = types
       self.pages = data?.allPages?.docs;
     }),
     getAllWebsites: flow(function* (query, variables, options) {
-      const data = yield makeGraphqlQuery(query, variables, options); 
+      const data = yield makeGraphqlQuery(query, variables, options);
       self.websites = data?.allWebsites?.docs;
     }),
     getWebsiteWithId: flow(function* (query, variables, options, id) {
@@ -76,6 +76,13 @@ const RootStore = types
       const index = self.pages.findIndex((page) => page.id === id);
       self.pages[index] = data?.updatePage;
     }),
+    deleteWebsite: flow(function* (query, variables, options, id) {
+      console.log("adsfcbsdd");
+      let data = yield makeGraphqlQuery(query, variables, options);
+      console.log(data, "adsfdadsf");
+      const index = self.websites.findIndex((web) => web.id === id);
+      self.websites.splice(index, 1);
+    })
   }));
 
 const store = RootStore.create({

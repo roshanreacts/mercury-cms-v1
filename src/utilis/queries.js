@@ -120,3 +120,14 @@ mutation UpdatePageMutation($data: updatePageSchema!, $updatePageId: ID!) {
   }
 }
 `;
+
+
+export const DELETE_WEBSITE = `
+mutation DeleteWebsite($deleteWebsiteId: ID!) {
+  deleteWebsite(id: $deleteWebsiteId)
+}`
+
+export const DELETE_PAGE = `
+mutation DeletePage($deletePageId: ID!) {
+  deletePage(id: $deletePageId)
+}`

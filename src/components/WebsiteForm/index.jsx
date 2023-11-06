@@ -10,14 +10,11 @@ const WebsiteForm = ({
   onSubmit,
   add,
   edit,
-  loading
+  loading,
+  handleDelete
 }) => {
 
   const router = useRouter();
-
-  const handleDelete = () => {
-
-  }
   const handleUpdate = () => {
     router.push('?edit=true')
   }
