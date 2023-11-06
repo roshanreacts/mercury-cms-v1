@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { MdAutoDelete, MdOutlineAutoDelete } from "react-icons/md";
 
 const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,7 +38,7 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* SVG Path for warning icon */}
+            <MdAutoDelete className="text-primary"/>
           </svg>
         );
       case "success":

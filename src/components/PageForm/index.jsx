@@ -28,8 +28,8 @@ const PageForm = ({
     router.push("?edit=true")
   };
   return (
-    <div className="relative mx-4">
-      <div className="relative bg-white shadow rounded-3xl py-3 px-10">
+    <div className="mx-10 my-6 flex flex-col justify-center">
+      <div className="relative px-10 py-5 bg-white mx-8 md:mx-0 shadow rounded-3xl">
         <div className="flex justify-between mb-4">
           <div className="flex items-center text-center space-x-5">
             <div className="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
@@ -170,7 +170,7 @@ const PageForm = ({
                   <div className="text-left">
                     <label className="leading-loose">Version</label>
                     <Field
-                      type="number"
+                      type="text"
                       name="version"
                       disabled={!(add || edit)}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
