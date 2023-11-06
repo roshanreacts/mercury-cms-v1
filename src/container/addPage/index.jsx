@@ -12,6 +12,7 @@ import {
   ToastSuccessMessage,
 } from "~/components/ToastMessage";
 import { ToastContainer } from "react-toastify";
+import { convertJSONtoBASE64 } from "~/utilis/utilMethods";
 
 const AddPage = () => {
   const [addPage, addPageResponse] = useLazyQuery(store.addPage);
@@ -53,10 +54,11 @@ const AddPage = () => {
 
   const onSubmit = (values) => {
     console.log(values);
+    const base64 = convertJSONtoBASE64(values.pageComponents);
     addPage(CREATE_PAGE, {
       "data": {
         "author": userId,
-        "components": values.pageComponents,
+        "components": base64,
         "metaDescription": values.metaDescription,
         "path": values.pagePath,
         "slug": values.pageSlug,

@@ -13,6 +13,7 @@ import {
 } from "~/components/ToastMessage";
 import { ToastContainer } from "react-toastify";
 import Image from "next/image";
+import { convertBASE64toJSON } from "~/utilis/utilMethods";
 
 let add = false,
   edit = false;
@@ -80,11 +81,13 @@ const PageUpdateView = () => {
   useEffect(() => {
     if (singlePageResponse.data) {
       const pageData = store.pages.find((page) => page.id === pageId);
+      const json = convertBASE64toJSON(pageData.components);
+      console.log(json, ">sdfds");
 
       setInitialValues({
         pageSlug: pageData?.slug || "",
         pageName: pageData?.title || "",
-        pageComponents: pageData?.components || "",
+        pageComponents: json || "",
         metaDescription: pageData?.metaDescription || "",
         pagePath: pageData?.path || "",
         status: pageData?.status || "draft",
