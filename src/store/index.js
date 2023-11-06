@@ -36,17 +36,14 @@ const RootStore = types
     }),
     getLoggedInUser: flow(function* (query, variables, options) {
       let data = yield makeGraphqlQuery(query, variables, options);
-      console.log("::data", data);
       self.loggedInUser = data?.getUser;
     }),
     getAllPages: flow(function* (query, variables, options) {
       const data = yield makeGraphqlQuery(query, variables, options);
-      console.log("::data", data);
       self.pages = data?.allPages?.docs;
     }),
     getAllWebsites: flow(function* (query, variables, options) {
-      const data = yield makeGraphqlQuery(query, variables, options);
-      console.log("::data Websites", data);
+      const data = yield makeGraphqlQuery(query, variables, options); 
       self.websites = data?.allWebsites?.docs;
     }),
     getWebsiteWithId: flow(function* (query, variables, options, id) {
@@ -68,7 +65,17 @@ const RootStore = types
       let data = yield makeGraphqlQuery(query, variables, options);
       console.log("::add website", data.createWebsite);
       self.websites.push(data.createWebsite);
-    })
+    }),
+    getPageWithId: flow(function* (query, variables, options, id) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      const index = self.pages.findIndex((page) => page.id === id);
+      self.pages[index] = data?.getPage;
+    }),
+    updatePageById: flow(function* (query, variables, options, id) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      const index = self.pages.findIndex((page) => page.id === id);
+      self.pages[index] = data?.updatePage;
+    }),
   }));
 
 const store = RootStore.create({

@@ -109,3 +109,14 @@ mutation CreatePage($data: createPageInput!) {
     title
   }
 }`
+
+
+export const UPDATE_PAGE = `
+mutation UpdatePageMutation($data: updatePageSchema!, $updatePageId: ID!) {
+  updatePage(data: $data, id: $updatePageId) {
+    title
+    id
+    slug
+  }
+}
+`;

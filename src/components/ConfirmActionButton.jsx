@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiEdit } from "react-icons/fi";
 
 const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +61,7 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* SVG Path for info icon */}
+           <FiEdit className="text-primary"/>
           </svg>
         );
       default:
@@ -94,10 +95,10 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
 
         {isModalOpen && (
           <div id="deleteModal" className="overflow-y-auto overflow-x-hidden fixed top-[40%] right-0 left-0 z-50 flex justify-center w-full h-screen">
-            <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-              <div className="relative p-4 text-center bg-gray-300 rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <div className="relative p-4 w-full max-w-md h-full left-24">
+              <div className="relative p-4 text-center bg-blue-100 rounded-lg shadow sm:p-5">
                 {getIcon()}
-                <p className="mb-4 text-white dark:text-gray-300">
+                <p className="mb-4 text-primary dark:text-gray-300">
                   {` ${para}  ${action}?`}
                 </p>
                 <div className="flex justify-center items-center space-x-4">
