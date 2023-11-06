@@ -18,9 +18,9 @@ const PageForm = ({
   const router = useRouter();
 
 
-const handleAction =()=>{
-  console.log("delete");
-}
+  const handleAction = () => {
+    console.log("delete");
+  }
 
   const handleUpdate = () => {
     console.log("update clicked");
@@ -40,16 +40,18 @@ const handleAction =()=>{
               </h2>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row justify-end items-end">
-            <div className="mb-2 sm:mb-0 sm:mr-2">
-              <ConfirmActionButton
-                action="Delete"
-                para="Are you sure you want to"
-                onConfirm={handleAction}
-                type="warning"
-              />
-            </div>
-            {!edit &&
+
+          {!add &&
+            <div className="flex flex-col sm:flex-row justify-end items-end">
+              <div className="mb-2 sm:mb-0 sm:mr-2">
+                <ConfirmActionButton
+                  action="Delete"
+                  para="Are you sure you want to"
+                  onConfirm={handleAction}
+                  type="warning"
+                />
+              </div>
+              {!edit &&
                 <div>
                   <ConfirmActionButton
                     action="Update"
@@ -59,7 +61,8 @@ const handleAction =()=>{
                   />
                 </div>
               }
-          </div>
+            </div>
+          }
         </div>
 
         <div className="text-left">
@@ -185,7 +188,7 @@ const handleAction =()=>{
                       type="submit"
                       className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                     >
-                      Create
+                      {loading ? <Loader size="small" type="info" /> : "Create"}
                     </button>
                   ) : (
                     edit && (
@@ -193,7 +196,7 @@ const handleAction =()=>{
                         type="submit"
                         className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
                       >
-                        Update
+                        {loading ? <Loader size="small" type="info" /> : "Update"}
                       </button>
                     )
                   )}

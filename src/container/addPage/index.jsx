@@ -19,7 +19,7 @@ const AddPage = () => {
     pageComponents: "",
     metaDescription: "",
     pagePath: "",
-    status: "draft",
+    status: "Draft",
     version: "0.1",
   };
 
@@ -33,11 +33,11 @@ const AddPage = () => {
     version: Yup.number().required("Version is required"),
   });
 
-  useEffect(()=>{
-    if(addPageResponse.data){
+  useEffect(() => {
+    if (addPageResponse.data) {
       console.log("added page");
     }
-    if(addPageResponse.error){
+    if (addPageResponse.error) {
       console.log("error in page", addPageResponse.error);
     }
   }, [addPageResponse.data, addPageResponse.error, addPageResponse.loading])
@@ -64,7 +64,7 @@ const AddPage = () => {
 
   return (
     <>
-      <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} pageId={undefined} />
+      <PageForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} add={true} edit={true} pageId={undefined} loading={addPageResponse.loading} />
     </>
   );
 };
