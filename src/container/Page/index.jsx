@@ -13,7 +13,7 @@ import {
 } from "~/components/ToastMessage";
 import { ToastContainer } from "react-toastify";
 import Image from "next/image";
-import { convertBASE64toJSON } from "~/utilis/utilMethods";
+import { convertBASE64toJSON, convertJSONtoBASE64 } from "~/utilis/utilMethods";
 
 let add = false,
   edit = false;
@@ -92,7 +92,6 @@ const PageUpdateView = () => {
     if (singlePageResponse.data) {
       const pageData = store.pages.find((page) => page.id === pageId);
       const json = convertBASE64toJSON(pageData?.components);
-      console.log(json, ">sdfds");
 
       setInitialValues({
         pageSlug: pageData?.slug || "",
@@ -143,6 +142,7 @@ const PageUpdateView = () => {
   };
 
   const onSubmit = (values) => {
+    values.pageComponents = convertJSONtoBASE64(values.pageComponents);
     updatePage(UPDATE_PAGE, {
       data: {
         title: values.pageName,
@@ -187,8 +187,6 @@ const PageUpdateView = () => {
           onSubmit={onSubmit}
           loading={updatePageResponse.loading}
           handleDelete={handleDelete}
-          togglePopup={togglePopup}
-          isPopupVisible={isPopupVisible}
         />
       ) : (
         <div className="h-[100vh] flex justify-center items-center">

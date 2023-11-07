@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { RiFileAddLine } from "react-icons/ri";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
 import Loader from "~/container/Loader";
-import JsonPopup from "../JsonPopup";
+import CodeEditorWindow from "../CodeEditor";
 
 const PageForm = ({
   initialValues,
@@ -15,12 +15,14 @@ const PageForm = ({
   edit,
   pageId,
   loading,
-  handleDelete,
-  togglePopup,
-  isPopupVisible
+  handleDelete
 }) => {
 
+  const formikRef = useRef();
   const router = useRouter();
+  const handleComponentEdit = (value) => {
+    formikRef.current.setFieldValue('pageComponents', value);
+  }
 
   const handleUpdate = () => {
     console.log("update clicked");
@@ -70,6 +72,7 @@ const PageForm = ({
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            innerRef={formikRef}
           >
             {({ touched, errors }) => (
               <Form>
@@ -105,25 +108,23 @@ const PageForm = ({
                     />
                   </div>
                 </div>
-                <div className="text-left" onClick={togglePopup}>
+                <div className="text-left">
                   <label className="leading-loose">Page Components</label>
-                  <Field
+                  {/* <Field
                     as="textarea"
                     name="pageComponents"
                     disabled={!(add || edit)}
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     placeholder="Page Components"
                     rows="5"
-                  />
+                  /> */}
+                  <CodeEditorWindow initialComponents={initialValues.pageComponents} edit={(add || edit)} handleComponentEdit={handleComponentEdit} />
                   <ErrorMessage
                     name="pageComponents"
                     component="div"
                     className="text-red-500 text-xs"
                   />
                 </div>
-                  <JsonPopup edit={edit} initialData={initialValues.pageComponents} />
-                
-
                 <div className="text-left">
                   <label className="leading-loose">Meta Description</label>
                   <Field
