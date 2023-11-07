@@ -13,8 +13,10 @@ const PageList = ({ currentWebsite }) => {
       where: {
         website: {
           is: currentWebsite
-        }
-      }
+        },
+        
+      },
+      limit: 30    
     }, { cache: "no-store" })
 
     return () => {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
 import Loader from "~/container/Loader";
+import JsonPopup from "../JsonPopup";
 
 const PageForm = ({
   initialValues,
@@ -14,7 +15,9 @@ const PageForm = ({
   edit,
   pageId,
   loading,
-  handleDelete
+  handleDelete,
+  togglePopup,
+  isPopupVisible
 }) => {
 
   const router = useRouter();
@@ -102,7 +105,7 @@ const PageForm = ({
                     />
                   </div>
                 </div>
-                <div className="text-left">
+                <div className="text-left" onClick={togglePopup}>
                   <label className="leading-loose">Page Components</label>
                   <Field
                     as="textarea"
@@ -118,6 +121,9 @@ const PageForm = ({
                     className="text-red-500 text-xs"
                   />
                 </div>
+                  <JsonPopup edit={edit} initialData={initialValues.pageComponents} />
+                
+
                 <div className="text-left">
                   <label className="leading-loose">Meta Description</label>
                   <Field

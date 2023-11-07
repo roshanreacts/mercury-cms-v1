@@ -38,8 +38,13 @@ const PageUpdateView = () => {
   const [getPages, pagesResponse] = useLazyQuery(store.getAllPages);
   const [getSinglePage, singlePageResponse] = useLazyQuery(store.getPageWithId);
   const [updatePage, updatePageResponse] = useLazyQuery(store.updatePageById)
-  const [deletePage, deletePageResponse] = useLazyQuery(store.deletePage)
-  
+  const [deletePage, deletePageResponse] = useLazyQuery(store.deletePage);
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const togglePopup = () => {
+    setPopupVisible(!isPopupVisible);
+  };
+
   useEffect(() => {
     if (store.pages.length === 0) {
       getPages(
@@ -53,6 +58,7 @@ const PageUpdateView = () => {
               is: websiteId,
             },
           },
+          limit: 30
         },
         {
           cache: "no-store",
@@ -85,7 +91,7 @@ const PageUpdateView = () => {
   useEffect(() => {
     if (singlePageResponse.data) {
       const pageData = store.pages.find((page) => page.id === pageId);
-      const json = convertBASE64toJSON(pageData.components);
+      const json = convertBASE64toJSON(pageData?.components);
       console.log(json, ">sdfds");
 
       setInitialValues({
@@ -150,10 +156,10 @@ const PageUpdateView = () => {
       },
       updatePageId: pageId
     },
-    {
-      cache: "no-store"
-    },
-    pageId);
+      {
+        cache: "no-store"
+      },
+      pageId);
   };
 
   const validationSchema = Yup.object().shape({
@@ -181,6 +187,8 @@ const PageUpdateView = () => {
           onSubmit={onSubmit}
           loading={updatePageResponse.loading}
           handleDelete={handleDelete}
+          togglePopup={togglePopup}
+          isPopupVisible={isPopupVisible}
         />
       ) : (
         <div className="h-[100vh] flex justify-center items-center">
