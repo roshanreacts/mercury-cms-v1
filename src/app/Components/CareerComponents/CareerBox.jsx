@@ -1,8 +1,7 @@
 import React from 'react';
-import { careersdata } from '@/utilities/constant';
 import CareersBoxBenefit from './CareersBoxBenefit';
 
-const CareerBox = ({bgimage, careersData}: {bgimage: string, careersData[]}) => {
+const CareerBox = ({bgimage, careersData}) => {
   return (
     <div className='bg-gradient-to-bl from-secondary to-primary p-4 md:p-14 relative'>
       <img

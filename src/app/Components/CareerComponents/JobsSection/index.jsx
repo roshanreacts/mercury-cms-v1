@@ -1,9 +1,8 @@
 "use client"
 import React, { useState } from 'react'
 import PostAccordion from './PostAccordion'
-import { jobs } from '@/utilities/constant'
 
-const JobsSection = ({jobPosts}:{jobPosts:any[]}) => {
+const JobsSection = ({jobPosts}) => {
     const [isOpen, setIsOpen] = useState(true);
     const [currentAccordion, setCurrentAccordion] = useState(0);
 
@@ -13,7 +12,7 @@ const JobsSection = ({jobPosts}:{jobPosts:any[]}) => {
             <div className="lg:w-[80%] mt-4">
 
                 {
-                    jobPosts?.map((job, index: number) =>
+                    jobPosts?.map((job, index) =>
                         <div key={index}>
                             <PostAccordion
                                 postData={job}

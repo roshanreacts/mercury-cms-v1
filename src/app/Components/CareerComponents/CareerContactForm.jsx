@@ -5,10 +5,6 @@ const CareerContactForm = ({
   title,
   description,
   image,
-}: {
-  title: string;
-  description: string;
-  image: string;
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,17 +14,17 @@ const CareerContactForm = ({
     upload: null,
   });
 
-  const handleInputChange = (e: { target: { name; value; }; }) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e: { target: { files }; }) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, upload: file });
   };
 
-  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
   };

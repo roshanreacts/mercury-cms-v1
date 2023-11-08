@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CareersBoxBenefit = ({ image, title, content }: { image: string; title: string; content: string }) => {
+const CareersBoxBenefit = ({ image, title, content }) => {
   return (
     <div className='mt-2'>
       <div className='overflow-hidden'>

@@ -22,7 +22,7 @@ const JobPostData = ({ postData }) => {
                     <h1 className='text-secondary text-[24px] md:text-[28px] font-[500]'>Responsibilities:</h1>
                     <ul className='mb-5 text-[16px] md:text-[18px] md:leading-9'>
                         {
-                            postData.responsibilities?.map((respson: string, index: number) =>
+                            postData.responsibilities?.map((respson, index) =>
                                 <li className='text-primary flex justify-start items-center ml-3' key={index}>
                                     <BsFillCaretRightFill className='mr-3 text-secondary ' />
                                     {respson}
@@ -35,7 +35,7 @@ const JobPostData = ({ postData }) => {
                     <h1 className='text-secondary text-[24px] md:text-[28px] font-[500]'>Requirements:</h1>
                     <ul className='mb-5 text-[16px] md:text-[18px] md:leading-9'>
                         {
-                            postData.requirements?.map((respson: string, index: number) =>
+                            postData.requirements?.map((respson, index) =>
                                 <li className='text-primary flex justify-start items-center ml-3' key={index}>
                                     <BsFillCaretRightFill className='mr-3 text-secondary ' />
                                     {respson}

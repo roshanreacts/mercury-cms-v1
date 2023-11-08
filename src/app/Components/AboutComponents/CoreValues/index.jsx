@@ -1,8 +1,7 @@
 import React from 'react';
 import CoreValues from './CoreValues';
-import { coreValuesData } from '@/utilities/constant'
 
-const CoreValuesList = ({valuesList}: {valuesList:any[]}) => {
+const CoreValuesList = ({valuesList}) => {
   return (
     <div className='p-12 bg-[#f3f6ff]' id="core">
       <div className='text-center text-3xl font-bold mb-8'>

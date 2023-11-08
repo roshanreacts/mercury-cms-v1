@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/Components/AboutComponents/AboutContentBox.jsx", "src/app/Components/AboutComponents/KeyDifferences/index.jsx", "src/app/Components/AboutComponents/CoreValues/CoreValues.jsx", "src/app/Components/AboutComponents/CoreValues/index.jsx", "src/app/Components/CareerComponents/CareerAboutBox.jsx", "src/app/Components/CareerComponents/CareerBox.jsx", "src/app/Components/CareerComponents/CareerContactForm.jsx", "src/app/Components/CareerComponents/CareersBoxBenefit.jsx", "src/app/Components/CareerComponents/JobsSection/index.jsx", "src/app/Components/CareerComponents/JobsSection/JobPostData.jsx", "src/app/Components/CareerComponents/JobsSection/PostAccordion.jsx"  ],
   "exclude": [
     "node_modules"
   ]

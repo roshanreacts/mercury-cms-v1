@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CoreValue = ({ imgUrl, title, paraGraph }:{imgUrl:string,title:string,paraGraph:string}) => {
+const CoreValue = ({ imgUrl, title, paraGraph }) => {
   return (
     <div className='max-w-7xl'>
       <div className='bg-white rounded-md p-5 md:p-12 2xl:p-16 flex flex-col items-center h-full hover:transform hover:-translate-y-2 transition-transform duration-300'>

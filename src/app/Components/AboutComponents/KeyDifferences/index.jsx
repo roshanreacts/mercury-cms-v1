@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const About = ({bgImage, content, differences}: {bgImage: string, content: string, differences:any[]}) => {
+const About = ({bgImage, content, differences}) => {
   return (
     <div className='relative bg-[#0b163b] h-fit flex justify-center pt-10 'id="key">
         <img src={bgImage} alt="" className='w-full h-full absolute inset-0 object-cover opacity-10' />

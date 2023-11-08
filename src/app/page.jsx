@@ -1,14 +1,12 @@
 import React from 'react'
 import * as Components from './Components';
-import ObjReact from '~/utilities/DynamicComponent';
-import jsonData from '~/utilities/vithiApp.json'
-import { generateCompoLib, generateComponentList } from '~/utilities/methods';
-import componentJson from '~/utilities/ComponentData.json';
+import ObjReact from './utilities/DynamicComponent';
+import jsonData from './utilities/vithiApp.json'
+import { generateCompoLib, generateComponentList } from './utilities/methods';
+import componentJson from './utilities/ComponentData.json';
 
 
 const page = ({ params }) => {
-
-  
 
   const slugMapping = jsonData.filter((subData)=> subData.slug === `home`)[0];
   

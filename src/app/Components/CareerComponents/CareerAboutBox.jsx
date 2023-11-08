@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-const CareerAboutBox = ({ title, content, contact }: { title: string, content: string, contact: string }) => {
+const CareerAboutBox = ({ title, content, contact }) => {
   return (
     // <div className='flex justify-center md:p-10 bg-primary'>
     // <div className='mt-4 flex items-start flex-col '>
