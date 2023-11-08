@@ -2,7 +2,7 @@ import React from 'react'
 import HeroCarousel from './HeroCarousel';
 import CarouselItem from './CarouselItem';
 
-const Hero = ({carouselData, discussButton}: {carouselData:any[], discussButton:any}) => {
+const Hero = ({carouselData, discussButton}) => {
     return (
         <div className='min-w-full mt-36 md:mt-[4.2rem] '>
             <HeroCarousel>

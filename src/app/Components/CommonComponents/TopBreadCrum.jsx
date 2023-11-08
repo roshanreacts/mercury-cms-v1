@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { BiHomeAlt } from 'react-icons/bi';
 
-const TopBreadCrum = ({ title, image, navigations }: { title: string, image: string, navigations: string[] }) => {
+const TopBreadCrum = ({ title, image, navigations }) => {
     return (
         
         <div className='flex flex-col-reverse lg:flex-row justify-center items-start bg-[#f5faff] mt-24'>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContactDetails = ({ content, address, phonenumber,landline }: { content: string, address, phonenumber: string ,landline:String}) => {
+const ContactDetails = ({ content, address, phonenumber,landline }) => {
   return (
     <div className='border-solid border-2 border-secondary m-7 bg-white md:p-8'>
       <div className='px-6 pt-6'>

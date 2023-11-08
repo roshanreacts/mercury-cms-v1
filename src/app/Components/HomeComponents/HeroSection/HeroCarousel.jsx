@@ -2,11 +2,8 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import {LiaGreaterThanSolid, LiaLessThanSolid} from 'react-icons/lia'
 
-interface HeroCarouselProps {
-  children: ReactNode;
-}
 
-const HeroCarousel = ({ children }: HeroCarouselProps) => {
+const HeroCarousel = ({ children }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const VideoBackgroundComponent = ({videoUrl, title, content}: {videoUrl:string, title: string, content: string}) => {
+const VideoBackgroundComponent = ({videoUrl, title, content}) => {
   return (
     <div className="relative w-full h-80 bg-gradient-to-bl from-[#70aa44] to-[#63AD2ABA]">
       <video

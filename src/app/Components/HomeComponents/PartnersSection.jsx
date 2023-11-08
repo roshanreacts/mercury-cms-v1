@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-const PartnersSection = ({ partners }: { partners: string[] }) => {
+const PartnersSection = ({ partners }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const slideLeft = () => {

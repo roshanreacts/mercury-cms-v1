@@ -7,7 +7,7 @@ const FooterDataSection = ({ sectionData }) => {
                 {sectionData.head}
             </h4>
             <ul className="list-none list-inside flex-1">
-                {sectionData.titles.map((item, titleIndex: number) => (
+                {sectionData.titles.map((item, titleIndex) => (
                     <li key={titleIndex} className="text-light my-2 font-[700] text-[13px] lg:text-[10px] xl:text-[13px] leading-[20px]">
                         <Link href={`/services/${item.link}`} className="hover:text-secondary">
                             {item.text}

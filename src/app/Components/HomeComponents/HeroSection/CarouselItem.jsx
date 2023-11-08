@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const CarouselItem = ({ title1, title2, description, imageUrl, discussButton }: { title1: string; title2: string; description: string; imageUrl: string, discussButton }) => {
+const CarouselItem = ({ title1, title2, description, imageUrl, discussButton }) => {
   return (
     <div className="mb-16 animate-fade animate-once animate-duration-500 animate-delay-0 animate-ease-in-out">
       <div className="flex relative flex-col-reverse md:flex-row justify-between md:h-[70vh] h-[80vh] xl:h-[90vh] items-center ">

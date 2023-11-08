@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-const HomeServicesBox = ({ servicesData, image, title1, title2, description }: { servicesData: string[], image: string, title1: string, title2: string, description }) => {
+const HomeServicesBox = ({ servicesData, image, title1, title2, description }) => {
     return (
         <div className="min-h-full mt-16 mb-28 flex items-center justify-center ">
             <div className="w-11/12 md:w-10/12 lg:w-7/5 bg-gradient-to-bl from-secondary to-primary pt-7 pr-7 pb-7 pl-7 xl:pb-0 xl:pl-0 rounded-lg shadow-xl ">
