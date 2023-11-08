@@ -4,11 +4,15 @@ import ObjReact from '../../utilities/DynamicComponent';
 import jsonData from '../../utilities/vithiApp.json'
 import componentJson from '../../utilities/ComponentData.json';
 import { generateCompoLib, generateComponentList } from '../../utilities/methods';
+import store from '~/store';
+import { GET_PAGE } from '~/utilis/queries';
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
 
   const subPath = params.subPath;
   const mainPath = params.mainPath;
+  const slugMapping = await store.getPageBySlug(GET_PAGE, {where: {slug :{is:"home"}}});
+  console.log(slugMapping);
 
   const slugMapping = jsonData.filter((subData) => subData.slug === `${mainPath}/${subPath}`)[0];
 

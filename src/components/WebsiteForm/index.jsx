@@ -49,7 +49,7 @@ const WebsiteForm = ({
               {!edit &&
                 <div>
                   <ConfirmActionButton
-                    action="Update"
+                    action="Edit"
                     para="Are you sure you want to"
                     onConfirm={handleUpdate}
                     type="info"

@@ -7,11 +7,14 @@ import { generateCompoLib, generateComponentList } from '../utilities/methods';
 import componentJson from '../utilities/ComponentData.json';
 import {useLazyQuery} from '~/container/hooks'
 import store from '~/store';
+import { GET_PAGE } from '~/utilis/queries';
 
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
 
-  const [getAllPageWithAllData, {data, loading, error}] = useLazyQuery(store.getAllPageWithAllData);
+  const slugMapping = await store.getPageBySlug(GET_PAGE, {where: {slug :{is:"home"}}});
+  console.log(slugMapping);
+  
 
   const mainPath = params.mainPath;
 

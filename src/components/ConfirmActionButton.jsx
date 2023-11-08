@@ -83,7 +83,7 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }) => {
   return (
     <div className="">
       <div>
-        <div className="flex justify-center m-5">
+        <div className="flex justify-center m-5 w-auto">
           <button
             id="deleteButton"
             onClick={toggleModal}
