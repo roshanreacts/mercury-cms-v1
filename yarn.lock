@@ -2251,6 +2251,13 @@ finalhandler@1.2.0:
     statuses "2.0.1"
     unpipe "~1.0.0"
 
+find-and-replace-anything@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/find-and-replace-anything/-/find-and-replace-anything-3.0.4.tgz#454b93782b371c922f20197b6112443cbc42972c"
+  integrity sha512-RY+5ft19Vjujx3JyetzOlY8pntuoIOEHVVbDANnvtAPLZ4W0O7NlUPtKthU5QLS1eAgeE7K4OlRMXrkc8kuqEw==
+  dependencies:
+    is-what "^4.1.8"
+
 form-data@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
@@ -2543,6 +2550,11 @@ is-stream@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha512-uQPm8kcs47jx38atAcWTVxyltQYoPT68y9aWYdV6yWXSyW8mzSat0TL6CiWdZeCdF3KrAvpVtnHbTv4RN+rqdQ==
+
+is-what@^4.1.8:
+  version "4.1.16"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.16.tgz#1ad860a19da8b4895ad5495da3182ce2acdd7a6f"
+  integrity sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==
 
 isomorphic-fetch@^2.1.1:
   version "2.2.1"

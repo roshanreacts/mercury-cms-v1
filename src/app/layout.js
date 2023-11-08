@@ -14,7 +14,12 @@ export default function RootLayout({ children }) {
   loadErrorMessages();
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className='flex justify-center items-center'>
+        <div className="flex min-h-screen flex-col items-center max-w-screen-2xl justify-center">
+          {children}
+        </div>
+          
+      </body>
     </html>
   )
 }

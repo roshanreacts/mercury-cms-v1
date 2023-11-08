@@ -8,20 +8,21 @@ import componentJson from '~/utilities/ComponentData.json';
 
 const page = ({ params }) => {
 
+  const mainPath = params.mainPath;
+
+  const slugMapping = jsonData.filter((subData)=> subData.slug === `${mainPath}`)[0];
   
 
-  const slugMapping = jsonData.filter((subData)=> subData.slug === `home`)[0];
-  
   return (
     <div>
       <ObjReact objReact={{
-        path: `/`,
+        path: `${mainPath}`,
         component: [
           {
             component: "Navbar",
             props: {
               ...componentJson[0].props,
-              active: "home"
+              active: mainPath
             },
             children: null
           },
