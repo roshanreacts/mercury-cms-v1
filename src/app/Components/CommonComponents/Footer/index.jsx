@@ -3,8 +3,6 @@ import { BsFacebook } from 'react-icons/bs';
 import { TiSocialLinkedinCircular } from 'react-icons/ti';
 import FooterDataSection from './FooterDataSection';
 
-const fastLinks= footerData;
-
 const Footer = ({ logo, content, readMoreUrl, facebookLink, linkedinLink, fastLinks}) => {
     return (
         <div className="flex flex-col items-center justify-center mt-10">

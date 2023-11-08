@@ -88,6 +88,10 @@ const RootStore = types
       if (index !== -1) {
         self.pages.splice(index, 1)
       }
+    }),
+    getAllPageWithAllData: flow(function* (query, variables, options) {
+      yield makeGraphqlQuery(query, variables, options);
+      self.pages = data?.allPages?.docs
     })
     
   }));

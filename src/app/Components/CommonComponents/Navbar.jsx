@@ -12,7 +12,7 @@ const Navbar = ({
   callButton,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState<any>({
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState({
     state: false,
     item: "",
   });

@@ -1,9 +1,9 @@
 import React from 'react'
-import * as Components from './Components';
-import ObjReact from '~/utilities/DynamicComponent';
-import jsonData from '~/utilities/vithiApp.json'
-import componentJson from '~/utilities/ComponentData.json';
-import { generateCompoLib, generateComponentList } from '~/utilities/methods';
+import * as Components from '../../Components';
+import ObjReact from '../../utilities/DynamicComponent';
+import jsonData from '../../utilities/vithiApp.json'
+import componentJson from '../../utilities/ComponentData.json';
+import { generateCompoLib, generateComponentList } from '../../utilities/methods';
 
 const page = ({ params }) => {
 

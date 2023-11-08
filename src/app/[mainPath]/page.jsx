@@ -1,12 +1,17 @@
+"use client"
 import React from 'react'
-import * as Components from './Components';
-import ObjReact from '~/utilities/DynamicComponent';
-import jsonData from '~/utilities/vithiApp.json'
-import { generateCompoLib, generateComponentList } from '~/utilities/methods';
-import componentJson from '~/utilities/ComponentData.json';
+import * as Components from '../Components';
+import ObjReact from '../utilities/DynamicComponent';
+import jsonData from '../utilities/vithiApp.json'
+import { generateCompoLib, generateComponentList } from '../utilities/methods';
+import componentJson from '../utilities/ComponentData.json';
+import {useLazyQuery} from '~/container/hooks'
+import store from '~/store';
 
 
 const page = ({ params }) => {
+
+  const [getAllPageWithAllData, {data, loading, error}] = useLazyQuery(store.getAllPageWithAllData);
 
   const mainPath = params.mainPath;
 
