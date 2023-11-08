@@ -1,26 +1,26 @@
 import React from 'react'
 import * as Components from '../../Components';
 import ObjReact from '../../utilities/DynamicComponent';
-import jsonData from '../../utilities/vithiApp.json'
 import componentJson from '../../utilities/ComponentData.json';
 import { generateCompoLib, generateComponentList } from '../../utilities/methods';
 import store from '~/store';
 import { GET_PAGE } from '~/utilis/queries';
+import { convertBASE64toJSON } from '~/utilis/utilMethods';
 
 const page = async ({ params }) => {
 
   const subPath = params.subPath;
   const mainPath = params.mainPath;
-  const slugMapping = await store.getPageBySlug(GET_PAGE, {where: {slug :{is:"home"}}});
-  console.log(slugMapping);
-
-  const slugMapping = jsonData.filter((subData) => subData.slug === `${mainPath}/${subPath}`)[0];
+  const slug = mainPath+"-"+subPath;
+  const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: slug } } });
+  
+  const slugMapping = JSON.parse(convertBASE64toJSON(data?.components))
 
 
   return (
     <div>
       <ObjReact objReact={{
-        path: `${mainPath}/${subPath}`,
+        path: slug,
         component: [
           {
             component: "Navbar",
@@ -30,7 +30,7 @@ const page = async ({ params }) => {
             },
             children: null
           },
-          ...generateComponentList(slugMapping?.Components),
+          ...generateComponentList(slugMapping),
           {
             component: "Footer",
             children: null,
@@ -42,7 +42,7 @@ const page = async ({ params }) => {
           }
         ],
         compoLib: {
-          ...generateCompoLib(Components, slugMapping?.Components),
+          ...generateCompoLib(Components, slugMapping),
           "Navbar": Components.Navbar,
           "Footer": Components.Footer,
           "MoveToUp": Components.MoveToUp
