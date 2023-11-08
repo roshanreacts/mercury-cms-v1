@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Components from '../components';
 import ObjReact from '../utilities/DynamicComponent';
 import { generateCompoLib, generateComponentList } from '../utilities/methods';
@@ -9,7 +10,7 @@ import { convertBASE64toJSON } from '~/utilis/utilMethods';
 
 const page = async () => {
 
-  const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: "home" } } },{cache:"no-store"});
+  const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: "home" } } }, { cache: "no-store" });
   const slugMapping = JSON.parse(convertBASE64toJSON(data?.components));
 
   return (

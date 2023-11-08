@@ -11,9 +11,9 @@ const page = async ({ params }) => {
 
   const subPath = params.subPath;
   const mainPath = params.mainPath;
-  const slug = mainPath+"-"+subPath;
-  const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: slug } } });
-  
+  const slug = mainPath + "-" + subPath;
+  const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: slug } } }, { cache: "no-store" });
+
   const slugMapping = JSON.parse(convertBASE64toJSON(data?.components))
 
 
