@@ -1,8 +1,8 @@
 import React from 'react'
-import * as Components from '../Components';
-import ObjReact from '../utilities/DynamicComponent';
-import { generateCompoLib, generateComponentList } from '../utilities/methods';
-import componentJson from '../utilities/ComponentData.json';
+import * as Components from '~/components';
+import ObjReact from '../../utilities/DynamicComponent';
+import { generateCompoLib, generateComponentList } from '../../utilities/methods';
+import componentJson from '../../utilities/ComponentData.json';
 import store from '~/store';
 import { GET_PAGE } from '~/utilis/queries';
 import { convertBASE64toJSON } from '~/utilis/utilMethods';
