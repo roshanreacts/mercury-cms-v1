@@ -9,7 +9,7 @@ const ContentBox = ({ header, para, link }) => {
         <p>{para}</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 gap-y-4">
-        {link?.map((item: string, index: number) => (
+        {link?.map((item, index) => (
           <a href="#" key={index} className="text-green-400 text-lg flex items-center font-semibold hover:text-green-600">
             {item}
             <BsArrowUpRight size={15} className="ml-2" />

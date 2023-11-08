@@ -1,7 +1,7 @@
 import React from "react";
 import ContactForm from "./ContactForm";
 
-const FullContactForm = ({ image1,image2 }: { image1: string,image2: string }) => {
+const FullContactForm = ({ image1,image2 }) => {
   return (
     <div className="grid md:grid-cols-12 items-center bg-primary mb-10">
       <div className="relative md:col-span-4">

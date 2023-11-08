@@ -6,7 +6,7 @@ import FooterDataSection from './FooterDataSection';
 
 const fastLinks= footerData;
 
-const Footer = ({ logo, content, readMoreUrl, facebookLink, linkedinLink, fastLinks}:{logo:string, content:string, readMoreUrl:string, facebookLink:string, linkedinLink:string, fastLinks:any[]}) => {
+const Footer = ({ logo, content, readMoreUrl, facebookLink, linkedinLink, fastLinks}) => {
     return (
         <div className="flex flex-col items-center justify-center mt-10">
             <div className="max-w-[90%]">

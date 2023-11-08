@@ -1,4 +1,4 @@
-const ImageComponent = ({ image1, image2, right }: { image1: string; image2: string, right:boolean }) => {
+const ImageComponent = ({ image1, image2, right }) => {
   return (
     <div className={`relative flex ${right ? 'justify-end': ''}`}>
       <img

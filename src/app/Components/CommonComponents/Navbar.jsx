@@ -10,11 +10,6 @@ const Navbar = ({
   logo,
   navItems,
   callButton,
-}: {
-  active: string;
-  logo: string;
-  navItems[];
-  callButton;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState<any>({
@@ -36,12 +31,12 @@ const Navbar = ({
     setIsOpen(!isOpen);
   };
 
-  const toggleServicesDropdown = (itemName: string) => {
+  const toggleServicesDropdown = (itemName) => {
     const obj = { state: true, item: itemName };
     setServicesDropdownOpen(obj);
   };
 
-  const closeServicesDropdown = (itemName: string) => {
+  const closeServicesDropdown = (itemName) => {
     const obj = { state: false, item: itemName };
     setServicesDropdownOpen(obj);
   };
@@ -81,7 +76,7 @@ const Navbar = ({
             } mt-4 md:flex md:items-center md:space-x-6 hidden`}
           >
             <ul className="md:flex 2xl:space-x-8 md:space-x-4 text-base text-primary font-[500] capitalize items-center cursor-pointer z-10">
-              {navItems.map((item, index:any) =>
+              {navItems.map((item, index) =>
                 item?.serviceTypes ? (
                   <Link href={item.link}>
                   <li key={index}
@@ -112,7 +107,7 @@ const Navbar = ({
                             closeServicesDropdown(item.activeName)
                           }
                         >
-                          {item.serviceTypes.map((ser, index:any) => (
+                          {item.serviceTypes.map((ser, index) => (
                             <Link href={ser.link} key={index}>
                               <li className="px-3 py-2 hover:bg-light hover:text-white text-primary">
                                 <a href="#">{ser.name}</a>
@@ -151,7 +146,7 @@ const Navbar = ({
       {isOpen && (
         <div className="md:hidden mt-3 p-4">
           <ul className="flex flex-col space-y-4 text-lg   text-primary">
-            {navItems.map((item, index:any) =>
+            {navItems.map((item, index) =>
               item?.serviceTypes ? (
                 <>
                   <li
@@ -178,7 +173,7 @@ const Navbar = ({
                           closeServicesDropdown(item.activeName)
                         }
                       >
-                        {item.serviceTypes.map((ser, index:any) => (
+                        {item.serviceTypes.map((ser, index) => (
                           <Link href={ser.link} key={index}>
                             <li className="px-3 py-2 hover:bg-gray-100 w-60">
                               <a>{ser.name}</a>

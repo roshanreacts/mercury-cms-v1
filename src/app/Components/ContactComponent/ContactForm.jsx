@@ -10,7 +10,7 @@ const ContactForm = () => {
     message: "",
   });
 
-  const handleInputChange = (e: { target: { id; value; }; }) => {
+  const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
