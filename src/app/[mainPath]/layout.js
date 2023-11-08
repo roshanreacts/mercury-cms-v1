@@ -1,4 +1,3 @@
-import "./globals.css";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 
 export const metadata = {
@@ -11,8 +10,10 @@ export default function RootLayout({ children }) {
   loadErrorMessages();
   return (
     <html lang="en">
-      <body>
-        <div>{children}</div>
+      <body className="flex justify-center items-center">
+        <div className="flex min-h-screen flex-col items-center max-w-screen-2xl justify-center">
+          {children}
+        </div>
       </body>
     </html>
   );

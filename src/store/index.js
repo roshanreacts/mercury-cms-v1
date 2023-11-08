@@ -53,7 +53,7 @@ const RootStore = types
     }),
     updateWebsiteById: flow(function* (query, variables, options, id) {
       let data = yield makeGraphqlQuery(query, variables, options);
-      const index = self.websites.findIndex((web) => web.id === id)
+      const index = self.websites.findIndex((web) => web.id === id);
       self.websites[index] = data?.updateWebsite;
     }),
     addPage: flow(function* (query, variables, options) {
@@ -71,6 +71,10 @@ const RootStore = types
       const index = self.pages.findIndex((page) => page.id === id);
       self.pages[index] = data?.getPage;
     }),
+    getPageBySlug: flow(function* (query, variables, options) {
+      let data = yield makeGraphqlQuery(query, variables, options);
+      return data?.getPage;
+    }),
     updatePageById: flow(function* (query, variables, options, id) {
       let data = yield makeGraphqlQuery(query, variables, options);
       const index = self.pages.findIndex((page) => page.id === id);
@@ -86,14 +90,13 @@ const RootStore = types
       yield makeGraphqlQuery(query, variables, options);
       const index = self.pages.findIndex((page) => page.id === id);
       if (index !== -1) {
-        self.pages.splice(index, 1)
+        self.pages.splice(index, 1);
       }
     }),
     getAllPageWithAllData: flow(function* (query, variables, options) {
       yield makeGraphqlQuery(query, variables, options);
-      self.pages = data?.allPages?.docs
-    })
-    
+      self.pages = data?.allPages?.docs;
+    }),
   }));
 
 const store = RootStore.create({
