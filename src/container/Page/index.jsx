@@ -19,7 +19,7 @@ import {
 } from "~/components/ToastMessage";
 import { ToastContainer } from "react-toastify";
 import Image from "next/image";
-import { convertBASE64toJSON, convertJSONtoBASE64 } from "~/utilis/utilMethods";
+import { convertBASE64toJSON, convertJSONtoBASE64, isValidJSON } from "~/utilis/utilMethods";
 
 let add = false,
   edit = false;
@@ -162,6 +162,11 @@ const PageUpdateView = () => {
   };
 
   const onSubmit = (values) => {
+    const valid = isValidJSON(values.pageComponents)
+    if (!valid) {
+      ToastErrorMessage("Not a Valid JSON!!");
+      return
+    }
     values.pageComponents = convertJSONtoBASE64(values.pageComponents);
     updatePage(
       UPDATE_PAGE,

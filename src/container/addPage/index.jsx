@@ -55,6 +55,11 @@ const AddPage = () => {
 
 
   const onSubmit = (values) => {
+    const valid = isValidJSON(values.pageComponents)
+    if(!valid){
+      ToastErrorMessage("Not a Valid JSON!!");
+      return
+    }
     const base64 = convertJSONtoBASE64(values.pageComponents);
     addPage(CREATE_PAGE, {
       "data": {
