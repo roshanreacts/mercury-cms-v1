@@ -119,7 +119,7 @@ const PageUpdateView = () => {
     }
   }, [singlePageResponse.data, singlePageResponse.error]);
 
-  useEffect(() => {}, [initialValues]);
+  useEffect(() => { }, [initialValues]);
 
   useEffect(() => {
     if (updatePageResponse.data) {
@@ -151,16 +151,16 @@ const PageUpdateView = () => {
   const handleDelete = () => {
     console.log("page Deleted");
     ToastDangerMessage("Page Deleted");
-    // deletePage(
-    //   DELETE_PAGE,
-    //   {
-    //     deletePageId: pageId,
-    //   },
-    //   {
-    //     cache: "no-store",
-    //   },
-    //   pageId
-    // );
+    deletePage(
+      DELETE_PAGE,
+      {
+        deletePageId: pageId,
+      },
+      {
+        cache: "no-store",
+      },
+      pageId
+    );
   };
 
   const onSubmit = (values) => {

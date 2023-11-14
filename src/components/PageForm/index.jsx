@@ -48,7 +48,7 @@ const PageForm = ({
           {!add && (
             <div className="flex flex-col sm:flex-row justify-end items-end">
               <div className="mb-2 sm:mb-0 sm:mr-2">
-              <DeleteConfirmPopup
+                <DeleteConfirmPopup
                   title={initialValues.pageName}
                   onConfirm={handleDelete}
                   type="Page"
@@ -69,16 +69,18 @@ const PageForm = ({
         </div>
 
         <div className="text-left">
-          <div className="flex gap-5 mt-4 text-gray-600 text-sm">
-            <div>
-              <span className="font-bold">Updated On :</span>{" "}
-              {formatDate(timeStamp.updatedOn)}
+          {!add &&
+            <div className="flex gap-5 mt-4 text-gray-600 text-sm">
+              <div>
+                <span className="font-bold">Updated On :</span>{" "}
+                {formatDate(timeStamp?.updatedOn)}
+              </div>
+              <div>
+                <span className="font-bold">Created On :</span>{" "}
+                {formatDate(timeStamp?.createdOn)}
+              </div>
             </div>
-            <div>
-              <span className="font-bold">Created On :</span>{" "}
-              {formatDate(timeStamp.createdOn)}
-            </div>
-          </div>
+          }
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -87,7 +89,7 @@ const PageForm = ({
           >
             {({ touched, errors }) => (
               <Form>
-                <div className="mb-4 flex justify-center ">
+                <div className="mb-4 flex justify-center mt-4">
                   {add ? (
                     <button
                       type="submit"

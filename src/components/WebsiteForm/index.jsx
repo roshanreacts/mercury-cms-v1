@@ -33,8 +33,8 @@ const WebsiteForm = ({
                 {add
                   ? "Create Website"
                   : edit
-                  ? "Update Website"
-                  : "View Website"}
+                    ? "Update Website"
+                    : "View Website"}
               </h2>
             </div>
           </div>
@@ -42,7 +42,7 @@ const WebsiteForm = ({
             <div className="flex justify-end items-end">
               <div>
                 <DeleteConfirmPopup
-                  title={initialValues.websiteName}
+                  title={initialValues?.websiteName}
                   onConfirm={handleDelete}
                   type="Website"
                 />
@@ -62,16 +62,18 @@ const WebsiteForm = ({
         </div>
 
         <div className="mx-auto space-x-5 text-gray-700">
-          <div className="flex gap-5 mt-4 text-gray-600 text-sm">
-            <div>
-              <span className="font-bold">Updated On :</span>{" "}
-              {formatDate(timeStamp.updatedOn)}
+          {!add &&
+            <div className="flex gap-5 mt-4 text-gray-600 text-sm">
+              <div>
+                <span className="font-bold">Updated On :</span>{" "}
+                {formatDate(timeStamp?.updatedOn)}
+              </div>
+              <div>
+                <span className="font-bold">Created On :</span>{" "}
+                {formatDate(timeStamp?.createdOn)}
+              </div>
             </div>
-            <div>
-              <span className="font-bold">Created On :</span>{" "}
-              {formatDate(timeStamp.createdOn)}
-            </div>
-          </div>
+          }
 
           <Formik
             initialValues={initialValues}
@@ -82,7 +84,7 @@ const WebsiteForm = ({
           >
             {({ touched, errors }) => (
               <Form className="flex flex-col gap-4">
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-4">
                   {add ? (
                     <button
                       type="submit"
@@ -105,7 +107,7 @@ const WebsiteForm = ({
                     )
                   )}
                 </div>
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-4">
+                <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="">
                       <label className="leading-loose"> Website Name</label>

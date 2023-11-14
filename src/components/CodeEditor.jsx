@@ -20,7 +20,7 @@ const CodeEditorWindow = ({ initialComponents, edit, handleComponentEdit }) => {
         language='json'
         value={value}
         theme={"hc-light"}
-        defaultValue="// some comment"
+        defaultValue=""
         onChange={handleEditorChange}
         options={{readOnly: !edit}}
       />
