@@ -37,6 +37,9 @@ export const PageSchema = {
         components: {
             type: "string"
         },
+        metaTitle: {
+            type: "string"
+        },
         version: {
             type: "string"
         },
