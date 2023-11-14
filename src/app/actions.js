@@ -21,7 +21,7 @@ export async function makeFetchCall() {
 
 export async function serverFetch(query, variables, options) {
   const data = await fetch(
-    "http://localhost:3000/api/graphql",
+    `${process.env.DOMAIN}api/graphql`,
     {
       method: "POST",
       headers: {
