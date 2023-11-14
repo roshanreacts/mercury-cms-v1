@@ -75,8 +75,8 @@ const WebsiteViewUpdate = () => {
 
             const webData = store.websites.filter((web) => web.id === currentWebsite)[0];
             setTimeStamp({
-                createdOn: webData.createdOn,
-                updatedOn: webData.updatedOn,
+                createdOn: webData?.createdOn,
+                updatedOn: webData?.updatedOn,
               });
             setInitialValues({
                 websiteSlug: webData?.slug,
