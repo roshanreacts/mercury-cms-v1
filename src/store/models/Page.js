@@ -13,6 +13,7 @@ const Page = types
     website: types.maybeNull(types.late(() => Website)), // Use types.late for circular dependencies
     author: types.maybeNull(types.late(() => User)), // Use types.late for circular dependencies
     components: types.maybeNull(types.string),
+    metaTitle: types.maybeNull(types.string),
     version: types.maybeNull(types.string),
   })
   .actions((self) => ({
