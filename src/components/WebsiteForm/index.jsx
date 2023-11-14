@@ -5,6 +5,7 @@ import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
 import Loader from "~/container/Loader";
 import { formatDate } from "~/utilis/utilMethods";
+import DeleteConfirmPopup from "../DeleteConfirmPopup";
 const WebsiteForm = ({
   initialValues,
   validationSchema,
@@ -40,11 +41,10 @@ const WebsiteForm = ({
           {!add && (
             <div className="flex justify-end items-end">
               <div>
-                <ConfirmActionButton
-                  action="Delete"
-                  para="Are you sure you want to"
+                <DeleteConfirmPopup
+                  title={initialValues.websiteName}
                   onConfirm={handleDelete}
-                  type="warning"
+                  type="Website"
                 />
               </div>
               {!edit && (
