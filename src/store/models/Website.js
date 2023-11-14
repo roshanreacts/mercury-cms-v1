@@ -13,8 +13,8 @@ const Website = types
     status: types.maybeNull(types.enumeration(["Draft", "Published"])),
     author: types.maybeNull(types.late(() => User)),
     pages: types.maybeNull(types.array(Page)),
-    updatedOn: types.maybeNull(types.Date),
-    createdOn: types.maybeNull(types.Date),
+    updatedOn: types.maybeNull(types.string),
+    createdOn: types.maybeNull(types.string),
   })
   .actions((self) => ({
     getWebsite: flow(function* (query, variables, options) {

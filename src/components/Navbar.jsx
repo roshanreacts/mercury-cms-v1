@@ -8,7 +8,6 @@ import { checkTokenExpiry, clearTokenCookie, getLoggedInUserIdFromCookie } from 
 import { useRouter } from "next/navigation";
 import store from "~/store";
 import { GET_SINGLE_USER } from "~/utilis/queries";
-import { deleteCookie } from "cookies-next";
 
 
 const Navbar = () => {
