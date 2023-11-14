@@ -6,14 +6,19 @@ import componentJson from '../../utilities/ComponentData.json';
 import store from '~/store';
 import { GET_PAGE } from '~/utilis/queries';
 import { convertBASE64toJSON } from '~/utilis/utilMethods';
+import {redirect} from 'next/navigation'
 
 
 const page = async ({ params }) => {
 
   const mainPath = params.mainPath
   const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: mainPath } } }, {cache: "no-store"});
+  if(!data){
+    redirect('/404');
+  }
   const slugMapping = JSON.parse(convertBASE64toJSON(data?.components));
 
+  
   return (
     <div>
       <ObjReact objReact={{

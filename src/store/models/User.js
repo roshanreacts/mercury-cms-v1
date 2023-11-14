@@ -10,6 +10,8 @@ const User = types
     password: types.maybeNull(types.string),
     role: types.maybeNull(types.string),
     websites: types.maybeNull(types.array(Website)),
+    updatedOn: types.maybeNull(types.Date),
+    createdOn: types.maybeNull(types.Date),
   })
   .actions((self) => ({
     setName(newName) {

@@ -6,6 +6,7 @@ import { generateCompoLib, generateComponentList } from '../../../utilities/meth
 import store from '~/store';
 import { GET_PAGE } from '~/utilis/queries';
 import { convertBASE64toJSON } from '~/utilis/utilMethods';
+import { redirect } from 'next/navigation';
 
 const page = async ({ params }) => {
 
@@ -13,7 +14,9 @@ const page = async ({ params }) => {
   const mainPath = params.mainPath;
   const slug = mainPath + "-" + subPath;
   const data = await store.getPageBySlug(GET_PAGE, { where: { slug: { is: slug } } }, { cache: "no-store" });
-
+  if(!data){
+    redirect('/404');
+  }
   const slugMapping = JSON.parse(convertBASE64toJSON(data?.components))
 
 

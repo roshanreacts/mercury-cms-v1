@@ -15,6 +15,8 @@ const Page = types
     components: types.maybeNull(types.string),
     metaTitle: types.maybeNull(types.string),
     version: types.maybeNull(types.string),
+    updatedOn: types.maybeNull(types.Date),
+    createdOn: types.maybeNull(types.Date),
   })
   .actions((self) => ({
     updateTitle(newTitle) {

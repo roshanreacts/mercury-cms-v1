@@ -53,6 +53,8 @@ query GetWebsite($where: whereWebsiteInput) {
     description
     domain
     status
+    createdOn
+    updatedOn
     pages {
       id
       slug
@@ -72,6 +74,9 @@ query Query($where: wherePageInput) {
     status
     version
     components
+    metaTitle
+    updatedOn
+    createdOn
   }
 }`;
 
