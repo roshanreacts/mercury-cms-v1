@@ -27,6 +27,7 @@ const AddPage = () => {
     pagePath: "",
     status: "Draft",
     version: "0.1",
+    metaTitle:""
   };
 
 
@@ -35,8 +36,10 @@ const AddPage = () => {
     pageName: Yup.string().required("Page Name is required"),
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
+    metaTitle: Yup.string().required("Meta Title is required"),
     pagePath: Yup.string().required("Page Path is required"),
     version: Yup.string().required("Version is required").matches(/^[0-9]*\.?[0-9]+$/, "Enter Number"),
+
   });
 
   useEffect(() => {
@@ -46,14 +49,12 @@ const AddPage = () => {
       redirect(`${pageId}`)
     }
     if (addPageResponse.error) {
-      console.log("error in page", addPageResponse.error);
       ToastErrorMessage(addPageResponse.error.message)
     }
   }, [addPageResponse.data, addPageResponse.error, addPageResponse.loading])
 
 
   const onSubmit = (values) => {
-    console.log(values);
     const base64 = convertJSONtoBASE64(values.pageComponents);
     addPage(CREATE_PAGE, {
       "data": {
@@ -65,7 +66,8 @@ const AddPage = () => {
         "status": values.status,
         "title": values.pageName,
         "version": values.version,
-        "website": websiteId
+        "website": websiteId,
+        "metaTitle":values.metaTitle
       }
     }, {
       cache: "no-store"

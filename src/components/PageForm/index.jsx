@@ -6,6 +6,7 @@ import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
 import Loader from "~/container/Loader";
 import CodeEditorWindow from "../CodeEditor";
+import { formatDate } from "~/utilis/utilMethods";
 
 const PageForm = ({
   initialValues,
@@ -15,18 +16,18 @@ const PageForm = ({
   edit,
   pageId,
   loading,
-  handleDelete
+  handleDelete,
+  timeStamp,
 }) => {
-
   const formikRef = useRef();
   const router = useRouter();
   const handleComponentEdit = (value) => {
-    formikRef.current.setFieldValue('pageComponents', value);
-  }
+    formikRef.current.setFieldValue("pageComponents", value);
+  };
 
   const handleUpdate = () => {
     console.log("update clicked");
-    router.push("?edit=true")
+    router.push("?edit=true");
   };
   return (
     <div className="mx-10 my-6 flex flex-col justify-center">
@@ -43,7 +44,7 @@ const PageForm = ({
             </div>
           </div>
 
-          {!add &&
+          {!add && (
             <div className="flex flex-col sm:flex-row justify-end items-end">
               <div className="mb-2 sm:mb-0 sm:mr-2">
                 <ConfirmActionButton
@@ -53,7 +54,7 @@ const PageForm = ({
                   type="warning"
                 />
               </div>
-              {!edit &&
+              {!edit && (
                 <div>
                   <ConfirmActionButton
                     action="Edit"
@@ -62,12 +63,22 @@ const PageForm = ({
                     type="info"
                   />
                 </div>
-              }
+              )}
             </div>
-          }
+          )}
         </div>
 
         <div className="text-left">
+          <div className="flex gap-5 mt-4 text-gray-600 text-sm">
+            <div>
+              <span className="font-bold">Updated On :</span>{" "}
+              {formatDate(timeStamp.updatedOn)}
+            </div>
+            <div>
+              <span className="font-bold">Created On :</span>{" "}
+              {formatDate(timeStamp.createdOn)}
+            </div>
+          </div>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -76,7 +87,30 @@ const PageForm = ({
           >
             {({ touched, errors }) => (
               <Form>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="mb-4 flex justify-center ">
+                  {add ? (
+                    <button
+                      type="submit"
+                      className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
+                    >
+                      {loading ? <Loader size="small" type="info" /> : "Create"}
+                    </button>
+                  ) : (
+                    edit && (
+                      <button
+                        type="submit"
+                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
+                      >
+                        {loading ? (
+                          <Loader size="small" type="info" />
+                        ) : (
+                          "Update"
+                        )}
+                      </button>
+                    )
+                  )}
+                </div>
+                <div className="grid grid-cols-3 gap-4">
                   <div className="text-left">
                     <label className="leading-loose"> Page Name</label>
                     <Field
@@ -88,6 +122,21 @@ const PageForm = ({
                     />
                     <ErrorMessage
                       name="pageName"
+                      component="div"
+                      className="text-red-500 text-xs"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <label className="leading-loose">Meta Title</label>
+                    <Field
+                      type="text"
+                      name="metaTitle"
+                      disabled={!(add || edit)}
+                      className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                      placeholder="Meta Title"
+                    />
+                    <ErrorMessage
+                      name="metaTitle"
                       component="div"
                       className="text-red-500 text-xs"
                     />
@@ -118,7 +167,11 @@ const PageForm = ({
                     placeholder="Page Components"
                     rows="5"
                   /> */}
-                  <CodeEditorWindow initialComponents={initialValues.pageComponents} edit={(add || edit)} handleComponentEdit={handleComponentEdit} />
+                  <CodeEditorWindow
+                    initialComponents={initialValues.pageComponents}
+                    edit={add || edit}
+                    handleComponentEdit={handleComponentEdit}
+                  />
                   <ErrorMessage
                     name="pageComponents"
                     component="div"
@@ -185,25 +238,6 @@ const PageForm = ({
                       className="text-red-500 text-xs"
                     />
                   </div>
-                </div>
-                <div className="pt-4 flex justify-center space-x-4">
-                  {add ? (
-                    <button
-                      type="submit"
-                      className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
-                    >
-                      {loading ? <Loader size="small" type="info" /> : "Create"}
-                    </button>
-                  ) : (
-                    edit && (
-                      <button
-                        type="submit"
-                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
-                      >
-                        {loading ? <Loader size="small" type="info" /> : "Update"}
-                      </button>
-                    )
-                  )}
                 </div>
               </Form>
             )}

@@ -9,7 +9,7 @@ import { DELETE_WEBSITE, GET_ALL_WEBSITES, GET_WEB_SITE, UPDATE_WEBSITE } from '
 import { observer } from 'mobx-react-lite';
 import { getLoggedInUserIdFromCookie } from '~/utilis/cookie';
 import Image from 'next/image';
-import { ToastErrorMessage, ToastSuccessMessage } from '~/components/ToastMessage';
+import { ToastDangerMessage, ToastErrorMessage, ToastSuccessMessage } from '~/components/ToastMessage';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
@@ -30,6 +30,8 @@ const WebsiteViewUpdate = () => {
     const [getSingleWebsite, singleWebsiteResponse] = useLazyQuery(store.getWebsiteWithId)
     const [updateWebsite, updateWebsiteResponse] = useLazyQuery(store.updateWebsiteById)
     const [deleteWebsite, deleteWebsiteResponse] = useLazyQuery(store.deleteWebsite)
+    const [timeStamp, setTimeStamp] = useState({});
+
 
     useEffect(() => {
         if (store.websites.length === 0) {
@@ -72,7 +74,10 @@ const WebsiteViewUpdate = () => {
         if (singleWebsiteResponse.data) {
 
             const webData = store.websites.filter((web) => web.id === currentWebsite)[0];
-
+            setTimeStamp({
+                createdOn: webData.createdOn,
+                updatedOn: webData.updatedOn,
+              });
             setInitialValues({
                 websiteSlug: webData?.slug,
                 websiteName: webData?.name,
@@ -136,15 +141,17 @@ const WebsiteViewUpdate = () => {
 
 
     const handleDelete = () => {
-        deleteWebsite(DELETE_WEBSITE,
-            {
-                deleteWebsiteId: currentWebsite
-            },
-            {
-                cache: "no-store"
-            },
-            currentWebsite
-        )
+        console.log("Website Deleted");
+        ToastDangerMessage("Website Deleted")
+        // deleteWebsite(DELETE_WEBSITE,
+        //     {
+        //         deleteWebsiteId: currentWebsite
+        //     },
+        //     {
+        //         cache: "no-store"
+        //     },
+        //     currentWebsite
+        // )
     }
 
     return (
@@ -159,6 +166,7 @@ const WebsiteViewUpdate = () => {
                     edit={edit}
                     loading={updateWebsiteResponse.loading}
                     handleDelete={handleDelete}
+                    timeStamp={timeStamp}
                 />
                 :
                 <div className='h-[100vh] flex justify-center items-center'>

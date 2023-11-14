@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import ConfirmActionButton from "../ConfirmActionButton";
 import { useRouter } from "next/navigation";
 import Loader from "~/container/Loader";
+import { formatDate } from "~/utilis/utilMethods";
 const WebsiteForm = ({
   initialValues,
   validationSchema,
@@ -11,13 +12,13 @@ const WebsiteForm = ({
   add,
   edit,
   loading,
-  handleDelete
+  handleDelete,
+  timeStamp,
 }) => {
-
   const router = useRouter();
   const handleUpdate = () => {
-    router.push('?edit=true')
-  }
+    router.push("?edit=true");
+  };
   return (
     <div className="mx-10 my-6 flex flex-col justify-center">
       <div className="relative px-10 py-5 bg-white mx-8 md:mx-0 shadow rounded-3xl">
@@ -31,12 +32,12 @@ const WebsiteForm = ({
                 {add
                   ? "Create Website"
                   : edit
-                    ? "Update Website"
-                    : "View Website"}
+                  ? "Update Website"
+                  : "View Website"}
               </h2>
             </div>
           </div>
-          {!add &&
+          {!add && (
             <div className="flex justify-end items-end">
               <div>
                 <ConfirmActionButton
@@ -46,7 +47,7 @@ const WebsiteForm = ({
                   type="warning"
                 />
               </div>
-              {!edit &&
+              {!edit && (
                 <div>
                   <ConfirmActionButton
                     action="Edit"
@@ -55,24 +56,55 @@ const WebsiteForm = ({
                     type="info"
                   />
                 </div>
-              }
+              )}
             </div>
-          }
-
+          )}
         </div>
 
-        <div className="mx-auto space-x-5">
+        <div className="mx-auto space-x-5 text-gray-700">
+          <div className="flex gap-5 mt-4 text-gray-600 text-sm">
+            <div>
+              <span className="font-bold">Updated On :</span>{" "}
+              {formatDate(timeStamp.updatedOn)}
+            </div>
+            <div>
+              <span className="font-bold">Created On :</span>{" "}
+              {formatDate(timeStamp.createdOn)}
+            </div>
+          </div>
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit= {
-              (values) => {
-                onSubmit(values)
-              }
-            }
+            onSubmit={(values) => {
+              onSubmit(values);
+            }}
           >
             {({ touched, errors }) => (
               <Form className="flex flex-col gap-4">
+                <div className="flex justify-center">
+                  {add ? (
+                    <button
+                      type="submit"
+                      className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
+                    >
+                      {loading ? <Loader size="small" type="info" /> : "Create"}
+                    </button>
+                  ) : (
+                    edit && (
+                      <button
+                        type="submit"
+                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
+                      >
+                        {loading ? (
+                          <Loader size="small" type="info" />
+                        ) : (
+                          "Update"
+                        )}
+                      </button>
+                    )
+                  )}
+                </div>
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="">
@@ -156,25 +188,6 @@ const WebsiteForm = ({
                       />
                     </div>
                   </div>
-                </div>
-                <div className="pt-4 flex justify-center">
-                  {add ? (
-                    <button
-                      type="submit"
-                      className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
-                    >
-                      {loading ? <Loader size="small" type="info" />:"Create"}
-                    </button>
-                  ) : (
-                    edit && (
-                      <button
-                        type="submit"
-                        className="bg-gray-900 flex justify-center items-center text-white px-6 py-3 rounded-md focus:outline-none hover:bg-transparent hover:text-primary hover:border-2 hover:border-primary"
-                      >
-                        {loading ? <Loader size="small" type="info" />:"Update"}
-                      </button>
-                    )
-                  )}
                 </div>
               </Form>
             )}

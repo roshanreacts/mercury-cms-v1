@@ -5,7 +5,12 @@ import * as Yup from "yup";
 import PageForm from "~/components/PageForm";
 import { useLazyQuery } from "../hooks";
 import store from "~/store";
-import { GET_ALL_PAGES, GET_PAGE, UPDATE_PAGE, DELETE_PAGE } from "~/utilis/queries";
+import {
+  GET_ALL_PAGES,
+  GET_PAGE,
+  UPDATE_PAGE,
+  DELETE_PAGE,
+} from "~/utilis/queries";
 import { getLoggedInUserIdFromCookie } from "~/utilis/cookie";
 import {
   ToastErrorMessage,
@@ -17,6 +22,7 @@ import { convertBASE64toJSON, convertJSONtoBASE64 } from "~/utilis/utilMethods";
 
 let add = false,
   edit = false;
+
 const PageUpdateView = () => {
   edit = useSearchParams().get("edit") === "true" ? true : false;
   const pageId = useParams().pageId;
@@ -33,13 +39,15 @@ const PageUpdateView = () => {
     pagePath: "",
     status: "draft",
     version: 0.1,
+    metaTitle: "",
   });
 
   const [getPages, pagesResponse] = useLazyQuery(store.getAllPages);
   const [getSinglePage, singlePageResponse] = useLazyQuery(store.getPageWithId);
-  const [updatePage, updatePageResponse] = useLazyQuery(store.updatePageById)
+  const [updatePage, updatePageResponse] = useLazyQuery(store.updatePageById);
   const [deletePage, deletePageResponse] = useLazyQuery(store.deletePage);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [timeStamp, setTimeStamp] = useState({});
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -58,7 +66,7 @@ const PageUpdateView = () => {
               is: websiteId,
             },
           },
-          limit: 30
+          limit: 30,
         },
         {
           cache: "no-store",
@@ -91,6 +99,10 @@ const PageUpdateView = () => {
   useEffect(() => {
     if (singlePageResponse.data) {
       const pageData = store.pages.find((page) => page.id === pageId);
+      setTimeStamp({
+        createdOn: pageData.createdOn,
+        updatedOn: pageData.updatedOn,
+      });
       const json = convertBASE64toJSON(pageData?.components);
 
       setInitialValues({
@@ -101,13 +113,12 @@ const PageUpdateView = () => {
         pagePath: pageData?.path || "",
         status: pageData?.status || "draft",
         version: pageData?.version || 0.1,
+        metaTitle: pageData?.metaTitle || "",
       });
     }
   }, [singlePageResponse.data, singlePageResponse.error]);
 
-  useEffect(() => {
-  }, [initialValues]);
-
+  useEffect(() => {}, [initialValues]);
 
   useEffect(() => {
     if (updatePageResponse.data) {
@@ -117,7 +128,11 @@ const PageUpdateView = () => {
     if (updatePageResponse.error) {
       ToastErrorMessage(updatePageResponse.error.message);
     }
-  }, [updatePageResponse.data, updatePageResponse.error, updatePageResponse.loading]);
+  }, [
+    updatePageResponse.data,
+    updatePageResponse.error,
+    updatePageResponse.loading,
+  ]);
   useEffect(() => {
     if (deletePageResponse.data) {
       ToastSuccessMessage("Deleted Page!!");
@@ -126,40 +141,50 @@ const PageUpdateView = () => {
     if (deletePageResponse.error) {
       ToastErrorMessage(deletePageResponse.error.message);
     }
-  }, [deletePageResponse.data, deletePageResponse.error, deletePageResponse.loading]);
+  }, [
+    deletePageResponse.data,
+    deletePageResponse.error,
+    deletePageResponse.loading,
+  ]);
 
   const handleDelete = () => {
-    deletePage(
-      DELETE_PAGE,
+    console.log("page Deleted");
+    ToastDangerMessage("Page Deleted");
+    // deletePage(
+    //   DELETE_PAGE,
+    //   {
+    //     deletePageId: pageId,
+    //   },
+    //   {
+    //     cache: "no-store",
+    //   },
+    //   pageId
+    // );
+  };
+
+  const onSubmit = (values) => {
+    values.pageComponents = convertJSONtoBASE64(values.pageComponents);
+    updatePage(
+      UPDATE_PAGE,
       {
-        deletePageId: pageId,
+        data: {
+          title: values.pageName,
+          slug: values.pageSlug,
+          components: values.pageComponents,
+          metaDescription: values.metaDescription,
+          path: values.pagePath,
+          status: values.status,
+          version: values.version,
+          author: userId,
+          metaTitle: values.metaTitle,
+        },
+        updatePageId: pageId,
       },
       {
         cache: "no-store",
       },
       pageId
     );
-  };
-
-  const onSubmit = (values) => {
-    values.pageComponents = convertJSONtoBASE64(values.pageComponents);
-    updatePage(UPDATE_PAGE, {
-      data: {
-        title: values.pageName,
-        slug: values.pageSlug,
-        components: values.pageComponents,
-        metaDescription: values.metaDescription,
-        path: values.pagePath,
-        status: values.status,
-        version: values.version,
-        author: userId
-      },
-      updatePageId: pageId
-    },
-      {
-        cache: "no-store"
-      },
-      pageId);
   };
 
   const validationSchema = Yup.object().shape({
@@ -170,7 +195,9 @@ const PageUpdateView = () => {
     pageComponents: Yup.string().required("Page Components are required"),
     metaDescription: Yup.string().required("Meta Description is required"),
     pagePath: Yup.string().required("Page Path is required"),
-    version: Yup.string().required("Version is required").matches(/^[0-9]*\.?[0-9]+$/, "Only Numbers Are Accepted"),
+    version: Yup.string()
+      .required("Version is required")
+      .matches(/^[0-9]*\.?[0-9]+$/, "Only Numbers Are Accepted"),
   });
 
   return (
@@ -187,6 +214,7 @@ const PageUpdateView = () => {
           onSubmit={onSubmit}
           loading={updatePageResponse.loading}
           handleDelete={handleDelete}
+          timeStamp={timeStamp}
         />
       ) : (
         <div className="h-[100vh] flex justify-center items-center">
