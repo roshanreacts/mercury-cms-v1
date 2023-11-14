@@ -149,8 +149,6 @@ const PageUpdateView = () => {
   ]);
 
   const handleDelete = () => {
-    console.log("page Deleted");
-    ToastDangerMessage("Page Deleted");
     deletePage(
       DELETE_PAGE,
       {

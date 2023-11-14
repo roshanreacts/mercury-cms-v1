@@ -141,8 +141,6 @@ const WebsiteViewUpdate = () => {
 
 
     const handleDelete = () => {
-        console.log("Website Deleted");
-        ToastDangerMessage("Website Deleted")
         deleteWebsite(DELETE_WEBSITE,
             {
                 deleteWebsiteId: currentWebsite
