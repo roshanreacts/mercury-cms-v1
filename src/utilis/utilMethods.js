@@ -28,3 +28,12 @@ export const formatDate = (dateString) => {
   const formattedDate = new Intl.DateTimeFormat("en-IN", options).format(date);
   return formattedDate;
 };
+
+export const isValidJSON = (jsonString) => {
+  try {
+    JSON.parse(jsonString);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
